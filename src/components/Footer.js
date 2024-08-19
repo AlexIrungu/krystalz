@@ -36,16 +36,16 @@ const Footer = () => {
           <div className="w-full md:w-1/4">
             <h3 className="text-xl font-semibold mb-2">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+              <a href="https://facebook.com/" target='_blank' className="text-gray-400 hover:text-white transition duration-300">
                 <FaFacebook size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+              <a href="https://twitter.com/" target="_blank" className="text-gray-400 hover:text-white transition duration-300">
                 <FaTwitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+              <a href="https://instagram.com/" target="_blank" className="text-gray-400 hover:text-white transition duration-300">
                 <FaInstagram size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+              <a href="https://pinterest.com/" target='_blank' className="text-gray-400 hover:text-white transition duration-300">
                 <FaPinterest size={24} />
               </a>
             </div>
