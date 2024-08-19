@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/krystalz/static/css/main.34f01c0a.css",
+    "main.js": "/krystalz/static/js/main.a6dabbd7.js",
+    "static/js/453.9e7d8bd1.chunk.js": "/krystalz/static/js/453.9e7d8bd1.chunk.js",
+    "static/media/lapis.jpeg": "/krystalz/static/media/lapis.f2db0411634665c6b30c.jpeg",
+    "static/media/tigereye.jpeg": "/krystalz/static/media/tigereye.a5deb5190f96695c2c90.jpeg",
+    "index.html": "/krystalz/index.html",
+    "main.34f01c0a.css.map": "/krystalz/static/css/main.34f01c0a.css.map",
+    "main.a6dabbd7.js.map": "/krystalz/static/js/main.a6dabbd7.js.map",
+    "453.9e7d8bd1.chunk.js.map": "/krystalz/static/js/453.9e7d8bd1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34f01c0a.css",
+    "static/js/main.a6dabbd7.js"
+  ]
+}
