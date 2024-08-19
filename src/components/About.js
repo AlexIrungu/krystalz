@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaGem, FaUserFriends, FaAward } from 'react-icons/fa';
+import store from './images/store1.jpg'
 
 const FeatureCard = ({ icon, title, description }) => (
   <div id='about' className="flex items-center space-x-4">
@@ -46,7 +47,7 @@ const About = () => {
 
         <div className="flex flex-col md:flex-row items-center justify-between mb-12">
           <div className="md:w-1/2 mb-8 md:mb-0">
-            <img src="/images/store-front.jpg" alt="Krystalz Store" className="rounded-lg shadow-lg" />
+            <img src={store} alt="Krystalz Store" className="rounded-lg shadow-lg" />
           </div>
           <div className="md:w-1/2 md:pl-12">
             <h3 className="text-2xl font-semibold mb-4">Our Story</h3>

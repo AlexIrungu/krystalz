@@ -7,10 +7,10 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Montserrat', sans-serif;
 }
+
 
 /* html {
   scroll-behavior: smooth;
