@@ -1,26 +1,8 @@
 import React from 'react';
-import amethyst from './images/amethyst.jpeg'
-import citrine from './images/citrine.jpeg'
-import clear from './images/clearquartz.jpeg'
-import jade from './images/Jade.jpeg'
-import lapis from './images/lapis.jpeg'
-import moon from './images/moonstone.jpeg'
-import obsidian from './images/obsidian.jpeg'
-import tiger from './images/tigereye.jpeg'
-import rose from './images/rosequartz.jpeg'
+import { Link } from 'react-scroll';
 
 const Home = () => {
-    const featuredKrystals = [
-        { name: 'Amethyst', color: 'Purple', benefit: 'Calming and intuitive', image: amethyst },
-        { name: 'Rose Quartz', color: 'Pink', benefit: 'Love and emotional healing', image: rose },
-        { name: 'Citrine', color: 'Yellow', benefit: 'Abundance and positivity', image: citrine },
-        { name: 'Clear Quartz', color: 'Transparent', benefit: 'Amplifies energy and healing', image: clear },
-        { name: 'Obsidian', color: 'Black', benefit: 'Protection and grounding', image: obsidian },
-        { name: 'Lapis Lazuli', color: 'Blue', benefit: 'Wisdom and truth', image: lapis},
-        { name: 'Jade', color: 'Green', benefit: 'Harmony and good luck', image: jade },
-        { name: 'Moonstone', color: 'White/Pearly', benefit: 'New beginnings and inner growth', image: moon },
-        { name: 'Tiger/s Eye', color: 'Golden Brown', benefit: 'Confidence and willpower', image: tiger },
-      ];
+   
 
   return (
     <div id='/' className="bg-gray-100 min-h-screen">
@@ -29,9 +11,14 @@ const Home = () => {
         <div className="container mx-auto text-center">
           <h1 className="text-5xl font-bold mb-4">Discover the Power of Krystals</h1>
           <p className="text-xl mb-8">Harness the energy of nature's most beautiful gems</p>
-          <button className="bg-white text-purple-500 font-bold py-2 px-4 rounded-full hover:bg-purple-100 transition duration-300">
-            Explore Krystals
-          </button>
+          <Link
+          to="explore-crystals"
+          smooth={true}
+          duration={500}
+          className="bg-white text-purple-500 font-bold py-2 px-4 rounded-full hover:bg-purple-100 transition duration-300 cursor-pointer"
+        >
+          Explore Crystals
+        </Link>
         </div>
       </section>
 
@@ -49,7 +36,7 @@ const Home = () => {
       </section>
 
       {/* Featured Krystals Section */}
-      <section className="bg-white py-16">
+      {/* <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-semibold text-center mb-12">Featured Krystals</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -65,7 +52,7 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
