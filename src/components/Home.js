@@ -1,20 +1,29 @@
 import React from 'react';
+import amethyst from './images/amethyst.jpeg'
+import citrine from './images/citrine.jpeg'
+import clear from './images/clearquartz.jpeg'
+import jade from './images/Jade.jpeg'
+import lapis from './images/lapis.jpeg'
+import moon from './images/moonstone.jpeg'
+import obsidian from './images/obsidian.jpeg'
+import tiger from './images/tigereye.jpeg'
+import rose from './images/rosequartz.jpeg'
 
 const Home = () => {
     const featuredKrystals = [
-        { name: 'Amethyst', color: 'Purple', benefit: 'Calming and intuitive', image: '/images/amethyst.jpg' },
-        { name: 'Rose Quartz', color: 'Pink', benefit: 'Love and emotional healing', image: '/images/rose-quartz.jpg' },
-        { name: 'Citrine', color: 'Yellow', benefit: 'Abundance and positivity', image: '/images/citrine.jpg' },
-        { name: 'Clear Quartz', color: 'Transparent', benefit: 'Amplifies energy and healing', image: '/images/clear-quartz.jpg' },
-        { name: 'Obsidian', color: 'Black', benefit: 'Protection and grounding', image: '/images/obsidian.jpg' },
-        { name: 'Lapis Lazuli', color: 'Blue', benefit: 'Wisdom and truth', image: '/images/lapis-lazuli.jpg' },
-        { name: 'Jade', color: 'Green', benefit: 'Harmony and good luck', image: '/images/jade.jpg' },
-        { name: 'Moonstone', color: 'White/Pearly', benefit: 'New beginnings and inner growth', image: '/images/moonstone.jpg' },
-        { name: 'Tiger/s Eye', color: 'Golden Brown', benefit: 'Confidence and willpower', image: '/images/tigers-eye.jpg' },
+        { name: 'Amethyst', color: 'Purple', benefit: 'Calming and intuitive', image: amethyst },
+        { name: 'Rose Quartz', color: 'Pink', benefit: 'Love and emotional healing', image: rose },
+        { name: 'Citrine', color: 'Yellow', benefit: 'Abundance and positivity', image: citrine },
+        { name: 'Clear Quartz', color: 'Transparent', benefit: 'Amplifies energy and healing', image: clear },
+        { name: 'Obsidian', color: 'Black', benefit: 'Protection and grounding', image: obsidian },
+        { name: 'Lapis Lazuli', color: 'Blue', benefit: 'Wisdom and truth', image: lapis},
+        { name: 'Jade', color: 'Green', benefit: 'Harmony and good luck', image: jade },
+        { name: 'Moonstone', color: 'White/Pearly', benefit: 'New beginnings and inner growth', image: moon },
+        { name: 'Tiger/s Eye', color: 'Golden Brown', benefit: 'Confidence and willpower', image: tiger },
       ];
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div id='/' className="bg-gray-100 min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-20">
         <div className="container mx-auto text-center">
