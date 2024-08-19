@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaGem, FaHandHoldingHeart, FaBook, FaMagic, FaHome, FaShoppingBag } from 'react-icons/fa';
 
-const ServiceCard = ({ icon, title, description }) => (
-  <div id='services' className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-    <div className="text-4xl text-purple-600 mb-4">{icon}</div>
-    <h3 className="text-xl font-semibold mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
+const ServiceCard = ({ icon, title, description }) => {
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div id='services'
+      ref={cardRef} 
+      className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4"
+    >
+      <div className="text-4xl text-purple-600 mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+};
 
 const Services = () => {
   const services = [
@@ -46,7 +77,16 @@ const Services = () => {
   return (
     <section id="services" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Our Services</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 opacity-0 translate-y-4 transition-all duration-300 ease-in-out" 
+            ref={(el) => {
+              if (el) {
+                setTimeout(() => {
+                  el.classList.add('opacity-100', 'translate-y-0');
+                }, 100);
+              }
+            }}>
+          Our Services
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <ServiceCard
