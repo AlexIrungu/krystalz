@@ -1,25 +1,26 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaPinterest } from 'react-icons/fa';
+import { Link } from 'react-scroll'
 
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white theme-dark">
       <div className="container mx-auto py-8 px-4">
         <div className="flex flex-wrap justify-between">
-          {/* About Section */}
+          {/* About Section
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <h3 className="text-xl font-semibold mb-2">About Krystalz</h3>
             <p className="text-gray-400">Discover the healing power of crystals and transform your life with our carefully curated collection.</p>
-          </div>
+          </div> */}
 
-          {/* Quick Links */}
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+ {/* Quick Links */}
+ <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
             <ul className="text-gray-400">
-              <li className="mb-2"><a href="#" className="hover:text-white transition duration-300">Home</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-white transition duration-300">Shop</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-white transition duration-300">About Us</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-white transition duration-300">Contact</a></li>
+              <li className="mb-2"><Link to="/" className="hover:text-white transition duration-300">Home</Link></li>
+              <li className="mb-2"><Link to="shop" className="hover:text-white transition duration-300">Shop</Link></li>
+              <li className="mb-2"><Link to="about" className="hover:text-white transition duration-300">About Us</Link></li>
+              <li className="mb-2"><Link to="contact" className="hover:text-white transition duration-300">Contact</Link></li>
             </ul>
           </div>
 

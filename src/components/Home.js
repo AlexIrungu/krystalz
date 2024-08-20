@@ -31,6 +31,7 @@ const Home = () => {
 
   return (
     <section
+      id="/"
       className="relative h-screen bg-black text-white"
       style={{
         backgroundImage: `url(${images[currentIndex]})`,
