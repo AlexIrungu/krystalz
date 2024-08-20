@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.4b37f981.css",
-    "main.js": "/krystalz/static/js/main.cc02bba9.js",
+    "main.css": "/krystalz/static/css/main.75326f53.css",
+    "main.js": "/krystalz/static/js/main.0ba093ad.js",
     "static/js/453.9e7d8bd1.chunk.js": "/krystalz/static/js/453.9e7d8bd1.chunk.js",
     "static/media/kry.jpg": "/krystalz/static/media/kry.a167525e2937798afd44.jpg",
     "static/media/kry2.jpg": "/krystalz/static/media/kry2.bb79aa1c2da1d2d7def2.jpg",
@@ -10,12 +10,12 @@
     "static/media/lapis.jpeg": "/krystalz/static/media/lapis.f2db0411634665c6b30c.jpeg",
     "static/media/tigereye.jpeg": "/krystalz/static/media/tigereye.a5deb5190f96695c2c90.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.4b37f981.css.map": "/krystalz/static/css/main.4b37f981.css.map",
-    "main.cc02bba9.js.map": "/krystalz/static/js/main.cc02bba9.js.map",
+    "main.75326f53.css.map": "/krystalz/static/css/main.75326f53.css.map",
+    "main.0ba093ad.js.map": "/krystalz/static/js/main.0ba093ad.js.map",
     "453.9e7d8bd1.chunk.js.map": "/krystalz/static/js/453.9e7d8bd1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4b37f981.css",
-    "static/js/main.cc02bba9.js"
+    "static/css/main.75326f53.css",
+    "static/js/main.0ba093ad.js"
   ]
 }
