@@ -12,6 +12,7 @@ import Checkout from './components/Checkout';
 // import Login from './components/Login';
 // import Signup from './components/Signup';
 import './css/theme.css'
+import Shop from './components/Shop'
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -80,6 +81,7 @@ function App() {
       )}
      <About />
      <Services />
+     <Shop />
      <Contact />
      <Footer />
     </div>
