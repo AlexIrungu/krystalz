@@ -1,42 +1,51 @@
 import React, { useState } from 'react';
+import axios from 'axios'
+
 
 const Signup = ({ onSignupSuccess }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [message, setMessage] = useState('');
+//   const [confirmPassword, setConfirmPassword] = useState('');
+//   const [isSignedUp, setIsSignedUp] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
+    try {
+        const res = await axios.post('http://localhost:5000/api/auth/signup', { name, email, password });
+        setMessage(res.data.message);
+      } catch (error) {
+        setMessage(error.response.data.message);
+      }
+    // if (password !== confirmPassword) {
+    //   alert("Passwords don't match");
+    //   return;
     }
 
     // Store user data in localStorage
-    const userData = { name, email, password, verified: false };
-    localStorage.setItem(email, JSON.stringify(userData));
+    // const userData = { name, email, password, verified: false };
+    // localStorage.setItem(email, JSON.stringify(userData));
     
-    setIsSignedUp(true);
+    // setIsSignedUp(true);
 
-    // Simulate email verification after 5 seconds
-    setTimeout(() => {
-        const user = JSON.parse(localStorage.getItem(email));
-        user.verified = true;
-        localStorage.setItem(email, JSON.stringify(user));
-        console.log('User verified:', email);
-      }, 5000);
-    };
+    // // Simulate email verification after 5 seconds
+    // setTimeout(() => {
+    //     const user = JSON.parse(localStorage.getItem(email));
+    //     user.verified = true;
+    //     localStorage.setItem(email, JSON.stringify(user));
+    //     console.log('User verified:', email);
+    //   }, 5000);
+    // };
 
-    if (isSignedUp) {
-        return (
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Signup Successful!</h2>
-            <p>Please wait 5 seconds for your account to be verified before logging in.</p>
-          </div>
-        );
-      }
+    // if (isSignedUp) {
+    //     return (
+    //       <div className="text-center">
+    //         <h2 className="text-2xl font-bold mb-4">Signup Successful!</h2>
+    //         <p>Please wait 5 seconds for your account to be verified before logging in.</p>
+    //       </div>
+    //     );
+    //   }
 
     // Here you would typically handle the signup logic
     // console.log('Signup attempted with:', name, email, password);
@@ -97,7 +106,7 @@ const Signup = ({ onSignupSuccess }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
               <input
                 id="confirm-password"
@@ -110,16 +119,12 @@ const Signup = ({ onSignupSuccess }) => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign up
-            </button>
+          <button type="submit">Sign Up</button>
+          {message && <p>{message}</p>}
           </div>
         </form>
       </div>

@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 // import Login from './components/Login';
 // import Signup from './components/Signup';
+import './css/theme.css'
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -57,7 +58,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="theme-light">
       {/* {showLogin ? (
         <Login onLoginSuccess={handleLoginSuccess} />
       ) : (

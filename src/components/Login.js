@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+//   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    try {
+        const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+        localStorage.setItem('token', res.data.token);
+        setMessage('Logged in successfully');
+      } catch (error) {
+        setMessage(error.response.data.message);
+      }
+    // setError('');
 
-    const userData = localStorage.getItem(email);
-    if (!userData) {
-      setError('User not found. Please sign up.');
-      return;
-    }
+    // const userData = localStorage.getItem(email);
+    // if (!userData) {
+    //   setError('User not found. Please sign up.');
+    //   return;
+    // }
 
-    const user = JSON.parse(userData);
-    if (user.password !== password) {
-      setError('Incorrect password.');
-      return;
-    }
+    // const user = JSON.parse(userData);
+    // if (user.password !== password) {
+    //   setError('Incorrect password.');
+    //   return;
+    // }
 
-    if (!user.verified) {
-      setError('Please verify your email before logging in.');
-      return;
-    }
+    // if (!user.verified) {
+    //   setError('Please verify your email before logging in.');
+    //   return;
+    // }
 
-    onLoginSuccess();
+    // onLoginSuccess();
 
     // Here you would typically handle the login logic
     // console.log('Login attempted with:', email, password);
@@ -96,12 +105,8 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign in
-            </button>
+          <button type="submit">Log In</button>
+          {message && <p>{message}</p>}
           </div>
         </form>
       </div>

@@ -5,7 +5,7 @@ import store from './images/store1.jpg'
 const FeatureCard = ({ icon, title, description }) => (
   <div id='about' className="flex items-center space-x-4">
     <div className="flex-shrink-0">
-      <div className="bg-purple-100 rounded-full p-3">
+      <div className="bg-black-600 rounded-full p-3">
         {icon}
       </div>
     </div>
@@ -19,17 +19,17 @@ const FeatureCard = ({ icon, title, description }) => (
 const About = () => {
   const features = [
     {
-      icon: <FaGem className="h-6 w-6 text-purple-600" />,
+      icon: <FaGem className="h-6 w-6 text-black-600" />,
       title: "Premium Quality",
       description: "We source only the finest, ethically mined crystals from around the world."
     },
     {
-      icon: <FaUserFriends className="h-6 w-6 text-purple-600" />,
+      icon: <FaUserFriends className="h-6 w-6 text-black-600" />,
       title: "Expert Guidance",
       description: "Our team of experienced crystal healers provides personalized advice and support."
     },
     {
-      icon: <FaAward className="h-6 w-6 text-purple-600" />,
+      icon: <FaAward className="h-6 w-6 text-black-600" />,
       title: "Certified Authentic",
       description: "All our crystals are certified authentic and come with a guarantee of quality."
     }

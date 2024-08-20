@@ -13,12 +13,21 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically handle the form submission,
-    // such as sending the data to a server or API
+    // Construct the mailto link
+    const mailtoLink = `mailto:aleaxmuiruri@gmail.com?subject=New Message from Krystalz Website&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
+    )}`;
+    // Open the mailto link in the user's default email client
+    window.location.href = mailtoLink;
     console.log('Form submitted:', formData);
     // Reset form after submission
     setFormData({ name: '', email: '', message: '' });
   };
+    // Here you would typically handle the form submission,
+    // such as sending the data to a server or API
+    
+    // Reset form after submission
+   
 
   return (
     <div id='contact' className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">

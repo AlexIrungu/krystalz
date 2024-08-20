@@ -33,7 +33,7 @@ const ServiceCard = ({ icon, title, description }) => {
       ref={cardRef} 
       className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4"
     >
-      <div className="text-4xl text-purple-600 mb-4">{icon}</div>
+      <div className="text-4xl text-black-600 mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
@@ -41,6 +41,32 @@ const ServiceCard = ({ icon, title, description }) => {
 };
 
 const Services = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const services = [
     {
       icon: <FaGem />,
@@ -75,16 +101,22 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-100">
+    <section
+      ref={sectionRef}
+      id="services"
+      className="py-20 bg-gray-100 opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 opacity-0 translate-y-4 transition-all duration-300 ease-in-out" 
-            ref={(el) => {
-              if (el) {
-                setTimeout(() => {
-                  el.classList.add('opacity-100', 'translate-y-0');
-                }, 100);
-              }
-            }}>
+        <h2
+          className="text-4xl font-bold text-center mb-12 opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
+          ref={(el) => {
+            if (el) {
+              setTimeout(() => {
+                el.classList.add('opacity-100', 'translate-y-0');
+              }, 100);
+            }
+          }}
+        >
           Our Services
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
