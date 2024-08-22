@@ -9,10 +9,11 @@ import About from './components/About';
 import ExploreCrystals from './components/ExploreCrystals';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-// import Login from './components/Login';
-// import Signup from './components/Signup';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './css/theme.css'
 import Shop from './components/Shop'
+import UserDashboard from './components/UserDashboard';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -44,32 +45,43 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
+  const [username, setUsername] = useState('');
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (user) => {
     setIsLoggedIn(true);
+    setUsername(user.name || user.email);
   };
 
-  const handleSignupSuccess = () => {
+  const handleSignupSuccess = (user) => {
     setIsLoggedIn(true);
+    setUsername(user.name || user.email);
   };
 
-  if (isLoggedIn) {
-    return <div>Welcome! You are logged in.</div>;
-  }
+  const handleSwitchForm = () => {
+    setShowLogin(!showLogin);
+  };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername('');
+    // Add any other logout logic (e.g., clearing tokens)
+  };
 
   return (
     <div className="theme-light">
-      {/* {showLogin ? (
-        <Login onLoginSuccess={handleLoginSuccess} />
+      {isLoggedIn ? (
+        <UserDashboard username={username} onLogout={handleLogout} />
       ) : (
-        <Signup onSignupSuccess={handleSignupSuccess} />
+        <>
+          {showLogin ? (
+            <Login onLoginSuccess={handleLoginSuccess} onSwitchToSignup={handleSwitchForm} />
+          ) : (
+            <Signup onSignupSuccess={handleSignupSuccess} onSwitchToLogin={handleSwitchForm} />
+          )}
+        </>
       )}
-      <button onClick={() => setShowLogin(!showLogin)}>
-        {showLogin ? 'Need to sign up?' : 'Already have an account?'}
-      </button> */}
        
-     <Navbar />
+     <Navbar isLoggedIn={isLoggedIn} username={username} />
      <Home />
      {!isCheckout ? (
         <>

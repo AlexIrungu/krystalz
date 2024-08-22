@@ -4,7 +4,7 @@ import log from './images/log.jpg'
 import Login from './Login';
 import Signup from './Signup';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, username }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);

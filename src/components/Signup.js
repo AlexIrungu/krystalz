@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'
 
 
-const Signup = ({ onSignupSuccess }) => {
+const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,51 +10,21 @@ const Signup = ({ onSignupSuccess }) => {
 //   const [confirmPassword, setConfirmPassword] = useState('');
 //   const [isSignedUp, setIsSignedUp] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const res = await axios.post('http://localhost:5000/api/auth/signup', { name, email, password });
-        setMessage(res.data.message);
-      } catch (error) {
-        setMessage(error.response.data.message);
-      }
-    // if (password !== confirmPassword) {
-    //   alert("Passwords don't match");
-    //   return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post('http://localhost:8000/api/auth/signup', { name, email, password });
+    setMessage(res.data.message);
+    onSignupSuccess(res.data.user); // Pass the user data
+  } catch (error) {
+    setMessage(error.response.data.message);
+  }
+};
 
-    // Store user data in localStorage
-    // const userData = { name, email, password, verified: false };
-    // localStorage.setItem(email, JSON.stringify(userData));
-    
-    // setIsSignedUp(true);
-
-    // // Simulate email verification after 5 seconds
-    // setTimeout(() => {
-    //     const user = JSON.parse(localStorage.getItem(email));
-    //     user.verified = true;
-    //     localStorage.setItem(email, JSON.stringify(user));
-    //     console.log('User verified:', email);
-    //   }, 5000);
-    // };
-
-    // if (isSignedUp) {
-    //     return (
-    //       <div className="text-center">
-    //         <h2 className="text-2xl font-bold mb-4">Signup Successful!</h2>
-    //         <p>Please wait 5 seconds for your account to be verified before logging in.</p>
-    //       </div>
-    //     );
-    //   }
-
-    // Here you would typically handle the signup logic
-    // console.log('Signup attempted with:', name, email, password);
-    // // For now, we'll just simulate a successful signup
-    // onSignupSuccess();
-//   };
+   
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div id='sign-up' className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -120,13 +90,31 @@ const Signup = ({ onSignupSuccess }) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div> */}
+            
           </div>
-
           <div>
-          <button type="submit">Sign Up</button>
-          {message && <p>{message}</p>}
-          </div>
+    <button
+      type="submit"
+      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      Sign Up
+    </button>
+  </div>
+  
+  {message && <p className="mt-2 text-center text-sm text-gray-600">{message}</p>}
+        
         </form>
+        <div className="text-center mt-4">
+  <p className="text-sm text-gray-600">
+    Already have an account?{' '}
+    <button
+      onClick={onSwitchToLogin}
+      className="font-medium text-indigo-600 hover:text-indigo-500"
+    >
+      Log in
+    </button>
+  </p>
+</div>
       </div>
     </div>
   );

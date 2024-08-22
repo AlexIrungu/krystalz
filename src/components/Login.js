@@ -1,50 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 
-const Login = ({ onLoginSuccess }) => {
+const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 //   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-        localStorage.setItem('token', res.data.token);
-        setMessage('Logged in successfully');
-      } catch (error) {
-        setMessage(error.response.data.message);
-      }
-    // setError('');
-
-    // const userData = localStorage.getItem(email);
-    // if (!userData) {
-    //   setError('User not found. Please sign up.');
-    //   return;
-    // }
-
-    // const user = JSON.parse(userData);
-    // if (user.password !== password) {
-    //   setError('Incorrect password.');
-    //   return;
-    // }
-
-    // if (!user.verified) {
-    //   setError('Please verify your email before logging in.');
-    //   return;
-    // }
-
-    // onLoginSuccess();
-
-    // Here you would typically handle the login logic
-    // console.log('Login attempted with:', email, password);
-    // // For now, we'll just simulate a successful login
-    // onLoginSuccess();
-  };
-
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post('http://localhost:8000/api/auth/login', { email, password });
+    localStorage.setItem('token', res.data.token);
+    setMessage('Logged in successfully');
+    onLoginSuccess(res.data.user); // Pass the user data
+  } catch (error) {
+    setMessage(error.response.data.message);
+  }
+};
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div id='login' className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -105,10 +80,27 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           <div>
-          <button type="submit">Log In</button>
-          {message && <p>{message}</p>}
-          </div>
+    <button
+      type="submit"
+      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      Log In
+    </button>
+  </div>
+  
+  {message && <p className="mt-2 text-center text-sm text-gray-600">{message}</p>}
         </form>
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{' '}
+            <button
+              onClick={onSwitchToSignup}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Sign up
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
