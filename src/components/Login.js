@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { Link } from 'react-scroll'
 
 const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
@@ -73,9 +74,9 @@ const handleSubmit = async (e) => {
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <Link to='forgot-password' className="font-medium text-indigo-600 hover:text-indigo-500"> 
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 

@@ -14,6 +14,7 @@ const Navbar = ({ isLoggedIn, username }) => {
     { name: 'About', to: 'about' },
     { name: 'Services', to: 'services' },
     { name: 'Contact', to: 'contact' },
+    { name: 'FAQ', to: 'faq'}
   ];
 
   const handleLoginSuccess = () => {

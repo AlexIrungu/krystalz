@@ -14,6 +14,7 @@ import Signup from './components/Signup';
 import './css/theme.css'
 import Shop from './components/Shop'
 import UserDashboard from './components/UserDashboard';
+import FAQ from './components/FAQ';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -95,6 +96,7 @@ function App() {
      <Services />
      <Shop />
      <Contact />
+     <FAQ />
      <Footer />
     </div>
   );
