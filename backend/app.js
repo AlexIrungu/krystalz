@@ -15,7 +15,10 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
       process.env.FRONTEND_URL,
-      `${process.env.FRONTEND_URL}/krystalz`
+      `${process.env.FRONTEND_URL}/krystalz`,
+      'https://alexirungu.github.io',
+      'http://localhost:3000', // Add this for local development
+      'https://alexirungu.github.io/krystalz/' // Add this if your app is hosted at this specific path
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
