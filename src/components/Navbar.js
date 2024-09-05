@@ -11,56 +11,76 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
     { name: 'Services', to: 'services' },
     { name: 'Shop', to: 'shop' },
     { name: 'Contact', to: 'contact' },
-    { name: 'FAQ', to: 'faq'}
   ];
 
   return (
-    <nav className="bg-gray-800 sticky top-0 z-50 theme-dark">
+    <nav className="bg-gray-900 sticky top-0 z-50 theme-dark shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
-              <p>LUNA KRYSTALZ</p>
-              <img className="h-8 w-8" src={log} alt="Logo" />
-            </div>
-
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {navItems.map((item) => (
-                  <ScrollLink
-                    key={item.name}
-                    to={item.to}
-                    smooth={true}
-                    duration={500}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                    activeClass="bg-gray-900 text-white"
-                    spy={true}
-                    offset={-64}
-                  >
-                    {item.name}
-                  </ScrollLink>
-                ))}
-                {isLoggedIn ? (
-                  <>
-                    <span className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
-                      Welcome, {username}
-                    </span>
-                    <button
-                      onClick={onLogout}
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : null}
+              <div className="flex flex-col items-start">
+                <div className="relative">
+                  <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 tracking-wider">
+                    LUNA
+                  </p>
+                  <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-600 tracking-wider absolute top-0 left-0 transform translate-x-0.5 translate-y-0.5 opacity-50">
+                    LUNA
+                  </p>
+                </div>
+                <div className="relative">
+                  <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600 tracking-wider">
+                    KRYSTALZ
+                  </p>
+                  <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-600 tracking-wider absolute top-0 left-0 transform translate-x-0.5 translate-y-0.5 opacity-50">
+                    KRYSTALZ
+                  </p>
+                </div>
               </div>
+              <img className="h-8 w-8 md:h-10 md:w-10 animate-spin-slow animate-pulse" src={log} alt="Logo" />
             </div>
           </div>
-          <div className="-mr-2 flex md:hidden">
+
+          <div className="hidden md:block flex-grow">
+            <div className="flex items-center justify-center space-x-4">
+              {navItems.map((item) => (
+                <ScrollLink
+                  key={item.name}
+                  to={item.to}
+                  smooth={true}
+                  duration={500}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition duration-300 ease-in-out"
+                  activeClass="bg-gray-700 text-white"
+                  spy={true}
+                  offset={-80}
+                >
+                  {item.name}
+                </ScrollLink>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden md:block">
+            {isLoggedIn ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
+                  Welcome, {username}
+                </span>
+                <button
+                  onClick={onLogout}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition duration-300 ease-in-out"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition duration-300 ease-in-out"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -88,8 +108,8 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                 to={item.to}
                 smooth={true}
                 duration={500}
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
-                activeClass="bg-gray-900 text-white"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition duration-300 ease-in-out"
+                activeClass="bg-gray-700 text-white"
                 spy={true}
                 offset={-64}
                 onClick={() => setIsOpen(false)}
@@ -107,7 +127,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                     onLogout();
                     setIsOpen(false);
                   }}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition duration-300 ease-in-out"
                 >
                   Logout
                 </button>

@@ -1,0 +1,304 @@
+{
+    "healingGemstones": [
+      {
+        "name": "Amethyst",
+        "color": "Purple",
+        "chakra": ["Third Eye", "Crown"],
+        "properties": [
+          "Calming",
+          "Enhances intuition",
+          "Promotes mental clarity"
+        ]
+      },
+      {
+        "name": "Rose Quartz",
+        "color": "Pink",
+        "chakra": ["Heart"],
+        "properties": [
+          "Promotes love and compassion",
+          "Emotional healing",
+          "Enhances self-love"
+        ]
+      },
+      {
+        "name": "Citrine",
+        "color": "Yellow",
+        "chakra": ["Solar Plexus"],
+        "properties": [
+          "Promotes abundance",
+          "Enhances creativity",
+          "Boosts self-confidence"
+        ]
+      },
+      {
+        "name": "Clear Quartz",
+        "color": "Colorless",
+        "chakra": ["All"],
+        "properties": [
+          "Amplifies energy",
+          "Enhances clarity of thought",
+          "Promotes balance"
+        ]
+      },
+      {
+        "name": "Lapis Lazuli",
+        "color": "Deep Blue",
+        "chakra": ["Throat", "Third Eye"],
+        "properties": [
+          "Enhances communication",
+          "Promotes inner truth",
+          "Stimulates wisdom"
+        ]
+      },
+      {
+        "name": "Jade",
+        "color": "Green",
+        "chakra": ["Heart"],
+        "properties": [
+          "Promotes harmony",
+          "Attracts good luck",
+          "Encourages serenity"
+        ]
+      },
+      {
+        "name": "Tiger's Eye",
+        "color": "Golden Brown",
+        "chakra": ["Solar Plexus", "Sacral"],
+        "properties": [
+          "Enhances courage",
+          "Promotes mental clarity",
+          "Protects against negative energy"
+        ]
+      },
+      {
+        "name": "Turquoise",
+        "color": "Blue-Green",
+        "chakra": ["Throat"],
+        "properties": [
+          "Promotes communication",
+          "Enhances spiritual grounding",
+          "Supports emotional balance"
+        ]
+      },
+      {
+        "name": "Carnelian",
+        "color": "Orange-Red",
+        "chakra": ["Sacral"],
+        "properties": [
+          "Boosts creativity",
+          "Enhances courage",
+          "Promotes vitality"
+        ]
+      },
+      {
+        "name": "Moonstone",
+        "color": "White with blue sheen",
+        "chakra": ["Crown", "Third Eye"],
+        "properties": [
+          "Enhances intuition",
+          "Promotes emotional balance",
+          "Supports feminine energy"
+        ]
+      },
+      {
+        "name": "Aventurine",
+        "color": "Green",
+        "chakra": ["Heart"],
+        "properties": [
+          "Attracts luck",
+          "Enhances prosperity",
+          "Promotes emotional calm"
+        ]
+      },
+      {
+        "name": "Obsidian",
+        "color": "Black",
+        "chakra": ["Root"],
+        "properties": [
+          "Provides psychic protection",
+          "Grounds energy",
+          "Clears negative energy"
+        ]
+      },
+      {
+        "name": "Fluorite",
+        "color": "Multi-colored",
+        "chakra": ["All"],
+        "properties": [
+          "Enhances mental clarity",
+          "Promotes concentration",
+          "Boosts creativity"
+        ]
+      },
+      {
+        "name": "Malachite",
+        "color": "Green",
+        "chakra": ["Heart", "Solar Plexus"],
+        "properties": [
+          "Promotes transformation",
+          "Protects against negative energy",
+          "Enhances intuition"
+        ]
+      },
+      {
+        "name": "Hematite",
+        "color": "Metallic Gray",
+        "chakra": ["Root"],
+        "properties": [
+          "Grounds and protects",
+          "Enhances mental capabilities",
+          "Boosts self-esteem"
+        ]
+      },
+      {
+        "name": "Garnet",
+        "color": "Deep Red",
+        "chakra": ["Root"],
+        "properties": [
+          "Enhances vitality",
+          "Boosts self-confidence",
+          "Promotes passion"
+        ]
+      },
+      {
+        "name": "Agate",
+        "color": "Various",
+        "chakra": ["Various"],
+        "properties": [
+          "Promotes inner stability",
+          "Enhances mental function",
+          "Improves concentration"
+        ]
+      },
+      {
+        "name": "Amazonite",
+        "color": "Blue-Green",
+        "chakra": ["Heart", "Throat"],
+        "properties": [
+          "Soothes emotions",
+          "Enhances communication",
+          "Promotes harmony"
+        ]
+      },
+      {
+        "name": "Aquamarine",
+        "color": "Light Blue",
+        "chakra": ["Throat"],
+        "properties": [
+          "Calms the mind",
+          "Reduces stress",
+          "Promotes clear communication"
+        ]
+      },
+      {
+        "name": "Bloodstone",
+        "color": "Dark Green with Red Spots",
+        "chakra": ["Root", "Heart"],
+        "properties": [
+          "Enhances courage",
+          "Purifies blood",
+          "Boosts energy"
+        ]
+      },
+      {
+        "name": "Chrysocolla",
+        "color": "Blue-Green",
+        "chakra": ["Throat", "Heart"],
+        "properties": [
+          "Promotes wisdom",
+          "Enhances communication",
+          "Relieves nervous tension"
+        ]
+      },
+      {
+        "name": "Jasper",
+        "color": "Various",
+        "chakra": ["Various"],
+        "properties": [
+          "Provides protection",
+          "Balances yin-yang energy",
+          "Promotes courage"
+        ]
+      },
+      {
+        "name": "Kyanite",
+        "color": "Blue",
+        "chakra": ["Throat", "Third Eye"],
+        "properties": [
+          "Aligns all chakras",
+          "Enhances communication",
+          "Promotes tranquility"
+        ]
+      },
+      {
+        "name": "Labradorite",
+        "color": "Gray with Iridescent Flashes",
+        "chakra": ["Third Eye", "Crown"],
+        "properties": [
+          "Enhances intuition",
+          "Promotes spiritual growth",
+          "Protects aura"
+        ]
+      },
+      {
+        "name": "Onyx",
+        "color": "Black",
+        "chakra": ["Root"],
+        "properties": [
+          "Provides strength",
+          "Enhances self-control",
+          "Promotes wise decision-making"
+        ]
+      },
+      {
+        "name": "Peridot",
+        "color": "Light Green",
+        "chakra": ["Heart", "Solar Plexus"],
+        "properties": [
+          "Promotes abundance",
+          "Enhances confidence",
+          "Balances emotions"
+        ]
+      },
+      {
+        "name": "Rhodonite",
+        "color": "Pink with Black Veins",
+        "chakra": ["Heart"],
+        "properties": [
+          "Promotes emotional healing",
+          "Enhances self-love",
+          "Balances emotions"
+        ]
+      },
+      {
+        "name": "Sodalite",
+        "color": "Dark Blue",
+        "chakra": ["Throat", "Third Eye"],
+        "properties": [
+          "Enhances logical thinking",
+          "Promotes calm",
+          "Boosts self-esteem"
+        ]
+      },
+      {
+        "name": "Sunstone",
+        "color": "Orange to Red-Brown",
+        "chakra": ["Solar Plexus", "Sacral"],
+        "properties": [
+          "Brings good fortune",
+          "Increases vitality",
+          "Promotes independence"
+        ]
+      },
+      {
+        "name": "Topaz",
+        "color": "Various",
+        "chakra": ["Solar Plexus", "Crown"],
+        "properties": [
+          "Promotes joy",
+          "Enhances creativity",
+          "Attracts success"
+        ]
+      }
+    ]
+  }

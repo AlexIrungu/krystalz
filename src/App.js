@@ -13,8 +13,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import './css/theme.css'
 import Shop from './components/Shop'
-import FAQ from './components/FAQ';
+import FAQSection from './components/FAQ';
 import DashboardPopup from './components/DashboardPopup';
+// import MapAsteroids from './components/MapAsteroids';
+import AstronomyComponent from './components/AstronomyComponent';
+// import AstroComponent from './components/AstroComponent';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -87,6 +90,9 @@ function App() {
     );
   }
 
+  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// Use `${apiUrl}/api/auth/login` for login requests, etc.
+
   return (
     <div className="theme-light">
       {showDashboardPopup && (
@@ -103,12 +109,15 @@ function App() {
       ) : (
         <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
       )}
+      <AstronomyComponent />
+      {/* <AstroComponent /> */}
       <About />
       <Services />
       <Shop />
       <Contact />
-      <FAQ />
+      <FAQSection />
       <Footer />
+      {/* <MapAsteroids /> */}
     </div>
   );
 }

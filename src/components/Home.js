@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+// import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import kry from './images/kry.jpg'
 import kry2 from './images/kry2.jpg'
+// import MapAsteroids from './MapAsteroids';
+
 // import kry3 from './images/kry3.jpeg'
 
 const Home = () => {
@@ -21,16 +23,19 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
+  // const handlePrevClick = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  // };
 
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  // const handleNextClick = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  // };
 
   return (
     <div>
+      {/* <div>
+      <MapAsteroids />
+      </div> */}
     <section
       id="/"
       className="relative h-screen bg-black text-white"
@@ -50,7 +55,7 @@ const Home = () => {
         <h1 className="text-5xl font-bold mb-4">Discover the Power of Krystals</h1>
         <p className="text-xl mb-8">Harness the energy of nature's most beautiful gems</p>
         <Link
-          to="explore-crystals"
+          to="map-asteroids"
           smooth={true}
           duration={500}
           className="bg-white text-black font-bold py-2 px-4 rounded-full hover:bg-gray-300 transition duration-300 cursor-pointer"
@@ -75,6 +80,7 @@ const Home = () => {
     </section>
     <div className="max-w-4xl mx-auto">
   {/* Add new sections here */}
+  
   <section className="select-your-crystal my-8 p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
     <h2 className="text-2xl font-bold text-black-700 mb-4">How to Select Your Crystal</h2>
     <p className="text-gray-700 leading-relaxed">

@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const FAQ = () => {
-  const faqData = [
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-gray-200 py-4">
+      <button
+        className="flex justify-between items-center w-full text-left"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-lg font-semibold">{question}</span>
+        {isOpen ? (
+          <ChevronUp className="w-6 h-6 text-indigo-600" />
+        ) : (
+          <ChevronDown className="w-6 h-6 text-indigo-600" />
+        )}
+      </button>
+      {isOpen && <p className="mt-2 text-gray-600">{answer}</p>}
+    </div>
+  );
+};
+
+const FAQSection = () => {
+  const faqs = [
     {
       question: "What crystal is best for healing?",
       answer: "The type of crystal you choose for healing may depend on the healing you need. Experts recommend clear quartz and amethyst for general healing."
@@ -21,18 +43,17 @@ const FAQ = () => {
   ];
 
   return (
-    <div id='faq' className="max-w-4xl mx-auto p-6 theme-white">
-      <h1 className="text-3xl font-bold mb-6 text-center text-black-700">Frequently Asked Questions</h1>
-      <div className="space-y-6">
-        {faqData.map((item, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-2 text-black-600">{item.question}</h2>
-            <p className="text-gray-700">{item.answer}</p>
-          </div>
-        ))}
+    <section className="py-12 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-indigo-800 mb-8">Frequently Asked Questions</h2>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          {faqs.map((faq, index) => (
+            <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default FAQ;
+export default FAQSection;

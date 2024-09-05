@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-scroll'
+import config from '../config';
 
 const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
@@ -8,17 +9,42 @@ const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [message, setMessage] = useState('');
 //   const [error, setError] = useState('');
 
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setMessage('');
   try {
-    const res = await axios.post('http://localhost:8000/api/auth/login', { email, password });
-    localStorage.setItem('token', res.data.token);
-    setMessage('Logged in successfully');
-    onLoginSuccess(res.data.user); // Pass the user data
+    const response = await axios.post(`${config.apiUrl}/auth/login`, 
+      { email, password },
+      { 
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.data && response.data.success) {
+      setMessage('Login successful');
+      onLoginSuccess();
+    } else {
+      setMessage(response.data.message || 'Login failed');
+    }
   } catch (error) {
-    setMessage(error.response.data.message);
+    console.error("Login error:", error);
+    if (error.response) {
+      setMessage(error.response.data.message || 'Server error');
+    } else if (error.request) {
+      setMessage('No response from server. Please check your connection.');
+    } else {
+      setMessage('An error occurred while sending the request.');
+    }
   }
+    
+  
 };
+
+
   return (
     <div id='login' className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
