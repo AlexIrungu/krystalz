@@ -3,6 +3,9 @@
   "name": "krystalz",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+  "node": "20.x"
+},
   "dependencies": {
     "@paypal/react-paypal-js": "^8.5.0",
     "@testing-library/jest-dom": "^5.17.0",
