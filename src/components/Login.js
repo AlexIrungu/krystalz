@@ -9,7 +9,7 @@ const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [message, setMessage] = useState('');
 //   const [error, setError] = useState('');
 
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const apiUrl = process.env.REACT_APP_API_URL || 'https://krystalz.onrender.com';
 
 const handleSubmit = async (e) => {
   e.preventDefault();
