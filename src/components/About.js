@@ -1,12 +1,12 @@
 import React from 'react';
 import { FaGem, FaUserFriends, FaAward } from 'react-icons/fa';
-import store from './images/store1.jpg';
+import about from './images/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg'
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
-  <div style={{border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', height: '100%'}}>
-    <Icon style={{fontSize: '2.5rem', color: '#8a2be2', marginBottom: '1rem'}} />
-    <h3 style={{fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem'}}>{title}</h3>
-    <p style={{color: '#4a5568'}}>{description}</p>
+  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+    <Icon className="text-4xl text-purple-600 mb-4" />
+    <h3 className="text-xl font-bold mb-2">{title}</h3>
+    <p className="text-gray-600">{description}</p>
   </div>
 );
 
@@ -30,39 +30,43 @@ const About = () => {
   ];
 
   return (
-    <div style={{maxWidth: '1200px', margin: '0 auto', padding: '4rem 1rem'}}>
-      <header style={{textAlign: 'center', marginBottom: '4rem'}}>
-        <h1 style={{fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem'}}>About Krystalz</h1>
-        <p style={{fontSize: '1.25rem', color: '#4a5568', maxWidth: '36rem', margin: '0 auto'}}>
+    <div id='about' className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          About <span className="text-purple-600">Krystalz</span>
+        </h1>
+        <p className="mt-3 max-w-md mx-auto text-xl text-gray-500 sm:text-2xl md:mt-5 md:max-w-3xl">
           Discover the transformative power of crystals with Krystalz, your trusted source for premium healing stones since 2010.
         </p>
-      </header>
+      </div>
 
-      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '4rem'}}>
-        <img
-          src={store}
-          alt="Krystalz Store"
-          style={{width: '100%', maxWidth: '600px', borderRadius: '0.5rem', marginBottom: '2rem'}}
-        />
-        <div>
-          <h2 style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem'}}>Our Story</h2>
-          <p style={{color: '#4a5568', marginBottom: '1rem'}}>
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-16">
+        <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+          <img
+            src={about}
+            alt="Krystalz Store"
+            className="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+          />
+        </div>
+        <div className="w-full lg:w-1/2 lg:pl-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
+          <p className="text-gray-600 mb-4">
             Founded in 2010 by crystal enthusiast Jane Doe, Krystalz began as a small online shop and has since grown into a leading provider of high-quality crystals and healing stones. Our passion for the metaphysical properties of crystals and commitment to customer satisfaction have been the driving forces behind our success.
           </p>
-          <p style={{color: '#4a5568'}}>
+          <p className="text-gray-600">
             Today, we're proud to serve a global community of crystal lovers, from beginners to experienced practitioners, helping them harness the power of nature's most beautiful creations.
           </p>
         </div>
       </div>
 
-      <section>
-        <h2 style={{fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '2rem'}}>Why Choose Krystalz?</h2>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem'}}>
+      <div>
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Why Choose Krystalz?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 };

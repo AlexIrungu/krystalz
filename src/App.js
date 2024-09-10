@@ -17,9 +17,13 @@ import FAQSection from './components/FAQ';
 import DashboardPopup from './components/DashboardPopup';
 // import MapAsteroids from './components/MapAsteroids';
 import AstronomyComponent from './components/AstronomyComponent';
-// import AstroComponent from './components/AstroComponent';
+import AstronomyButtons from './components/AstronomyButtons';
+import NightSkyTheme from './NightSkyTheme';
+import NewsLetter from './components/NewsLetter';
 
 function App() {
+  const [showAstronomy, setShowAstronomy] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [isCheckout, setIsCheckout] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,6 +55,16 @@ function App() {
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const handleShowHalfScreen = () => {
+    setShowAstronomy(true);
+    setIsPopup(false);
+  };
+
+  const handleShowPopup = () => {
+    setShowAstronomy(true);
+    setIsPopup(true);
+  };
+
   const handleLoginSuccess = (user) => {
     setIsLoggedIn(true);
     setUsername(user.name || user.email);
@@ -80,44 +94,61 @@ function App() {
 
   if (!isLoggedIn && !showMainContent) {
     return (
-      <div className="theme-light">
-        {showLogin ? (
-          <Login onLoginSuccess={handleLoginSuccess} onSwitchToSignup={handleSwitchForm} />
-        ) : (
-          <Signup onSignupSuccess={handleSignupSuccess} onSwitchToLogin={handleSwitchForm} />
-        )}
+      <div className="relative min-h-screen">
+      <div className="absolute inset-0 z-0">
+        <NightSkyTheme />
       </div>
+      <div className="relative z-10 flex items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-8 w-full max-w-md">
+          {showLogin ? (
+            <Login onLoginSuccess={handleLoginSuccess} onSwitchToSignup={handleSwitchForm} />
+          ) : (
+            <Signup onSignupSuccess={handleSignupSuccess} onSwitchToLogin={handleSwitchForm} />
+          )}
+        </div>
+      </div>
+    </div>
     );
   }
 
-  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-// Use `${apiUrl}/api/auth/login` for login requests, etc.
-
   return (
-    <div className="theme-light">
-      {showDashboardPopup && (
-        <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
+    <div className="relative min-h-[150vh]">
+    <div className="absolute inset-0 z-0">
+      <NightSkyTheme />
+    </div>
+    <div className="relative z-10">
+        {showDashboardPopup && (
+          <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
+        )}
+        <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
+        <Home />
+        {!isCheckout ? (
+          <>
+            <ExploreCrystals onAddToCart={handleAddToCart} />
+            <Cart items={cartItems} onCheckout={handleCheckout} />
+          </>
+        ) : (
+          <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
+        )}
+        <AstronomyButtons 
+        onShowHalfScreen={handleShowHalfScreen}
+        onShowPopup={handleShowPopup}
+      />
+
+      {showAstronomy && (
+        <AstronomyComponent 
+          isPopup={isPopup} 
+          onClose={() => setShowAstronomy(false)} 
+        />
       )}
-      
-      <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
-      <Home />
-      {!isCheckout ? (
-        <>
-          <ExploreCrystals onAddToCart={handleAddToCart} />
-          <Cart items={cartItems} onCheckout={handleCheckout} />
-        </>
-      ) : (
-        <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
-      )}
-      <AstronomyComponent />
-      {/* <AstroComponent /> */}
-      <About />
-      <Services />
-      <Shop />
-      <Contact />
-      <FAQSection />
-      <Footer />
-      {/* <MapAsteroids /> */}
+      <NewsLetter />
+        <About />
+        <Services />
+        <Shop />
+        <Contact />
+        <FAQSection />
+        <Footer />
+      </div>
     </div>
   );
 }

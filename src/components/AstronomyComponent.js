@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Star } from 'lucide-react';
+import { Moon, Star, X } from 'lucide-react';
 
-const AstronomyComponent = () => {
+const AstronomyComponent = ({ isPopup, onClose}) => {
   const [moonPhase, setMoonPhase] = useState('');
   const [moonFraction, setMoonFraction] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -61,66 +61,83 @@ const AstronomyComponent = () => {
     return descriptions[phase] || 'Description not available.';
   };
 
+  const containerClasses = isPopup
+    ? "fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50"
+    : "min-h-[50vh] bg-gray-900 text-white overflow-hidden relative";
+
+  const contentClasses = isPopup
+    ? "bg-gray-900 text-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
+    : "container mx-auto px-4 py-8";
+
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-hidden relative">
-      {[...Array(50)].map((_, i) => (
-        <Star 
-          key={i}
-          size={Math.random() * 4 + 1}
-          className="text-white absolute"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animation: `twinkle ${Math.random() * 5 + 2}s linear infinite`
-          }}
-        />
-      ))}
-      <div className="container mx-auto px-4 py-16">
-        <div className="sticky top-0 z-10 bg-gray-900 bg-opacity-70 backdrop-filter backdrop-blur-lg p-4 rounded-lg shadow-lg mb-8">
-          <h1 className="text-4xl font-bold mb-2">Moon Phase Explorer</h1>
-          <p className="text-xl">Current phase: {moonPhase}</p>
-        </div>
-        <div className="space-y-16">
-          <section className="flex flex-col items-center">
-            <div className="relative w-64 h-64 mb-8">
-              <div className="absolute inset-0 bg-gray-300 rounded-full shadow-inner"></div>
-              <div 
-                className="absolute inset-0 bg-gray-900 rounded-full transition-all duration-500 ease-in-out"
-                style={{
-                  clipPath: `inset(0 ${100 - moonFraction * 100}% 0 0)`,
-                  transform: `rotate(${scrollPosition / 10}deg)`
-                }}
-              ></div>
-              <Moon className="absolute inset-0 m-auto text-yellow-300" size={128} />
-            </div>
-            <div className="text-2xl mb-4">
-              {Math.round(moonFraction * 100)}% Illuminated
-            </div>
-            <div className="text-lg text-center max-w-2xl">
-              {getMoonPhaseDescription(moonPhase)}
-            </div>
-          </section>
-          <section>
-            <h2 className="text-3xl font-bold mb-4">About {moonPhase}</h2>
-            <p className="text-lg mb-4">
-              The {moonPhase.toLowerCase()} phase occurs when {moonFraction < 0.5 ? 'less' : 'more'} than half of the moon's 
-              visible surface is illuminated by the sun. During this phase, the moon appears to be {moonFraction < 0.5 ? 'growing' : 'shrinking'} 
-              in the sky.
-            </p>
-            <p className="text-lg">
-              This phase is part of the moon's approximately 29.5-day cycle, also known as the synodic month. 
-              As the moon orbits around the Earth, different amounts of its illuminated surface become visible to us, 
-              creating the various lunar phases we observe.
-            </p>
-          </section>
-          <section>
-            <h2 className="text-3xl font-bold mb-4">Observation Details</h2>
-            <p className="text-lg">Date: {new Date().toLocaleDateString()}</p>
-            <p className="text-lg mt-2">Note: This is a simulated moon phase based on the current date.</p>
-          </section>
-        </div>
+    <div className={containerClasses}>
+    {[...Array(50)].map((_, i) => (
+      <Star 
+        key={i}
+        size={Math.random() * 4 + 1}
+        className="text-white absolute"
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          animation: `twinkle ${Math.random() * 5 + 2}s linear infinite`
+        }}
+      />
+    ))}
+    <div className={contentClasses}>
+      {isPopup && (
+        <button 
+          onClick={onClose}
+          className="absolute top-2 right-2 text-white hover:text-gray-300"
+        >
+          <X size={24} />
+        </button>
+      )}
+      <div className={isPopup ? "p-4" : "sticky top-0 z-10 bg-gray-900 bg-opacity-70 backdrop-filter backdrop-blur-lg p-4 rounded-lg shadow-lg mb-8"}>
+        <h1 className="text-4xl font-bold mb-2">Moon Phase Explorer</h1>
+        <p className="text-xl">Current phase: {moonPhase}</p>
+      </div>
+      <div className="space-y-8">
+        <section className="flex flex-col items-center">
+          <div className="relative w-48 h-48 mb-4">
+            <div className="absolute inset-0 bg-gray-300 rounded-full shadow-inner"></div>
+            <div 
+              className="absolute inset-0 bg-gray-900 rounded-full transition-all duration-500 ease-in-out"
+              style={{
+                clipPath: `inset(0 ${100 - moonFraction * 100}% 0 0)`,
+                transform: `rotate(${scrollPosition / 10}deg)`
+              }}
+            ></div>
+            <Moon className="absolute inset-0 m-auto text-yellow-300" size={96} />
+          </div>
+          <div className="text-xl mb-2">
+            {Math.round(moonFraction * 100)}% Illuminated
+          </div>
+          <div className="text-base text-center max-w-xl">
+            {getMoonPhaseDescription(moonPhase)}
+          </div>
+        </section>
+        <section>
+          <h2 className="text-2xl font-bold mb-2">About {moonPhase}</h2>
+          <p className="text-base mb-2">
+            The {moonPhase.toLowerCase()} phase occurs when {moonFraction < 0.5 ? 'less' : 'more'} than half of the moon's 
+            visible surface is illuminated by the sun. During this phase, the moon appears to be {moonFraction < 0.5 ? 'growing' : 'shrinking'} 
+            in the sky.
+          </p>
+          <p className="text-base">
+            This phase is part of the moon's approximately 29.5-day cycle, also known as the synodic month. 
+            As the moon orbits around the Earth, different amounts of its illuminated surface become visible to us, 
+            creating the various lunar phases we observe.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-bold mb-2">Observation Details</h2>
+          <p className="text-base">Date: {new Date().toLocaleDateString()}</p>
+          <p className="text-base mt-1">Note: This is a simulated moon phase based on the current date.</p>
+        </section>
       </div>
     </div>
+  </div>
   );
 };
 

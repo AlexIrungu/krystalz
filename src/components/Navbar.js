@@ -14,7 +14,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
   ];
 
   return (
-    <nav className="bg-gray-900 sticky top-0 z-50 theme-dark shadow-lg">
+    <nav className=" sticky top-0 z-50 theme-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">

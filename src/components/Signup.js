@@ -13,7 +13,7 @@ const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post('https://krystalz.onrender.com/api/auth/signup', { name, email, password });
+    const res = await axios.post('http://localhost:8000/api/auth/signup', { name, email, password });
     setMessage(res.data.message);
     onSignupSuccess(res.data.user); // Pass the user data
   } catch (error) {
