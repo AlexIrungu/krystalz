@@ -19,7 +19,7 @@ import DashboardPopup from './components/DashboardPopup';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
 import NightSkyTheme from './NightSkyTheme';
-import NewsLetter from './components/NewsLetter';
+
 
 function App() {
   const [showAstronomy, setShowAstronomy] = useState(false);
@@ -141,7 +141,7 @@ function App() {
           onClose={() => setShowAstronomy(false)} 
         />
       )}
-      <NewsLetter />
+     
         <About />
         <Services />
         <Shop />

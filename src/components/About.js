@@ -3,7 +3,7 @@ import { FaGem, FaUserFriends, FaAward } from 'react-icons/fa';
 import about from './images/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg'
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+  <div className="bg-gray p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
     <Icon className="text-4xl text-purple-600 mb-4" />
     <h3 className="text-xl font-bold mb-2">{title}</h3>
     <p className="text-gray-600">{description}</p>
@@ -30,7 +30,7 @@ const About = () => {
   ];
 
   return (
-    <div id='about' className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div id='about' className="bg-black text-white max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
         <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           About <span className="text-purple-600">Krystalz</span>

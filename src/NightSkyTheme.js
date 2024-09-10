@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Moon } from 'lucide-react';
 
 const Star = ({ x, y }) => (
   <div 
@@ -14,8 +13,36 @@ const Star = ({ x, y }) => (
   />
 );
 
+const RealisticMoon = ({ style }) => (
+  <svg
+    viewBox="0 0 100 100"
+    className="fixed transition-all duration-300 ease-out"
+    style={style}
+  >
+    <defs>
+      <radialGradient id="moonGradient" cx="50%" cy="50%" r="50%" fx="20%" fy="20%">
+        <stop offset="0%" stopColor="#fff6e6" />
+        <stop offset="50%" stopColor="#ffeaad" />
+        <stop offset="100%" stopColor="#ffd54f" />
+      </radialGradient>
+      <filter id="moonShadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+        <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
+        <feMerge>
+          <feMergeNode in="offsetBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <circle cx="50" cy="50" r="45" fill="url(#moonGradient)" filter="url(#moonShadow)" />
+    <ellipse cx="28" cy="30" rx="8" ry="10" fill="#ffd54f" opacity="0.3" />
+    <ellipse cx="60" cy="70" rx="12" ry="8" fill="#ffd54f" opacity="0.3" />
+  </svg>
+);
+
 const NightSkyTheme = () => {
   const [stars, setStars] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const generateStars = () => {
@@ -29,26 +56,36 @@ const NightSkyTheme = () => {
       }
       setStars(newStars);
     };
-
     generateStars();
+
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
+  const moonPosition = {
+    top: `${10 + (scrollPosition / 20)}%`,
+    right: `${10 - (scrollPosition / 40)}%`,
+    width: '150px',
+    height: '150px',
+    transform: `rotate(${scrollPosition / 10}deg)`,
+  };
+
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full min-h-screen bg-black overflow-hidden">
       {stars.map((star) => (
         <Star key={star.id} x={star.x} y={star.y} />
       ))}
-      <Moon 
-        className="absolute text-yellow-200" 
-        style={{
-          top: '10%',
-          right: '10%',
-          width: '50px',
-          height: '50px',
-        }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-4xl text-white font-bold">Welcome to the Night Sky</h1>
+      <RealisticMoon style={moonPosition} />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="h-[300vh]" /> {/* Placeholder content for scrolling */}
       </div>
       <style jsx>{`
         @keyframes twinkle {

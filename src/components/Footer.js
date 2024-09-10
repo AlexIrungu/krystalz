@@ -1,17 +1,14 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaPinterest } from 'react-icons/fa';
 import { Link } from 'react-scroll'
+import NewsLetter from './NewsLetter';
 
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white theme-dark">
       <div className="container mx-auto py-8 px-4">
         <div className="flex flex-wrap justify-between">
-          {/* About Section
-          <div className="w-full md:w-1/4 mb-6 md:mb-0">
-            <h3 className="text-xl font-semibold mb-2">About Krystalz</h3>
-            <p className="text-gray-400">Discover the healing power of crystals and transform your life with our carefully curated collection.</p>
-          </div> */}
+          <NewsLetter />
 
  {/* Quick Links */}
  <div className="w-full md:w-1/4 mb-6 md:mb-0">

@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 // import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import kry from './images/kry.jpg'
-import kry2 from './images/kry2.jpg'
+// import kry from './images/kry.jpg'
+// import kry2 from './images/kry2.jpg'
 // import MapAsteroids from './MapAsteroids';
 
 // import kry3 from './images/kry3.jpeg'
 
 const Home = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [
-    kry,
-    kry2,
-    // kry3,
-  ];
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  // const images = [
+  //   kry,
+  //   kry2,
+  //   // kry3,
+  // ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  //   }, 5000);
 
-    return () => clearInterval(interval);
-  }, [images.length]);
+  //   return () => clearInterval(interval);
+  // }, [images.length]);
 
   // const handlePrevClick = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -38,12 +38,12 @@ const Home = () => {
       </div> */}
     <section
       id="/"
-      className="relative h-screen bg-black text-white"
-      style={{
-        backgroundImage: `url(${images[currentIndex]})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className="relative h-screen text-white"
+      // style={{
+      //   backgroundImage: `url(${images[currentIndex]})`,
+      //   backgroundSize: 'cover',
+      //   backgroundPosition: 'center',
+      // }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
         <h2 className="text-3xl font-semibold mb-4">Welcome to Our Krystal Sanctuary</h2>
@@ -79,7 +79,7 @@ const Home = () => {
 
     </section>
     <div className="flex flex-col md:flex-row gap-8 my-8">
-      <section className="select-your-crystal flex-1 p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <section className="select-your-crystal flex-1 p-8  rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
         <h2 className="text-2xl font-bold text-black-700 mb-4">How to Select Your Crystal</h2>
         <p className="text-gray-700 leading-relaxed">
           First things first: Identify what you feel you're missing before looking into what the stones can provide you. 

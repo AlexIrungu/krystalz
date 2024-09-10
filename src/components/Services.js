@@ -31,7 +31,7 @@ const ServiceCard = ({ icon, title, description }) => {
   return (
     <div id='services'
       ref={cardRef} 
-      className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4"
+      className="bg-gray p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4"
     >
       <div className="text-4xl text-black-600 mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -104,7 +104,7 @@ const Services = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-20 bg-gray-100 opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
+      className="py-20 bg-black text-white opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
     >
       <div className="container mx-auto px-4">
         <h2
