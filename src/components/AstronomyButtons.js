@@ -18,9 +18,9 @@ const StyledButton = ({ onClick, children, isPrimary }) => {
 const AstronomyButtons = ({ onShowHalfScreen, onShowPopup }) => {
   return (
     <div className="flex space-x-4 mb-4">
-      <StyledButton onClick={onShowHalfScreen} isPrimary={true}>
+      {/* <StyledButton onClick={onShowHalfScreen} isPrimary={true}>
         Show Astronomy (Half Screen)
-      </StyledButton>
+      </StyledButton> */}
       <StyledButton onClick={onShowPopup} isPrimary={false}>
         Show Astronomy (Popup)
       </StyledButton>

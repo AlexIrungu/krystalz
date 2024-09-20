@@ -30,7 +30,7 @@ const About = () => {
   ];
 
   return (
-    <div id='about' className="bg-black text-white max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div id='about' className="text-white max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center mb-16">
         <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           About <span className="text-purple-600">Krystalz</span>

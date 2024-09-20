@@ -41,7 +41,7 @@ const Footer = () => {
               <a href="https://twitter.com/" target="_blank" className="text-gray-400 hover:text-white transition duration-300">
                 <FaTwitter size={24} />
               </a>
-              <a href="https://instagram.com/" target="_blank" className="text-gray-400 hover:text-white transition duration-300">
+              <a href="https://www.instagram.com/_luna.kenya/" target="_blank" className="text-gray-400 hover:text-white transition duration-300">
                 <FaInstagram size={24} />
               </a>
               <a href="https://pinterest.com/" target='_blank' className="text-gray-400 hover:text-white transition duration-300">

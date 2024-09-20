@@ -104,7 +104,7 @@ const Services = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-20 bg-black text-white opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
+      className="py-20 text-white opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
     >
       <div className="container mx-auto px-4">
         <h2

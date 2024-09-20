@@ -1,49 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-// import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-// import kry from './images/kry.jpg'
-// import kry2 from './images/kry2.jpg'
-// import MapAsteroids from './MapAsteroids';
 
-// import kry3 from './images/kry3.jpeg'
 
 const Home = () => {
-  // const [currentIndex, setCurrentIndex] = useState(0);
-  // const images = [
-  //   kry,
-  //   kry2,
-  //   // kry3,
-  // ];
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  //   }, 5000);
-
-  //   return () => clearInterval(interval);
-  // }, [images.length]);
-
-  // const handlePrevClick = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  // };
-
-  // const handleNextClick = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  // };
-
   return (
     <div id='home'>
-      {/* <div>
-      <MapAsteroids />
-      </div> */}
+    
     <section
       id="/"
       className="relative h-screen text-white"
-      // style={{
-      //   backgroundImage: `url(${images[currentIndex]})`,
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center',
-      // }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center">
         <h2 className="text-3xl font-semibold mb-4">Welcome to Our Krystal Sanctuary</h2>
@@ -55,7 +20,7 @@ const Home = () => {
         <h1 className="text-5xl font-bold mb-4">Discover the Power of Krystals</h1>
         <p className="text-xl mb-8">Harness the energy of nature's most beautiful gems</p>
         <Link
-          to="map-asteroids"
+          to="shop"
           smooth={true}
           duration={500}
           className="bg-white text-black font-bold py-2 px-4 rounded-full hover:bg-gray-300 transition duration-300 cursor-pointer"
@@ -63,24 +28,10 @@ const Home = () => {
           Explore Crystals
         </Link>
       </div>
-      {/* <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white hover:text-gray-300 transition duration-300"
-        onClick={handlePrevClick}
-      >
-        <FaArrowLeft size={24} />
-      </button>
-      <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white hover:text-gray-300 transition duration-300"
-        onClick={handleNextClick}
-      >
-        <FaArrowRight size={24} />
-      </button> */}
- 
-
     </section>
     <div className="flex flex-col md:flex-row gap-8 my-8">
       <section className="select-your-crystal flex-1 p-8  rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <h2 className="text-2xl font-bold text-black-700 mb-4">How to Select Your Crystal</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">How to Select Your Crystal</h2>
         <p className="text-gray-700 leading-relaxed">
           First things first: Identify what you feel you're missing before looking into what the stones can provide you. 
           This will help you determine what's happening within yourself before depending on outside sources. From there, 
@@ -90,8 +41,8 @@ const Home = () => {
         </p>
       </section>
 
-      <section className="care-for-your-crystal flex-1 p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <h2 className="text-2xl font-bold text-black-700 mb-4">How to Care for Your Crystal</h2>
+      <section className="care-for-your-crystal flex-1 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <h2 className="text-2xl font-bold text-white mb-4">How to Care for Your Crystal</h2>
         <p className="text-gray-700 leading-relaxed mb-6">
           When you first bring your crystal home, experts say you'll want to cleanse away any negativity it may have picked up. 
           Depending on the kind of stone, you can:

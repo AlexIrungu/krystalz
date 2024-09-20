@@ -6,8 +6,6 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import Services from './components/Services';
 import About from './components/About';
-import ExploreCrystals from './components/ExploreCrystals';
-import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -15,7 +13,6 @@ import './css/theme.css'
 import Shop from './components/Shop'
 import FAQSection from './components/FAQ';
 import DashboardPopup from './components/DashboardPopup';
-// import MapAsteroids from './components/MapAsteroids';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
 import NightSkyTheme from './NightSkyTheme';
@@ -54,11 +51,6 @@ function App() {
   };
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  const handleShowHalfScreen = () => {
-    setShowAstronomy(true);
-    setIsPopup(false);
-  };
 
   const handleShowPopup = () => {
     setShowAstronomy(true);
@@ -112,45 +104,51 @@ function App() {
   }
 
   return (
-    <div className="relative min-h-[150vh]">
-    <div className="absolute inset-0 z-0">
+    <div className="relative min-h-screen">
+    <div className="fixed inset-0 z-0">
       <NightSkyTheme />
     </div>
     <div className="relative z-10">
-        {showDashboardPopup && (
-          <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
-        )}
-        <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
-        <Home />
-        {!isCheckout ? (
-          <>
-            <ExploreCrystals onAddToCart={handleAddToCart} />
-            <Cart items={cartItems} onCheckout={handleCheckout} />
-          </>
-        ) : (
-          <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
-        )}
-        <AstronomyButtons 
-        onShowHalfScreen={handleShowHalfScreen}
-        onShowPopup={handleShowPopup}
-      />
-
-      {showAstronomy && (
-        <AstronomyComponent 
-          isPopup={isPopup} 
-          onClose={() => setShowAstronomy(false)} 
-        />
+      {!isLoggedIn && !showMainContent ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-8 w-full max-w-md">
+            {showLogin ? (
+              <Login onLoginSuccess={handleLoginSuccess} onSwitchToSignup={handleSwitchForm} />
+            ) : (
+              <Signup onSignupSuccess={handleSignupSuccess} onSwitchToLogin={handleSwitchForm} />
+            )}
+          </div>
+        </div>
+      ) : (
+        <>
+          {showDashboardPopup && (
+            <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
+          )}
+          <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
+          <div className="container mx-auto px-4">
+            <Home />
+            {!isCheckout ? (
+              <>
+                <Shop onAddToCart={handleAddToCart} />
+              </>
+            ) : (
+              <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
+            )}
+            <AstronomyButtons onShowPopup={handleShowPopup} />
+            {showAstronomy && (
+              <AstronomyComponent isPopup={isPopup} onClose={() => setShowAstronomy(false)} />
+            )}
+            <About />
+            <Services />
+            <Contact />
+            <FAQSection />
+          </div>
+          <Footer />
+        </>
       )}
-     
-        <About />
-        <Services />
-        <Shop />
-        <Contact />
-        <FAQSection />
-        <Footer />
-      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
