@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.287c523b.css",
-    "main.js": "/krystalz/static/js/main.ccfdd0e4.js",
+    "main.css": "/krystalz/static/css/main.91a39e9c.css",
+    "main.js": "/krystalz/static/js/main.bda15e91.js",
     "static/js/453.9e7d8bd1.chunk.js": "/krystalz/static/js/453.9e7d8bd1.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
     "static/media/log.jpg": "/krystalz/static/media/log.7abf829e47002dff5cc7.jpg",
     "index.html": "/krystalz/index.html",
-    "main.287c523b.css.map": "/krystalz/static/css/main.287c523b.css.map",
-    "main.ccfdd0e4.js.map": "/krystalz/static/js/main.ccfdd0e4.js.map",
+    "main.91a39e9c.css.map": "/krystalz/static/css/main.91a39e9c.css.map",
+    "main.bda15e91.js.map": "/krystalz/static/js/main.bda15e91.js.map",
     "453.9e7d8bd1.chunk.js.map": "/krystalz/static/js/453.9e7d8bd1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.287c523b.css",
-    "static/js/main.ccfdd0e4.js"
+    "static/css/main.91a39e9c.css",
+    "static/js/main.bda15e91.js"
   ]
 }
