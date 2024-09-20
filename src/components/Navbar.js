@@ -28,14 +28,14 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                     LUNA
                   </p>
                 </div>
-                <div className="relative">
+                {/* <div className="relative">
                   <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600 tracking-wider">
                     KRYSTALZ
                   </p>
                   <p className="text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-600 tracking-wider absolute top-0 left-0 transform translate-x-0.5 translate-y-0.5 opacity-50">
                     KRYSTALZ
                   </p>
-                </div>
+                </div> */}
               </div>
               <img className="h-8 w-8 md:h-10 md:w-10 animate-spin-slow animate-pulse" src={log} alt="Logo" />
             </div>

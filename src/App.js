@@ -105,9 +105,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen">
-    <div className="fixed inset-0 z-0">
-      <NightSkyTheme />
-    </div>
+    <NightSkyTheme />
     <div className="relative z-10">
       {!isLoggedIn && !showMainContent ? (
         <div className="flex items-center justify-center min-h-screen">
@@ -125,12 +123,10 @@ function App() {
             <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
           )}
           <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
-          <div className="container mx-auto px-4">
+          <main className="container mx-auto px-4 pb-16">
             <Home />
             {!isCheckout ? (
-              <>
-                <Shop onAddToCart={handleAddToCart} />
-              </>
+              <Shop onAddToCart={handleAddToCart} />
             ) : (
               <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
             )}
@@ -142,7 +138,7 @@ function App() {
             <Services />
             <Contact />
             <FAQSection />
-          </div>
+          </main>
           <Footer />
         </>
       )}
