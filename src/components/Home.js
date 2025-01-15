@@ -4,7 +4,7 @@ import moon from './images/d6069b77-b862-43ef-b6f6-04183622008e.jpg';
 
 const Home = () => {
   return (
-    <div id='home' className="min-h-screen">
+    <div id='home' className="min-h-screen overflow-x-hidden">
       {/* Hero Section with Full Background */}
       <section 
         className="relative min-h-screen bg-cover bg-center bg-no-repeat"

@@ -13,13 +13,13 @@ const Cart = ({ items, onCheckout }) => {
           {items.map((item, index) => (
             <li key={index} className="flex justify-between items-center mb-2">
               <span>{item.name} (x{item.quantity})</span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
+              <span>KSH {(item.price * item.quantity).toFixed(2)}</span>
             </li>
           ))}
         </ul>
       )}
       <div className="flex justify-between items-center mt-4">
-        <h3 className="text-xl font-semibold">Total: ${totalPrice.toFixed(2)}</h3>
+        <h3 className="text-xl font-semibold">Total: KSH{totalPrice.toFixed(2)}</h3>
         <button
           onClick={onCheckout}
           className="bg-blue-500 text-white py-2 px-4 rounded"
