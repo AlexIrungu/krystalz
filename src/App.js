@@ -25,9 +25,10 @@ function App() {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(null);
   const [showDashboardPopup, setShowDashboardPopup] = useState(false);
   const [showMainContent, setShowMainContent] = useState(false);
+  const [email, setEmail] = useState(null);
 
   const handleAddToCart = (crystal) => {
     const existingItem = cartItems.find(item => item.id === crystal.id);
@@ -59,8 +60,16 @@ function App() {
 
   const handleLoginSuccess = (user) => {
     setIsLoggedIn(true);
-    setUsername(user.name || user.email);
+    setEmail(user.email);  // Store the email
+    setUsername(user.name || user.email.split('@')[0]);  // Set username from name or email
     setShowDashboardPopup(true);
+  };
+  
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername(null);
+    setEmail(null);
+    setShowMainContent(false);
   };
 
   const handleSignupSuccess = (user) => {
@@ -78,11 +87,7 @@ function App() {
     setShowMainContent(true);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername('');
-    setShowMainContent(false);
-  };
+  
 
   if (!isLoggedIn && !showMainContent) {
     return (
@@ -120,9 +125,18 @@ function App() {
       ) : (
         <>
           {showDashboardPopup && (
-            <DashboardPopup username={username} onClose={handleCloseDashboardPopup} />
-          )}
-          <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
+  <DashboardPopup 
+    username={username} 
+    email={email}
+    onClose={handleCloseDashboardPopup} 
+  />
+)}
+          <Navbar 
+  isLoggedIn={isLoggedIn} 
+  username={username} 
+  email={email}  // Pass email if needed
+  onLogout={handleLogout}
+/>
           <main className="container mx-auto px-4 pb-16">
             <Home />
             {!isCheckout ? (

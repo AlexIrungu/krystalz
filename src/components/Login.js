@@ -26,7 +26,11 @@ const handleSubmit = async (e) => {
     );
     if (response.data && response.data.success) {
       setMessage('Login successful');
-      onLoginSuccess();
+      // Pass the user data to the parent component
+      onLoginSuccess({
+        email: email,
+        name: response.data.user?.name || email.split('@')[0] // Use user's name from response if available
+      });
     } else {
       setMessage(response.data.message || 'Login failed');
     }
@@ -40,10 +44,7 @@ const handleSubmit = async (e) => {
       setMessage('An error occurred while sending the request.');
     }
   }
-    
-  
 };
-
 
   return (
     <div id='login' className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

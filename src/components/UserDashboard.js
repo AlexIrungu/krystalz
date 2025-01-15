@@ -31,7 +31,7 @@ const UserDashboard = ({ email, onLogout }) => {
           transition={{ delay: 0.2 }}
           className="text-3xl font-bold mb-6 text-gray-800 text-center"
         >
-          Welcome, {username}!
+          Welcome, {username || 'User'}!
         </motion.h2>
         
         <div className="space-y-4">
