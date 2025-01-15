@@ -88,7 +88,7 @@ function App() {
     return (
       <div className="relative min-h-screen">
       <div className="absolute inset-0 z-0">
-        <NightSkyTheme />
+        {/* <NightSkyTheme /> */}
       </div>
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-8 w-full max-w-md">
@@ -105,7 +105,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen">
-    <NightSkyTheme />
+    {/* <NightSkyTheme /> */}
     <div className="relative z-10">
       {!isLoggedIn && !showMainContent ? (
         <div className="flex items-center justify-center min-h-screen">

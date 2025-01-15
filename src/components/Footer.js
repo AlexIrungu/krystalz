@@ -25,10 +25,10 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <h3 className="text-xl font-semibold mb-2">Contact Us</h3>
-            <p className="text-gray-400 mb-2">123 Crystal Lane</p>
-            <p className="text-gray-400 mb-2">Gemstone City, GS 12345</p>
-            <p className="text-gray-400 mb-2">Phone: (123) 456-7890</p>
-            <p className="text-gray-400">Email: info@krystalz.com</p>
+            {/* <p className="text-gray-400 mb-2">123 Crystal Lane</p> */}
+            <p className="text-gray-400 mb-2">Nairobi, Kenya</p>
+            <p className="text-gray-400 mb-2">Phone: +254 702064459</p>
+            <p className="text-gray-400">Email:  Lunakenya88@gmail.com</p>
           </div>
 
           {/* Social Media */}

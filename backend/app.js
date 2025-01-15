@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require("express");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const cors = require('cors');
 const collection = require("./mongo");
 
@@ -35,9 +35,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// {mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(err => console.error('MongoDB connection error:', err));}
 
 // Routes
 app.post("/api/auth/signup", async (req, res) => {
@@ -68,17 +68,34 @@ app.post("/api/auth/signup", async (req, res) => {
 app.post("/api/auth/login", async (req, res) => {
   const { email, password } = req.body;
   try {
+    console.log("Login attempt for email:", email); // Log the incoming request
+    
     const user = await collection.findOne({ email: email });
     if (!user) {
+      console.log("User not found for email:", email);
       return res.status(401).json({ success: false, message: "User not found" });
     }
-    if (user.password !== password) {  // Note: In production, use proper password hashing
+    
+    console.log("User found, checking password");
+    if (user.password !== password) {
+      console.log("Password mismatch for email:", email);
       return res.status(401).json({ success: false, message: "Incorrect password" });
     }
+    
+    console.log("Login successful for email:", email);
     res.json({ success: true, message: "Login successful" });
   } catch (e) {
     console.error("Login error:", e);
     res.status(500).json({ success: false, message: "Server error", error: e.message });
+  }
+});
+
+app.get("/api/auth/users", async (req, res) => {
+  try {
+    const users = await collection.find({}).select('-password');
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching users", error: error.message });
   }
 });
 
