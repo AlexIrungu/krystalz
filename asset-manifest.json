@@ -1,17 +1,34 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.91a39e9c.css",
-    "main.js": "/krystalz/static/js/main.bda15e91.js",
+    "main.css": "/krystalz/static/css/main.3f62a593.css",
+    "main.js": "/krystalz/static/js/main.46812226.js",
     "static/js/453.9e7d8bd1.chunk.js": "/krystalz/static/js/453.9e7d8bd1.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
-    "static/media/log.jpg": "/krystalz/static/media/log.7abf829e47002dff5cc7.jpg",
+    "static/media/d6069b77-b862-43ef-b6f6-04183622008e.jpg": "/krystalz/static/media/d6069b77-b862-43ef-b6f6-04183622008e.386c019d11d3211e390a.jpg",
+    "static/media/Redjasperbracelet.jpeg": "/krystalz/static/media/Redjasperbracelet.53452ccf1387fb8d7a9f.jpeg",
+    "static/media/Groundedonlineworkshop.jpeg": "/krystalz/static/media/Groundedonlineworkshop.988b6ad1bf78142d381e.jpeg",
+    "static/media/Amethyst.jpeg": "/krystalz/static/media/Amethyst.686301a04470b8392e5a.jpeg",
+    "static/media/ObsidianBracelet.jpeg": "/krystalz/static/media/ObsidianBracelet.e264e7c0e4618d41774f.jpeg",
+    "static/media/TigersEye.jpeg": "/krystalz/static/media/TigersEye.370db7f62ce9da0c698c.jpeg",
+    "static/media/HametiteBracelet.jpeg": "/krystalz/static/media/HametiteBracelet.c1490fb2cdacc4d3d0b8.jpeg",
+    "static/media/ClearQuartz.jpeg": "/krystalz/static/media/ClearQuartz.cd6ff69058981d5df52c.jpeg",
+    "static/media/LunaGuideBalancingChakras.jpeg": "/krystalz/static/media/LunaGuideBalancingChakras.8d9f36724cd8c15ea770.jpeg",
+    "static/media/RoseQuartz.jpeg": "/krystalz/static/media/RoseQuartz.8df9d6411d7bfda192ea.jpeg",
+    "static/media/AventurineBracelet.jpeg": "/krystalz/static/media/AventurineBracelet.35f78ccbf7fecf43c94d.jpeg",
+    "static/media/Palosanto.jpeg": "/krystalz/static/media/Palosanto.019f1ce6fc87ad765737.jpeg",
+    "static/media/WhiteSageBundle.jpeg": "/krystalz/static/media/WhiteSageBundle.cfe525550b6a2407952d.jpeg",
+    "static/media/ChakraBraceletClearQuartz.jpeg": "/krystalz/static/media/ChakraBraceletClearQuartz.bc37d780c2183a9f1902.jpeg",
+    "static/media/ChakraBraceletObsidian.jpeg": "/krystalz/static/media/ChakraBraceletObsidian.46e65e942737609e1322.jpeg",
+    "static/media/ReikiEnergyHealingSession.jpeg": "/krystalz/static/media/ReikiEnergyHealingSession.3c7437fd39dc1ebad53c.jpeg",
+    "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
+    "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.91a39e9c.css.map": "/krystalz/static/css/main.91a39e9c.css.map",
-    "main.bda15e91.js.map": "/krystalz/static/js/main.bda15e91.js.map",
+    "main.3f62a593.css.map": "/krystalz/static/css/main.3f62a593.css.map",
+    "main.46812226.js.map": "/krystalz/static/js/main.46812226.js.map",
     "453.9e7d8bd1.chunk.js.map": "/krystalz/static/js/453.9e7d8bd1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.91a39e9c.css",
-    "static/js/main.bda15e91.js"
+    "static/css/main.3f62a593.css",
+    "static/js/main.46812226.js"
   ]
 }
