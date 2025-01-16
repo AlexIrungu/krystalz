@@ -3,7 +3,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { AnimatePresence, motion } from 'framer-motion';
 import log from './Luna/logoo.jpeg';
 
-const Navbar = ({ isLoggedIn, username, onLogout }) => {
+const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -28,6 +28,17 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
     { name: 'Shop', to: 'shop' },
     { name: 'Contact', to: 'contact' },
   ];
+
+  const AuthButtons = () => (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onShowAuth}
+      className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out shadow-md"
+    >
+      Sign In
+    </motion.button>
+  );
 
   return (
     <motion.nav
@@ -96,7 +107,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
           </div>
 
           <div className="hidden md:block">
-            {isLoggedIn && username && (
+            {isLoggedIn && username ? (
               <motion.div 
                 className="flex items-center space-x-4"
                 initial={{ opacity: 0, x: 20 }}
@@ -114,6 +125,8 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                   Logout
                 </motion.button>
               </motion.div>
+            ) : (
+              <AuthButtons />
             )}
           </div>
 
@@ -163,7 +176,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                   {item.name}
                 </ScrollLink>
               ))}
-              {isLoggedIn && username && (
+              {isLoggedIn && username ? (
                 <>
                   <span className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium bg-purple-50">
                     Welcome, {username}
@@ -179,6 +192,17 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                     Logout
                   </motion.button>
                 </>
+              ) : (
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    onShowAuth();
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-all duration-300 ease-in-out"
+                >
+                  Sign In
+                </motion.button>
               )}
             </div>
           </motion.div>
