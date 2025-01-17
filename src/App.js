@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import { ThemeProvider, useTheme} from './context/ThemeContext'
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
@@ -16,7 +17,8 @@ import DashboardPopup from './components/DashboardPopup';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
 
-function App() {
+function AppContent() {
+  const { isDarkMode, toggleTheme } = useTheme();
   const [showAstronomy, setShowAstronomy] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -90,24 +92,26 @@ function App() {
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="relative min-h-screen">
-      <div className="relative z-10">
+    <div className={`relative min-h-screen ${isDarkMode ? 'dark' : ''}`}>
+      <div className="relative z-10 bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark transition-colors duration-200">
         <Navbar 
           isLoggedIn={isLoggedIn} 
           username={username} 
           email={email}
           onLogout={handleLogout}
           onShowAuth={() => setShowAuthModal(true)}
+          onToggleTheme={toggleTheme}
+          isDarkMode={isDarkMode}
         />
         
         {showAuthModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-            <div className="bg-white rounded-lg p-8 w-full max-w-md">
+            <div className="bg-primary-light dark:bg-secondary-dark rounded-lg p-8 w-full max-w-md">
               <button 
                 onClick={() => setShowAuthModal(false)}
                 className="float-right text-gray-500 hover:text-gray-700"
               >
-                ×
+                
               </button>
               {showLogin ? (
                 <Login 
@@ -153,5 +157,14 @@ function App() {
     </div>
   );
 }
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
+
 
 export default App;

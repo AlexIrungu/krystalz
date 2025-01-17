@@ -3,6 +3,7 @@ import { FaGem, FaUserFriends, FaAward, FaArrowRight, FaTimes } from 'react-icon
 import about from './images/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg';
 import AboutMore from './AboutMore';
 import Reiki from './Reiki';
+import AstrologyComponent from './AstrologyComponent';
 
 const About = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,7 +86,7 @@ const About = () => {
           </li>
         </ul>
         <div className="mt-8">
-          <AboutMore />
+          <AstrologyComponent />
         </div>
       </div>
     </div>

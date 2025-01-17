@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
+import { FaChevronLeft, FaChevronRight, FaGem } from 'react-icons/fa';
 import Root from './Luna/Root.jpg';
 import balancing from './Luna/BalancingRoot.jpg';
 import brtwo from './Luna/BRTWO.jpg';
-import { FaChevronLeft, FaChevronRight, FaGem } from 'react-icons/fa';
 
-function AboutMore() {
+const CrystalSection = ({ crystals, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const crystals = [
-    {
-      image: Root,
-      name: "The Root Chakra",
-      description: "Known for its powerful healing and cleansing properties. This crystal promotes spiritual growth, inner peace, and emotional balance.",
-      benefits: ["Enhances meditation", "Promotes restful sleep", "Reduces anxiety"]
-    },
-    {
-      image: balancing,
-      name: "Balancing The Root Chakra",
-      description: "The stone of universal love. This gentle pink crystal opens the heart chakra and promotes all forms of love, including self-love.",
-      benefits: ["Attracts love", "Heals emotional wounds", "Promotes self-care"]
-    },
-    {
-      image: brtwo,
-      name: "Clear Quartz",
-      description: "The master healer crystal. It amplifies energy and thought, and helps with concentration and memory.",
-      benefits: ["Amplifies intentions", "Clarity of mind", "Energy cleansing"]
-    }
-  ];
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
@@ -41,8 +20,8 @@ function AboutMore() {
   };
 
   return (
-    <div id='about-more' className="bg-white rounded-2xl shadow-lg p-8 mt-16">
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Discover Our Crystals</h2>
+    <div className="bg-white rounded-2xl shadow-lg p-8 mt-8">
+      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{title}</h2>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-1/2 relative">
           <img
@@ -94,6 +73,55 @@ function AboutMore() {
       </div>
     </div>
   );
-}
+};
+
+const AboutMore = () => {
+  const rootChakraCrystals = [
+    {
+      image: Root,
+      name: "The Root Chakra",
+      description: "Known for its powerful healing and cleansing properties. This crystal promotes spiritual growth, inner peace, and emotional balance.",
+      benefits: ["Enhances meditation", "Promotes restful sleep", "Reduces anxiety"]
+    },
+    // Add more root chakra crystals here
+  ];
+
+  const throatChakraCrystals = [
+    {
+      image: balancing, // Replace with throat chakra image
+      name: "Throat Chakra Crystal",
+      description: "Enhances communication and self-expression. This crystal helps in speaking your truth and expressing yourself clearly.",
+      benefits: ["Improves communication", "Enhances self-expression", "Promotes clarity"]
+    },
+    // Add more throat chakra crystals here
+  ];
+
+  const crownChakraCrystals = [
+    {
+      image: brtwo, // Replace with crown chakra image
+      name: "Crown Chakra Crystal",
+      description: "Connected to spiritual awareness and enlightenment. This crystal helps in achieving higher consciousness and divine wisdom.",
+      benefits: ["Spiritual connection", "Enhanced intuition", "Mental clarity"]
+    },
+    // Add more crown chakra crystals here
+  ];
+
+  return (
+    <div id="about-more" className="space-y-8">
+      <CrystalSection 
+        crystals={rootChakraCrystals} 
+        title="Root Chakra Crystals" 
+      />
+      <CrystalSection 
+        crystals={throatChakraCrystals} 
+        title="Throat Chakra Crystals" 
+      />
+      <CrystalSection 
+        crystals={crownChakraCrystals} 
+        title="Crown Chakra Crystals" 
+      />
+    </div>
+  );
+};
 
 export default AboutMore;

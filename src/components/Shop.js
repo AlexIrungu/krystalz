@@ -275,29 +275,14 @@ const Shop = () => {
 
   return (
     <div id="shop" className="py-12">
-      <h1 className="">SHOP</h1>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Categories */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex overflow-x-auto space-x-4 pb-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
-                className={`whitespace-nowrap px-4 py-2 rounded-full ${
-                  activeCategory === category
-                    ? 'bg-gray-200 text-gray-800'
-                    : 'bg-white text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header section with Shop title and sort */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold tracking-wide">SHOP</h1>
           <div className="flex items-center">
             <select
               onChange={handleSortChange}
-              className="border rounded-md px-2 py-1"
+              className="border rounded-md px-4 py-2 bg-white text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200"
             >
               <option value="default">SORT BY</option>
               <option value="price-low-high">Price: Low to High</option>
@@ -305,6 +290,23 @@ const Shop = () => {
             </select>
             <ChevronRight className="ml-1" />
           </div>
+        </div>
+
+        {/* Categories */}
+        <div className="flex overflow-x-auto space-x-4 pb-6">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleCategoryChange(category)}
+              className={`whitespace-nowrap px-4 py-2 rounded-full ${
+                activeCategory === category
+                  ? 'bg-gray-200 text-gray-800'
+                  : 'bg-white text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
 
         {/* Product Grid */}
