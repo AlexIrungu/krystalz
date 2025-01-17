@@ -26,11 +26,11 @@ const handleSubmit = async (e) => {
       }
     );
 
-    console.log('Signup response:', response); // Debug log
+    console.log('Signup response:', res); // Debug log
 
-    setMessage(response.data.message);
-    if (response.data.user) {
-      onSignupSuccess(response.data.user); // Pass the user data
+    setMessage(res.data.message);
+    if (res.data.user) {
+      onSignupSuccess(res.data.user); // Pass the user data
     }
     
   } catch (error) {
@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
       response: error.response,
       request: error.request
     });
-    
+
     setMessage(error.response?.data?.message || 'An error occurred during signup')
   }
 };
