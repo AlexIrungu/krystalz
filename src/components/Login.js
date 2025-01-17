@@ -7,13 +7,14 @@ const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-//   const [error, setError] = useState('');
 
-// const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:10000';
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   setMessage('');
+
+  console.log('Attempting login to:', `${config.apiUrl}/auth/login`); // Debug log
+
   try {
     const response = await axios.post(`${config.apiUrl}/auth/login`, 
       { email, password },
@@ -24,6 +25,9 @@ const handleSubmit = async (e) => {
         },
       }
     );
+
+    console.log('Login response:', response); // Debug log
+
     if (response.data && response.data.success) {
       setMessage('Login successful');
       // Pass the user data to the parent component
@@ -34,14 +38,20 @@ const handleSubmit = async (e) => {
     } else {
       setMessage(response.data.message || 'Login failed');
     }
+
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("Login error details:", {
+      message: error.message,
+      response: error.response,
+      request: error.request
+    });
+
     if (error.response) {
-      setMessage(error.response.data.message || 'Server error');
+      setMessage(error.response.data.message || `Server error: ${error.response.status}`);
     } else if (error.request) {
       setMessage('No response from server. Please check your connection.');
     } else {
-      setMessage('An error occurred while sending the request.');
+      setMessage(`Error: ${error.message}`);
     }
   }
 };

@@ -8,11 +8,14 @@ const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [isSignedUp, setIsSignedUp] = useState(false);
+
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  console.log('Attempting signup to:', `${config.apiUrl}/auth/signup`); // Debug log
+
+
   try {
     const res = await axios.post(`${config.apiUrl}/auth/signup`,
        { name, email, password },
@@ -22,12 +25,21 @@ const handleSubmit = async (e) => {
         },
       }
     );
+
+    console.log('Signup response:', response); // Debug log
+
     setMessage(response.data.message);
     if (response.data.user) {
-      onSignupSuccess(res.data.user); // Pass the user data
+      onSignupSuccess(response.data.user); // Pass the user data
     }
     
   } catch (error) {
+    console.error("Signup error details:", {
+      message: error.message,
+      response: error.response,
+      request: error.request
+    });
+    
     setMessage(error.response?.data?.message || 'An error occurred during signup')
   }
 };
