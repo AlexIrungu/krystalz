@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import config from '../config';
 
 
 const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
@@ -13,11 +14,21 @@ const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post('http://localhost:8000/api/auth/signup', { name, email, password });
-    setMessage(res.data.message);
-    onSignupSuccess(res.data.user); // Pass the user data
+    const res = await axios.post(`${config.apiUrl}/auth/signup`,
+       { name, email, password },
+       {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    setMessage(response.data.message);
+    if (response.data.user) {
+      onSignupSuccess(res.data.user); // Pass the user data
+    }
+    
   } catch (error) {
-    setMessage(error.response.data.message);
+    setMessage(error.response?.data?.message || 'An error occurred during signup')
   }
 };
 
