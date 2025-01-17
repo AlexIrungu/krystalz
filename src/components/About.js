@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { FaGem, FaUserFriends, FaAward, FaArrowRight, FaTimes } from 'react-icons/fa';
+import { FaGem, FaUserFriends, FaAward, FaArrowRight, FaTimes, FaYinYang, FaMoon } from 'react-icons/fa';
 import about from './images/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg';
 import AboutMore from './AboutMore';
 import Reiki from './Reiki';
 import AstrologyComponent from './AstrologyComponent';
+import { 
+  GiLibra, // For zodiac representation
+  GiStarsStack, // For celestial/astrology elements
+  GiCrystalBall // For readings/guidance
+} from 'react-icons/gi';
+import { Sparkles } from 'lucide-react';
 
 const About = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,26 +43,34 @@ const About = () => {
   // Feature-specific content components
   const PremiumQualityContent = () => (
     <div className="p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Premium Quality Crystals</h2>
-      <div className="space-y-6">
-        <p className="text-lg text-gray-600">
-          Our crystals are carefully selected from the most reputable mines worldwide. Each piece undergoes 
-          rigorous quality control to ensure:
-        </p>
-        <ul className="space-y-4 text-gray-600">
-          <li className="flex items-start">
-            <FaGem className="text-purple-600 mt-1 mr-3" />
-            <span>Exceptional clarity and natural formation</span>
-          </li>
-          <li className="flex items-start">
-            <FaGem className="text-purple-600 mt-1 mr-3" />
-            <span>Optimal energetic properties and vibrations</span>
-          </li>
-          <li className="flex items-start">
-            <FaGem className="text-purple-600 mt-1 mr-3" />
-            <span>Ethical and sustainable sourcing practices</span>
-          </li>
-        </ul>
+     <h2 className="text-3xl font-bold text-gray-900 mb-6">Understanding Chakras</h2>
+<div className="space-y-6">
+  <p className="text-lg text-gray-600">
+    Chakras are powerful energy centers within our body that influence our physical, emotional, and spiritual well-being. 
+    Each chakra represents different aspects of our consciousness and serves unique purposes:
+  </p>
+  <ul className="space-y-4 text-gray-600">
+    <li className="flex items-start">
+      <FaGem className="text-purple-600 mt-1 mr-3" />
+      <span>From Root to Crown, these seven energy centers govern different aspects of our life journey</span>
+    </li>
+    <li className="flex items-start">
+      <FaGem className="text-purple-600 mt-1 mr-3" />
+      <span>When balanced, chakras promote harmony between mind, body, and spirit</span>
+    </li>
+    <li className="flex items-start">
+      <FaGem className="text-purple-600 mt-1 mr-3" />
+      <span>Each chakra resonates with specific crystals that can help maintain their alignment</span>
+    </li>
+    <li className="flex items-start">
+      <FaGem className="text-purple-600 mt-1 mr-3" />
+      <span>Regular chakra work can enhance personal growth and spiritual development</span>
+    </li>
+    <li className="flex items-start">
+      <FaGem className="text-purple-600 mt-1 mr-3" />
+      <span>Understanding your chakras helps identify areas needing attention and healing</span>
+    </li>
+  </ul>
         <div className="mt-8">
           <AboutMore />
         </div>
@@ -66,25 +80,25 @@ const About = () => {
 
   const ExpertGuidanceContent = () => (
     <div className="p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Expert Crystal Guidance</h2>
-      <div className="space-y-6">
-        <p className="text-lg text-gray-600">
-          Our team of certified crystal healers and practitioners are here to support your journey:
-        </p>
-        <ul className="space-y-4 text-gray-600">
-          <li className="flex items-start">
-            <FaUserFriends className="text-purple-600 mt-1 mr-3" />
-            <span>Personalized crystal recommendations</span>
-          </li>
-          <li className="flex items-start">
-            <FaUserFriends className="text-purple-600 mt-1 mr-3" />
-            <span>Crystal healing sessions and workshops</span>
-          </li>
-          <li className="flex items-start">
-            <FaUserFriends className="text-purple-600 mt-1 mr-3" />
-            <span>Energy cleansing and charging guidance</span>
-          </li>
-        </ul>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Astrological Guidance</h2>
+<div className="space-y-6">
+  <p className="text-lg text-gray-600">
+    Explore the cosmic influences and celestial energies that shape your journey through expert astrological guidance:
+  </p>
+  <ul className="space-y-4 text-gray-600">
+    <li className="flex items-start">
+      <GiLibra className="text-purple-600 mt-1 mr-3" />
+      <span>Personalized birth chart readings and zodiac sign compatibility analysis</span>
+    </li>
+    <li className="flex items-start">
+      <GiStarsStack className="text-purple-600 mt-1 mr-3" />
+      <span>Monthly planetary transitions and their impact on your sun, moon, and rising signs</span>
+    </li>
+    <li className="flex items-start">
+      <GiCrystalBall className="text-purple-600 mt-1 mr-3" />
+      <span>Guidance through retrogrades, full moons, and astrological events</span>
+    </li>
+  </ul>
         <div className="mt-8">
           <AstrologyComponent />
         </div>
@@ -94,23 +108,27 @@ const About = () => {
 
   const CertificationContent = () => (
     <div className="p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Certified Authentic Crystals</h2>
+       <h2 className="text-3xl font-bold text-gray-900 mb-6">Certified Reiki Master Services</h2>
       <div className="space-y-6">
         <p className="text-lg text-gray-600">
-          Every crystal comes with our guarantee of authenticity:
+          Every Reiki session is provided with the highest level of expertise and care:
         </p>
         <ul className="space-y-4 text-gray-600">
           <li className="flex items-start">
-            <FaAward className="text-purple-600 mt-1 mr-3" />
-            <span>Certificate of authenticity with each purchase</span>
+            <Sparkles className="text-purple-600 mt-1 mr-3" />
+            <span>Certified Usui Reiki Master Teacher training</span>
           </li>
           <li className="flex items-start">
-            <FaAward className="text-purple-600 mt-1 mr-3" />
-            <span>Detailed origin and sourcing information</span>
+            <Sparkles className="text-purple-600 mt-1 mr-3" />
+            <span>Personalized healing sessions tailored to your needs</span>
           </li>
           <li className="flex items-start">
-            <FaAward className="text-purple-600 mt-1 mr-3" />
-            <span>100% satisfaction guarantee</span>
+            <Sparkles className="text-purple-600 mt-1 mr-3" />
+            <span>Sacred space with traditional Reiki principles</span>
+          </li>
+          <li className="flex items-start">
+            <Sparkles className="text-purple-600 mt-1 mr-3" />
+            <span>Commitment to your spiritual and energetic wellbeing</span>
           </li>
         </ul>
         <div className="mt-8">
@@ -144,11 +162,11 @@ const About = () => {
 
   const getModalContent = () => {
     switch (selectedFeature) {
-      case "Premium Quality":
+      case "Chakra Healing":
         return <PremiumQualityContent />;
-      case "Expert Guidance":
+      case "Astrological Insights":
         return <ExpertGuidanceContent />;
-      case "Certified Authentic":
+      case "Certified Reiki Master":
         return <CertificationContent />;
       default:
         return null;
@@ -157,52 +175,60 @@ const About = () => {
   
   const features = [
     {
-      icon: FaGem,
-      title: "Premium Quality",
-      description: "We source only the finest, ethically mined crystals from around the world."
+      icon: FaYinYang,
+      title: "Chakra Healing",
+      description: "Discover the seven energy centers of your body - from Root to Crown chakra - and learn how to maintain their balance for optimal physical and spiritual wellbeing."
     },
     {
-      icon: FaUserFriends,
-      title: "Expert Guidance",
-      description: "Our team of experienced crystal healers provides personalized advice and support."
+      icon: FaMoon, // or could use FaStarAndCrescent or FaSun from 'react-icons/fa'
+      title: "Astrological Insights",
+      description: "Discover your celestial path with personalized birth chart readings and planetary transit interpretations by our expert astrologers."
     },
     {
-      icon: FaAward,
-      title: "Certified Authentic",
-      description: "All our crystals are certified authentic and come with a guarantee of quality."
+      icon: Sparkles,
+      title: "Certified Reiki Master",
+      description: "All our Reiki sessions are provided by certified masters trained in authentic Usui Reiki traditions."
     }
   ];
 
   return (
     <div id="about" className="bg-gradient-to-b from-white to-purple-50">
-      <div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <div className="inline-block bg-purple-100 px-4 py-2 rounded-full mb-4">
-            <span className="text-purple-600 font-medium">About Us</span>
-          </div>
+    <div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+      <div className="text-center mb-20">
+        <div className="inline-block bg-purple-100 px-4 py-2 rounded-full mb-4">
+          <span className="text-purple-600 font-medium">About Us</span>
         </div>
+      </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between mb-24 gap-16">
-          <div className="w-full lg:w-1/2 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 transform rotate-3 rounded-2xl opacity-20"></div>
-            <img
-              src={about}
-              alt="Krystalz Store"
-              className="relative rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 object-cover w-full h-[500px]"
-            />
-          </div>
-          <div className="w-full lg:w-1/2 lg:pl-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-            <div className="space-y-6">
-              <p className="text-xl text-gray-600 leading-relaxed">
-                🌒 Online shop based in Kenya 🌒 Sourced and made with love 🌒 Inspired by the waxing stage of the moon, representing growth
-              </p>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Today, we're proud to serve a global community of crystal lovers, from beginners to experienced practitioners, helping them harness the power of nature's most beautiful creations.
-              </p>
+      {/* Modified layout to match the design */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-12 mb-24">
+        <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden">
+          <img
+            src={about}
+            alt="Krystalz Store"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="flex flex-col justify-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-8">Our Story</h2>
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+              <p className="text-gray-600">Online shop based in Kenya</p>
+              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+              <p className="text-gray-600">Sourced and made with love</p>
             </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+              <p className="text-gray-600">Inspired by the waxing stage of the moon, representing growth</p>
+            </div>
+            <p className="text-gray-600 mt-6">
+              Today, we're proud to serve a global community of crystal lovers, from beginners to experienced practitioners, helping them harness the power of nature's most beautiful creations.
+            </p>
           </div>
         </div>
+      </div>
+
 
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900">Why Choose Krystalz?</h2>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { FaSearch, FaStar } from 'react-icons/fa';
+import { FaSearch, FaStar, FaMoon, FaArrowDown } from 'react-icons/fa';
+import { GiEarthAmerica, GiStarsStack } from 'react-icons/gi';
 
 const AstrologyComponent = () => {
   const [selectedSign, setSelectedSign] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('zodiac');
 
   const zodiacSigns = [
     {
@@ -116,6 +118,55 @@ const AstrologyComponent = () => {
     }
 ];
 
+// New data structure for astrological events
+const astroEvents = {
+  currentRetrograde: {
+    planet: "Mercury",
+    period: "April 21 - May 14, 2025",
+    impact: "Communication delays, technology issues, and reflection periods are common during Mercury retrograde. Take extra care with important decisions and agreements.",
+    recommendations: [
+      "Backup important data",
+      "Double-check travel plans",
+      "Avoid signing contracts if possible",
+      "Focus on reflection and review"
+    ]
+  },
+  moonPhases: [
+    {
+      phase: "Full Moon in Scorpio",
+      date: "April 23, 2025",
+      meaning: "Time for transformation, emotional release, and manifesting intentions",
+    },
+    {
+      phase: "New Moon in Taurus",
+      date: "May 7, 2025",
+      meaning: "Perfect time for setting new goals, especially related to material security and personal values",
+    }
+  ],
+  planetaryTransits: [
+    {
+      planet: "Jupiter",
+      movement: "Entering Gemini",
+      date: "May 25, 2025",
+      impact: {
+        sun: "Enhanced communication and learning opportunities",
+        moon: "Emotional expansion and mental growth",
+        rising: "New social connections and intellectual pursuits"
+      }
+    },
+    {
+      planet: "Saturn",
+      movement: "Retrograde in Aries",
+      date: "June 29, 2025",
+      impact: {
+        sun: "Review of personal goals and responsibilities",
+        moon: "Emotional maturity and boundary setting",
+        rising: "Restructuring of self-image and approach to life"
+      }
+    }
+  ]
+};
+
   const filteredSigns = zodiacSigns.filter(sign =>
     sign.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -124,26 +175,55 @@ const AstrologyComponent = () => {
     <div className="max-w-6xl mx-auto p-6 bg-gradient-to-b from-indigo-50 to-purple-50">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-indigo-900 mb-4">
-          Explore the Zodiac
+          Celestial Guidance
         </h1>
         <p className="text-lg text-gray-600">
-          Discover the mysteries of astrology and learn about your zodiac sign
+          Explore your zodiac sign and track important astrological events
         </p>
       </div>
 
-      {/* Search Bar */}
-      <div className="mb-8">
-        <div className="relative max-w-md mx-auto">
-          <input
-            type="text"
-            placeholder="Search for your zodiac sign..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 rounded-full border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 pl-12"
-          />
-          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400" />
+      {/* Navigation Tabs */}
+      <div className="flex justify-center mb-8">
+        <div className="flex space-x-4 bg-white rounded-full p-2 shadow-md">
+          <button
+            onClick={() => setActiveTab('zodiac')}
+            className={`px-6 py-2 rounded-full ${
+              activeTab === 'zodiac'
+                ? 'bg-purple-500 text-white'
+                : 'text-gray-600 hover:bg-purple-50'
+            }`}
+          >
+            Zodiac Signs
+          </button>
+          <button
+            onClick={() => setActiveTab('events')}
+            className={`px-6 py-2 rounded-full ${
+              activeTab === 'events'
+                ? 'bg-purple-500 text-white'
+                : 'text-gray-600 hover:bg-purple-50'
+            }`}
+          >
+            Celestial Events
+          </button>
         </div>
       </div>
+
+      {activeTab === 'zodiac' ? (
+        <>
+
+       {/* Existing Search Bar and Zodiac Grid */}
+       <div className="mb-8">
+            <div className="relative max-w-md mx-auto">
+              <input
+                type="text"
+                placeholder="Search for your zodiac sign..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-3 rounded-full border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 pl-12"
+              />
+              <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400" />
+            </div>
+          </div>
 
       {/* Zodiac Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -172,6 +252,71 @@ const AstrologyComponent = () => {
           </div>
         ))}
       </div>
+      </>
+       ) : (
+        // New Astrological Events Section
+        <div className="space-y-8">
+          {/* Current Retrograde */}
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <GiEarthAmerica className="text-2xl text-purple-500 mr-2" />
+              <h2 className="text-2xl font-bold text-indigo-900">Current Retrograde</h2>
+            </div>
+            <div className="space-y-4">
+              <p className="text-xl text-purple-600">{astroEvents.currentRetrograde.planet} Retrograde</p>
+              <p className="text-gray-600">{astroEvents.currentRetrograde.period}</p>
+              <p className="text-gray-700">{astroEvents.currentRetrograde.impact}</p>
+              <div className="mt-4">
+                <h3 className="font-semibold mb-2">Recommendations:</h3>
+                <ul className="list-disc pl-5 text-gray-600">
+                  {astroEvents.currentRetrograde.recommendations.map((rec, index) => (
+                    <li key={index}>{rec}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Moon Phases */}
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <FaMoon className="text-2xl text-purple-500 mr-2" />
+              <h2 className="text-2xl font-bold text-indigo-900">Upcoming Moon Phases</h2>
+            </div>
+            <div className="grid gap-6">
+              {astroEvents.moonPhases.map((moon, index) => (
+                <div key={index} className="border-l-4 border-purple-400 pl-4">
+                  <p className="text-xl text-purple-600">{moon.phase}</p>
+                  <p className="text-gray-600">{moon.date}</p>
+                  <p className="text-gray-700 mt-2">{moon.meaning}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Planetary Transits */}
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <GiStarsStack className="text-2xl text-purple-500 mr-2" />
+              <h2 className="text-2xl font-bold text-indigo-900">Planetary Transits</h2>
+            </div>
+            <div className="space-y-6">
+              {astroEvents.planetaryTransits.map((transit, index) => (
+                <div key={index} className="border-b last:border-b-0 pb-6 last:pb-0">
+                  <p className="text-xl text-purple-600">{transit.planet} - {transit.movement}</p>
+                  <p className="text-gray-600 mb-4">{transit.date}</p>
+                  <div className="space-y-2">
+                    <p><span className="font-semibold">Sun Sign Impact:</span> {transit.impact.sun}</p>
+                    <p><span className="font-semibold">Moon Sign Impact:</span> {transit.impact.moon}</p>
+                    <p><span className="font-semibold">Rising Sign Impact:</span> {transit.impact.rising}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
 
       {/* Selected Sign Modal */}
       {selectedSign && (
