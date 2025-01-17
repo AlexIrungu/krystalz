@@ -1,40 +1,49 @@
 const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/react-login-tut";
 
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    // Add this check
-    mongoose.connection.db.admin().ping((error, result) => {
-      if (error) {
-        console.log('MongoDB ping failed:', error);
-      } else {
-        console.log('MongoDB ping successful');
-      }
-    });
-  })
-  .catch((err) => {
-    console.log('MongoDB connection failed:', err);
-  });
+// Get MongoDB URI from environment variables
+const MONGODB_URI = process.env.MONGODB_URI;
 
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI is not defined in environment variables');
+  process.exit(1);
+}
 
-
-const newSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    password: {
-      type: String,
-      required: true
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("MongoDB connected successfully");
+  // Ping database to verify connection
+  mongoose.connection.db.admin().ping((error, result) => {
+    if (error) {
+      console.log('MongoDB ping failed:', error);
+    } else {
+      console.log('MongoDB ping successful');
     }
   });
+})
+.catch((err) => {
+  console.error('MongoDB connection failed:', err);
+  process.exit(1);
+});
 
-const collection = mongoose.model("collection",newSchema)
+const newSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
+});
 
-module.exports=collection
+const collection = mongoose.model("collection", newSchema);
+
+module.exports = collection;
