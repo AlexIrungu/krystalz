@@ -139,12 +139,12 @@ const About = () => {
   );
 
   const FeatureCard = ({ icon: Icon, title, description, onClick }) => (
-    <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-purple-100">
-      <div className="bg-purple-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-        <Icon className="text-3xl text-purple-600" />
+    <div className="bg-white dark:bg-gray-800/50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-purple-100 dark:border-purple-900/20">
+      <div className="bg-purple-100 dark:bg-purple-900/30 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+        <Icon className="text-3xl text-purple-600 dark:text-purple-400" />
       </div>
-      <h3 className="text-2xl font-bold mb-3 text-gray-800">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{description}</p>
       <button 
         onClick={onClick}
         className="mt-4 group bg-purple-600 text-white px-6 py-2 rounded-lg flex items-center hover:bg-purple-700 transition-all duration-300"
@@ -192,13 +192,13 @@ const About = () => {
   ];
 
   return (
-    <div id="about" className="bg-gradient-to-b from-white to-purple-50">
+    <div id="about" className="bg-primary dark:bg-primary-dark transition-colors duration-200">
     <div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
-      <div className="text-center mb-20">
-        <div className="inline-block bg-purple-100 px-4 py-2 rounded-full mb-4">
-          <span className="text-purple-600 font-medium">About Us</span>
-        </div>
-      </div>
+    <div className="text-center mb-20">
+  <div className="inline-block bg-purple-100 dark:bg-purple-900/30 px-4 py-2 rounded-full mb-4">
+    <span className="text-purple-600 dark:text-purple-300 font-medium">About Us</span>
+  </div>
+</div>
 
       {/* Modified layout to match the design */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-12 mb-24">
@@ -210,19 +210,19 @@ const About = () => {
           />
         </div>
         <div className="flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">Our Story</h2>
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
-              <p className="text-gray-600">Online shop based in Kenya</p>
-              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
-              <p className="text-gray-600">Sourced and made with love</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
-              <p className="text-gray-600">Inspired by the waxing stage of the moon, representing growth</p>
-            </div>
-            <p className="text-gray-600 mt-6">
+        <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Our Story</h2>
+<div className="space-y-6">
+  <div className="flex items-center gap-2">
+    <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+    <p className="text-gray-600 dark:text-gray-300">Online shop based in Kenya</p>
+    <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+    <p className="text-gray-600 dark:text-gray-300">Sourced and made with love</p>
+  </div>
+  <div className="flex items-center gap-2">
+    <div className="w-2 h-2 rounded-full bg-purple-600"></div>
+    <p className="text-gray-600 dark:text-gray-300">Inspired by the waxing stage of the moon, representing growth</p>
+  </div>
+  <p className="text-gray-600 dark:text-gray-300 mt-6">
               Today, we're proud to serve a global community of crystal lovers, from beginners to experienced practitioners, helping them harness the power of nature's most beautiful creations.
             </p>
           </div>
@@ -230,10 +230,10 @@ const About = () => {
       </div>
 
 
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900">Why Choose Krystalz?</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-500 mx-auto mt-4 rounded-full"></div>
-        </div>
+      <div className="text-center mb-16">
+  <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100">Why Choose Krystalz?</h2>
+  <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-500 mx-auto mt-4 rounded-full"></div>
+</div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (

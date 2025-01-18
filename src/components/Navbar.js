@@ -1,15 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, ShoppingCart } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import log from './Luna/logoo.jpeg';
+import Cart from './Cart';
 
-const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
+// CartButton Component - Moved outside of main component
+const CartButton = ({ totalItems, showCartDropdown, setShowCartDropdown, isCheckout, cartItems, onCheckout }) => (
+  <motion.div className="relative">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => setShowCartDropdown(!showCartDropdown)}
+      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative"
+      aria-label="Shopping cart"
+    >
+      <ShoppingCart className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+      {totalItems > 0 && (
+        <motion.span
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs"
+        >
+          {totalItems}
+        </motion.span>
+      )}
+    </motion.button>
+
+    <AnimatePresence>
+      {showCartDropdown && !isCheckout && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50"
+        >
+          <Cart 
+            items={cartItems}
+            onCheckout={onCheckout}
+            isVisible={showCartDropdown}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </motion.div>
+);
+
+const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth, cartItems = [],
+  onCheckout, isCheckout  }) => {
   const { isDarkMode, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  // const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +79,8 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
     { name: 'Contact', to: 'contact' },
   ];
 
+ 
+
   const AuthButtons = () => (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -52,6 +101,7 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
+          {/* logo section */}
           <motion.div 
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
@@ -88,7 +138,7 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
               />
             </div>
           </motion.div>
-
+                    {/* desktop navigation */}
           <div className="hidden md:block flex-grow">
             <div className="flex items-center justify-center space-x-6">
               {navItems.map((item) => (
@@ -109,8 +159,10 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
             </div>
           </div>
 
+              {/* desktop right section */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
+              {/* theme toogle */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -125,6 +177,18 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
                 )}
               </motion.button>
 
+                {/* Cart Button */}
+               {/* Cart Button */}
+               <CartButton 
+                totalItems={totalItems}
+                showCartDropdown={showCartDropdown}
+                setShowCartDropdown={setShowCartDropdown}
+                isCheckout={isCheckout}
+                cartItems={cartItems}
+                onCheckout={onCheckout}
+              />
+
+                {/* Auth section */}
               {isLoggedIn && username ? (
                 <motion.div 
                   className="flex items-center space-x-4"
@@ -149,6 +213,8 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
             </div>
           </div>
 
+          
+          {/* mobile navigation */}
           <div className="md:hidden">
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -169,6 +235,8 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
           </div>
         </div>
       </div>
+
+      {/* mobile menu */}
 
       <AnimatePresence>
         {isOpen && (
@@ -195,7 +263,20 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
                   {item.name}
                 </ScrollLink>
               ))}
-              
+
+               {/* Cart button for mobile */}
+               <button
+                onClick={() => {
+                  setShowCartDropdown(!showCartDropdown);
+                  setIsOpen(false);
+                }}
+                className="w-full flex items-center justify-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/50 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
+              >
+                <ShoppingCart className="w-5 h-5" />
+                <span>Cart ({totalItems})</span>
+              </button>
+
+              {/* mobile theme toggle */}
               <button
                 onClick={toggleTheme}
                 className="w-full flex items-center justify-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/50 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
@@ -212,7 +293,7 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth }) => {
                   </>
                 )}
               </button>
-
+                {/* mobile auth section */}
               {isLoggedIn && username ? (
                 <>
                   <span className="text-gray-700 dark:text-gray-300 block px-3 py-2 rounded-md text-base font-medium bg-purple-50 dark:bg-purple-900/50">

@@ -47,18 +47,18 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-gray-100 dark:bg-gray-800 transition-colors duration-200">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-indigo-800 dark:text-indigo-300 mb-8">
-          Frequently Asked Questions
-        </h2>
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
-          {faqs.map((faq, index) => (
-            <FAQItem key={index} question={faq.question} answer={faq.answer} />
-          ))}
-        </div>
+    <section className="py-12 bg-white dark:bg-[#1a1a1a] transition-colors duration-200">
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl font-bold text-center text-indigo-800 dark:text-indigo-300 mb-8">
+        Frequently Asked Questions
+      </h2>
+      <div className="bg-white dark:bg-[#2d2d2d] rounded-lg shadow-lg p-6">
+        {faqs.map((faq, index) => (
+          <FAQItem key={index} question={faq.question} answer={faq.answer} />
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
 

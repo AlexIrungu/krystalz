@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-scroll'
 import config from '../config';
+import { useAuth } from '../context/AuthContext';
 
 const Login = ({ onLoginSuccess, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { login } = useAuth();
 
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   setMessage('');
+
+  const result = await login(email, password);
+  if (!result.success) {
+    setMessage(result.message);
+  }
+
 
   console.log('Attempting login to:', `${config.apiUrl}/auth/login`); // Debug log
 

@@ -57,46 +57,57 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Information Cards with Enhanced Styling */}
-      <div className="flex flex-col md:flex-row gap-8 px-4 md:px-8 py-16 bg-gradient-to-b from-purple-50 to-white">
-        <section className="flex-1 p-8 rounded-2xl bg-white shadow-xl hover:shadow-2xl 
-                          transform hover:-translate-y-1 transition-all duration-300
-                          border border-purple-100">
-          <h2 className="text-3xl font-bold mb-6 text-purple-800">
-            How to Select Your Crystal
-          </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
-            First things first: Identify what you feel you're missing before looking into what the stones can provide you. 
-            This will help you determine what's happening within yourself before depending on outside sources. From there, 
-            just let your intuition choose what's best for you. Your inner wisdom will guide you to the perfect crystal companion.
-          </p>
-        </section>
+     {/* Information Cards with Enhanced Dark Mode Styling */}
+<div className="flex flex-col md:flex-row gap-8 px-4 md:px-8 py-16 
+                bg-gradient-to-b from-purple-50 to-primary-light 
+                dark:from-purple-900/10 dark:to-primary-dark
+                transition-colors duration-200">
+  <section className="flex-1 p-8 rounded-2xl 
+                    bg-primary-light dark:bg-secondary-dark
+                    shadow-xl hover:shadow-2xl dark:shadow-purple-900/20
+                    transform hover:-translate-y-1 transition-all duration-300
+                    border border-purple-100 dark:border-purple-900/20">
+    <h2 className="text-3xl font-bold mb-6 text-purple-800 dark:text-purple-300">
+      How to Select Your Crystal
+    </h2>
+    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+      First things first: Identify what you feel you're missing before looking into what the stones can provide you. 
+      This will help you determine what's happening within yourself before depending on outside sources. From there, 
+      just let your intuition choose what's best for you. Your inner wisdom will guide you to the perfect crystal companion.
+    </p>
+  </section>
 
-        <section className="flex-1 p-8 rounded-2xl bg-white shadow-xl hover:shadow-2xl 
-                          transform hover:-translate-y-1 transition-all duration-300
-                          border border-purple-100">
-          <h2 className="text-3xl font-bold mb-6 text-purple-800">
-            How to Care for Your Crystal
-          </h2>
-          <p className="text-gray-700 leading-relaxed text-lg mb-6">
-            When you first bring your crystal home, cleanse away any lingering energies it may have picked up. 
-            Choose from these sacred cleansing methods:
-          </p>
-          <ul className="space-y-3 text-lg">
-            {[
-              'Hold it under cold, running water',
-              'Immerse it in sea salt',
-              'Place it in sunlight or moonlight',
-              'Smudge your crystal with sage or other herbs'
-            ].map((item, index) => (
-              <li key={index} className="flex items-center space-x-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">
-                <span className="text-purple-500">✧</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+  <section className="flex-1 p-8 rounded-2xl 
+                    bg-primary-light dark:bg-secondary-dark
+                    shadow-xl hover:shadow-2xl dark:shadow-purple-900/20
+                    transform hover:-translate-y-1 transition-all duration-300
+                    border border-purple-100 dark:border-purple-900/20">
+    <h2 className="text-3xl font-bold mb-6 text-purple-800 dark:text-purple-300">
+      How to Care for Your Crystal
+    </h2>
+    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6">
+      When you first bring your crystal home, cleanse away any lingering energies it may have picked up. 
+      Choose from these sacred cleansing methods:
+    </p>
+    <ul className="space-y-3 text-lg">
+      {[
+        'Hold it under cold, running water',
+        'Immerse it in sea salt',
+        'Place it in sunlight or moonlight',
+        'Smudge your crystal with sage or other herbs'
+      ].map((item, index) => (
+        <li key={index} 
+            className="flex items-center space-x-2 
+                      text-gray-700 dark:text-gray-300 
+                      hover:text-purple-600 dark:hover:text-purple-400 
+                      transition-colors duration-200">
+          <span className="text-purple-500 dark:text-purple-400">✧</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</div>
     </div>
   );
 };

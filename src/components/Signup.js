@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import config from '../config';
+import { useAuth } from '../context/AuthContext';
+import { set } from 'mongoose';
 
 
 const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
@@ -8,10 +10,17 @@ const Signup = ({ onSignupSuccess, onSwitchToLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { signup } = useAuth();
 
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setMessage('');
+
+  const result = await signup(name, email, password);
+  if (!result.success) {
+    setMessage(result.message);
+  }
 
   console.log('Attempting signup to:', `${config.apiUrl}/auth/signup`); // Debug log
 

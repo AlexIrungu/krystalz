@@ -17,6 +17,8 @@ import DashboardPopup from './components/DashboardPopup';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
 import Cart from './components/Cart';
+import { X } from 'lucide-react';
+import { AuthProvider } from './context/AuthContext';
 
 function AppContent() {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -30,6 +32,7 @@ function AppContent() {
   const [username, setUsername] = useState(null);
   const [showDashboardPopup, setShowDashboardPopup] = useState(false);
   const [email, setEmail] = useState(null);
+  const [showCart, setShowCart] = useState(true);
 
   const handleAddToCart = (crystal) => {
     const existingItem = cartItems.find(item => item.id === crystal.id);
@@ -40,6 +43,7 @@ function AppContent() {
     } else {
       setCartItems([...cartItems, { ...crystal, quantity: 1 }]);
     }
+    setShowCart(true); // Show cart when item is added
   };
 
   const handleCheckout = () => {
@@ -48,12 +52,15 @@ function AppContent() {
       return;
     }
     setIsCheckout(true);
+    setShowCart(false); // Hide cart when checkout is shown
   };
 
   const handlePaymentSuccess = () => {
+    setCartItems([]); // Clear cart
+    setIsCheckout(false); // Close checkout
+    setShowCart(true); // Show empty cart
     alert('Payment Successful!');
-    setCartItems([]);
-    setIsCheckout(false);
+    
   };
 
   const handleShowPopup = () => {
@@ -67,6 +74,9 @@ function AppContent() {
     setUsername(user.name || user.email.split('@')[0]);
     setShowDashboardPopup(true);
     setShowAuthModal(false);
+    if (cartItems.length > 0) {
+      setIsCheckout(true); // Proceed to checkout if cart has items
+    }
   };
   
   const handleLogout = () => {
@@ -103,13 +113,15 @@ function AppContent() {
           onShowAuth={() => setShowAuthModal(true)}
           onToggleTheme={toggleTheme}
           isDarkMode={isDarkMode}
+          cartItems={cartItems}
+  onCheckout={handleCheckout}
+  showCart={showCart}
+  isCheckout={isCheckout}
+          
         />
+       
 
-        {/* Add Cart component here */}
-<Cart 
-  items={cartItems} 
-  onCheckout={handleCheckout} 
-/>
+
         
         {showAuthModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
@@ -118,7 +130,7 @@ function AppContent() {
                 onClick={() => setShowAuthModal(false)}
                 className="float-right text-gray-500 hover:text-gray-700"
               >
-                
+                 <X size={24} />
               </button>
               {showLogin ? (
                 <Login 
@@ -148,8 +160,16 @@ function AppContent() {
           {!isCheckout ? (
             <Shop onAddToCart={handleAddToCart} />
           ) : (
-            <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess}  onClose={() => setIsCheckout(false)} />
+            <Checkout 
+              totalAmount={cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)} 
+              onPaymentSuccess={handlePaymentSuccess}  
+              onClose={() => {
+                setIsCheckout(false);
+                setShowCart(true);
+              }} 
+            />
           )}
+
           <AstronomyButtons onShowPopup={handleShowPopup} />
           {showAstronomy && (
             <AstronomyComponent isPopup={isPopup} onClose={() => setShowAstronomy(false)} />
@@ -168,7 +188,9 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
+      <AuthProvider>
       <AppContent />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
