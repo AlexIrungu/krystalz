@@ -16,6 +16,7 @@ import FAQSection from './components/FAQ';
 import DashboardPopup from './components/DashboardPopup';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
+import Cart from './components/Cart';
 
 function AppContent() {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -103,6 +104,12 @@ function AppContent() {
           onToggleTheme={toggleTheme}
           isDarkMode={isDarkMode}
         />
+
+        {/* Add Cart component here */}
+<Cart 
+  items={cartItems} 
+  onCheckout={handleCheckout} 
+/>
         
         {showAuthModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
@@ -141,7 +148,7 @@ function AppContent() {
           {!isCheckout ? (
             <Shop onAddToCart={handleAddToCart} />
           ) : (
-            <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
+            <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess}  onClose={() => setIsCheckout(false)} />
           )}
           <AstronomyButtons onShowPopup={handleShowPopup} />
           {showAstronomy && (

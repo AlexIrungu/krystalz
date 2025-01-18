@@ -1,16 +1,21 @@
 import React from 'react';
+import { Moon, Stars } from 'lucide-react';
 
 const StyledButton = ({ onClick, children, isPrimary }) => {
-  const baseClasses = "px-4 py-2 rounded-full font-semibold text-sm shadow-md transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50";
-  const primaryClasses = "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500";
-  const secondaryClasses = "bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-400";
+  const baseClasses = "relative px-6 py-3 rounded-full font-medium text-sm shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 hover:scale-105 active:scale-95 flex items-center gap-2";
+  
+  const primaryClasses = "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white focus:ring-indigo-500 hover:shadow-indigo-500/25";
+  
+  const secondaryClasses = "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white focus:ring-purple-400 hover:shadow-purple-500/25";
 
   return (
     <button
       onClick={onClick}
-      className={`${baseClasses} ${isPrimary ? primaryClasses : secondaryClasses}`}
+      className={`group ${baseClasses} ${isPrimary ? primaryClasses : secondaryClasses}`}
     >
-      {children}
+      <Moon className="w-4 h-4 transition-transform group-hover:rotate-12" />
+      <span>{children}</span>
+      <Stars className="w-4 h-4 absolute right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </button>
   );
 };
@@ -22,7 +27,7 @@ const AstronomyButtons = ({ onShowHalfScreen, onShowPopup }) => {
         Show Astronomy (Half Screen)
       </StyledButton> */}
       <StyledButton onClick={onShowPopup} isPrimary={false}>
-        Show Astronomy (Popup)
+        Show Astronomy
       </StyledButton>
     </div>
   );

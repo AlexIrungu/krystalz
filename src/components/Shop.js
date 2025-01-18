@@ -24,16 +24,16 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 text-black hover:text-black">
       <div className="bg-white rounded-lg w-full max-w-2xl overflow-hidden relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full"
+          className="absolute top-4 right-4 p-2 hover:bg-gray rounded-full"
         >
           <X size={24} />
         </button>
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="aspect-square">
+          <div className="aspect-square ">
             <img
               src={product.image}
               alt={product.name}
