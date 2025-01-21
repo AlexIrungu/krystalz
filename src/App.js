@@ -16,12 +16,12 @@ import FAQSection from './components/FAQ';
 import DashboardPopup from './components/DashboardPopup';
 import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
-import Cart from './components/Cart';
 import { X } from 'lucide-react';
 import { AuthProvider } from './context/AuthContext';
 
 function AppContent() {
   const { isDarkMode, toggleTheme } = useTheme();
+  // const { isAuthenticated, user, loading } = useAuth();
   const [showAstronomy, setShowAstronomy] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -54,6 +54,12 @@ function AppContent() {
     setIsCheckout(true);
     setShowCart(false); // Hide cart when checkout is shown
   };
+
+  const handleCloseCheckout = () => {
+    setIsCheckout(false);
+    setShowCart(true);
+  };
+
 
   const handlePaymentSuccess = () => {
     setCartItems([]); // Clear cart
@@ -161,12 +167,12 @@ function AppContent() {
             <Shop onAddToCart={handleAddToCart} />
           ) : (
             <Checkout 
-              totalAmount={cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)} 
-              onPaymentSuccess={handlePaymentSuccess}  
-              onClose={() => {
-                setIsCheckout(false);
-                setShowCart(true);
-              }} 
+              totalAmount={cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}
+              onPaymentSuccess={() => {
+                setCartItems([]);
+                handleCloseCheckout();
+              }}
+              onClose={handleCloseCheckout}
             />
           )}
 

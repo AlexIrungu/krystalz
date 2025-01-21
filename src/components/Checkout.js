@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { X, Phone } from 'lucide-react';
 
@@ -7,83 +7,62 @@ const MpesaPayment = ({ amount, onSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const CONSUMER_KEY = "AEBDzgRcdGi5zKL68wOXR0DPZWlZ7wO14qHaNWtTPXnAiPfU";
-  const CONSUMER_SECRET = "jp2790gN2mT4jGD7ZFjUWy3FcJiSNvUJQLYGVMITvyBxgsWjJ2ShGiltcfmSGf";
-  const SHORTCODE = "N/A"; // Your business shortcode
-
   const handleMpesaPayment = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
-     // First, get the access token
-     const auth = await fetch('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Basic ' + btoa(CONSUMER_KEY + ":" + CONSUMER_SECRET)
+      // Format the phone number
+      const formattedPhone = phoneNumber.replace(/^0/, '254').replace(/\+/, '');
+  
+      const response = await fetch('http://localhost:10000/api/mpesa/stkpush', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          phoneNumber: formattedPhone,
+          amount: Math.round(amount)
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    });
-
-    const { access_token } = await auth.json();
-
-    // Generate timestamp
-    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, -3);
-    
-    // Make STK Push request
-    const response = await fetch('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${access_token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        BusinessShortCode: SHORTCODE,
-        Password: "", // Base64 encoded string of shortcode + passkey + timestamp
-        Timestamp: timestamp,
-        TransactionType: "CustomerPayBillOnline",
-        Amount: amount,
-        PartyA: phoneNumber,
-        PartyB: SHORTCODE,
-        PhoneNumber: phoneNumber,
-        CallBackURL: "https://your-callback-url.com/callback",
-        AccountReference: "Luna Shop",
-        TransactionDesc: "Payment for items" 
-      })
-    });
-
-    const data = await response.json();
-
-    if (data.ResponseCode === "0") {
-      // Success - STK push sent
-      onSuccess();
-    } else {
-      setError('Failed to initiate payment. Please try again.');
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        // Show success message to user
+        alert('Please check your phone for the STK push notification');
+        onSuccess();
+      } else {
+        setError(data.message || 'Failed to initiate payment. Please try again.');
+      }
+    } catch (err) {
+      console.error('Payment error:', err);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-  } catch (err) {
-    console.error('Payment error:', err);
-    setError('Something went wrong. Please try again.');
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
+  
+  const formatPhoneNumber = (input) => {
+    let number = input.replace(/\D/g, '');
+    if (!number.startsWith('254') && number.startsWith('0')) {
+      number = '254' + number.slice(1);
+    } else if (!number.startsWith('254')) {
+      number = '254' + number;
+    }
+    return number;
+  };
 
-const formatPhoneNumber = (input) => {
-  let number = input.replace(/\D/g, '');
-  // Ensure number starts with 254
-  if (!number.startsWith('254') && number.startsWith('0')) {
-    number = '254' + number.slice(1);
-  } else if (!number.startsWith('254')) {
-    number = '254' + number;
-  }
-  return number;
-};
-
-const handlePhoneChange = (e) => {
-  const formatted = formatPhoneNumber(e.target.value);
-  setPhoneNumber(formatted);
-};
-
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhoneNumber(formatted);
+  };
 
   return (
     <div className="p-4">
@@ -122,37 +101,48 @@ const handlePhoneChange = (e) => {
 
 const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
   const [paymentMethod, setPaymentMethod] = useState('mpesa');
+  const [isClosing, setIsClosing] = useState(false);
 
-  // Handler for the close button
-  const handleClose = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (typeof onClose === 'function') {
-      onClose();
-    }
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        handleCloseClick();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  const handleCloseClick = () => {
+    setIsClosing(true);
+    // Add a small delay to allow the closing animation if needed
+    setTimeout(() => {
+      if (typeof onClose === 'function') {
+        onClose();
+      }
+    }, 10);
   };
 
-  // Handler for backdrop clicks
+  // Backdrop click handler
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      handleClose(e);
+      handleCloseClick();
     }
   };
 
   return (
     <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+      className={`fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 ${isClosing ? 'fade-out' : ''}`}
       onClick={handleBackdropClick}
     >
       <div 
         className="max-w-lg w-full bg-white rounded-lg shadow-xl relative"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         <button
-          onClick={handleClose}
-          className="absolute top-3 right-3 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+          onClick={handleCloseClick}
+          className="absolute top-3 right-3 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 z-10"
           aria-label="Close checkout"
         >
           <X size={24} className="text-gray-500 hover:text-gray-700" />
@@ -192,7 +182,15 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
           </div>
 
           {paymentMethod === 'mpesa' ? (
-            <MpesaPayment amount={totalAmount} onSuccess={onPaymentSuccess} />
+            <MpesaPayment 
+              amount={totalAmount} 
+              onSuccess={() => {
+                if (typeof onPaymentSuccess === 'function') {
+                  onPaymentSuccess();
+                }
+                handleCloseClick();
+              }} 
+            />
           ) : (
             <PayPalScriptProvider options={{ "client-id": "Ac0u-o6lpGGw7_E0ZYmBCXWNRN-LsFksMPRYxlRHwicYAfCC2oObngl6rC0bLlpbyboehVvFhFossFRW" }}>
               <PayPalButtons
@@ -208,9 +206,10 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
                 }}
                 onApprove={(data, actions) => {
                   return actions.order.capture().then(details => {
-                    alert('Transaction completed by ' + details.payer.name.given_name);
-                    onPaymentSuccess();
-                    handleClose();
+                    if (typeof onPaymentSuccess === 'function') {
+                      onPaymentSuccess();
+                    }
+                    handleCloseClick();
                   });
                 }}
               />
