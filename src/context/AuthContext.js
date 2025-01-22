@@ -1,65 +1,74 @@
+// AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import config from '../config';
 
 const AuthContext = createContext(null);
+const TOKEN_REFRESH_INTERVAL = 1000 * 60 * 15; // 15 minutes
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
+  const [tokenRefreshTimeout, setTokenRefreshTimeout] = useState(null);
 
-  // Configure axios defaults for authentication
+  // Initialize auth state from localStorage
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+    const initializeAuth = async () => {
+      const storedUser = localStorage.getItem('user');
+      const token = localStorage.getItem('authToken');
+      
+      if (storedUser && token) {
+        setUser(JSON.parse(storedUser));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        await checkAuthStatus();
+      } else {
+        setLoading(false);
+      }
+    };
 
+    initializeAuth();
     return () => {
-      delete axios.defaults.headers.common['Authorization'];
+      if (tokenRefreshTimeout) {
+        clearTimeout(tokenRefreshTimeout);
+      }
     };
   }, []);
 
-  // Set up axios interceptor for token handling
+  // Set up periodic token refresh
   useEffect(() => {
-    const interceptor = axios.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (error.response?.status === 401 && localStorage.getItem('authToken')) {
-          localStorage.removeItem('authToken');
-          delete axios.defaults.headers.common['Authorization'];
-          setUser(null);
-          setAuthError('Session expired. Please login again.');
-        }
-        return Promise.reject(error);
-      }
-    );
+    if (user) {
+      const timeout = setTimeout(refreshToken, TOKEN_REFRESH_INTERVAL);
+      setTokenRefreshTimeout(timeout);
+      return () => clearTimeout(timeout);
+    }
+  }, [user]);
 
-    return () => axios.interceptors.response.eject(interceptor);
-  }, []);
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get(`${config.apiUrl}/auth/verify`);
+      if (response.data.token) {
+        updateAuthState(response.data.user, response.data.token);
+      }
+    } catch (error) {
+      console.error('Token refresh failed:', error);
+      handleLogout();
+    }
+  };
+
+  const updateAuthState = (userData, token) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('lastActivity', Date.now().toString());
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    setUser(userData);
+  };
 
   const checkAuthStatus = async () => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
     try {
-      const response = await axios.get(`${config.apiUrl}/auth/verify`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      
+      const response = await axios.get(`${config.apiUrl}/auth/verify`);
       if (response.data.user) {
-        setUser(response.data.user);
-        // Update token if a new one is provided
-        if (response.data.token) {
-          localStorage.setItem('authToken', response.data.token);
-          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        }
+        updateAuthState(response.data.user, response.data.token);
       } else {
         handleLogout();
       }
@@ -71,42 +80,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Check auth status on mount
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  // Listen for storage events (logout in other tabs)
-  useEffect(() => {
-    const handleStorageChange = (e) => {
-      if (e.key === 'authToken') {
-        if (!e.newValue) {
-          setUser(null);
-          delete axios.defaults.headers.common['Authorization'];
-        } else {
-          checkAuthStatus();
-        }
-      }
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${config.apiUrl}/auth/login`,
-        { email, password }
-      );
-      
+      const response = await axios.post(`${config.apiUrl}/auth/login`, { email, password });
       if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        setUser(response.data.user);
+        updateAuthState(response.data.user, response.data.token);
         setAuthError(null);
         return { success: true };
       }
-      return { success: false, message: 'Login success' };
+      return { success: false, message: 'Login failed' };
     } catch (error) {
       const message = error.response?.data?.message || 'Login failed';
       setAuthError(message);
@@ -114,36 +96,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    delete axios.defaults.headers.common['Authorization'];
-    setUser(null);
-    setAuthError(null);
-  };
-
-  const logout = async () => {
-    try {
-      const token = localStorage.getItem('authToken');
-      if (token) {
-        await axios.post(`${config.apiUrl}/auth/logout`);
-      }
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      handleLogout();
-    }
-  };
-
   const signup = async (name, email, password) => {
     try {
-      const response = await axios.post(`${config.apiUrl}/auth/signup`,
-        { name, email, password }
-      );
-      
+      const response = await axios.post(`${config.apiUrl}/auth/signup`, { name, email, password });
       if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        setUser(response.data.user);
+        updateAuthState(response.data.user, response.data.token);
         setAuthError(null);
         return { success: true };
       }
@@ -155,13 +112,53 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('lastActivity');
+    delete axios.defaults.headers.common['Authorization'];
+    if (tokenRefreshTimeout) {
+      clearTimeout(tokenRefreshTimeout);
+    }
+    setUser(null);
+    setAuthError(null);
+  };
+
+  // Add activity monitoring
+  useEffect(() => {
+    const activityTimeout = 1000 * 60 * 30; // 30 minutes
+
+    const checkActivity = () => {
+      const lastActivity = localStorage.getItem('lastActivity');
+      if (lastActivity && Date.now() - parseInt(lastActivity) > activityTimeout) {
+        handleLogout();
+      }
+    };
+
+    const activityInterval = setInterval(checkActivity, 1000 * 60); // Check every minute
+    const updateActivity = () => {
+      if (user) {
+        localStorage.setItem('lastActivity', Date.now().toString());
+      }
+    };
+
+    window.addEventListener('mousemove', updateActivity);
+    window.addEventListener('keypress', updateActivity);
+
+    return () => {
+      clearInterval(activityInterval);
+      window.removeEventListener('mousemove', updateActivity);
+      window.removeEventListener('keypress', updateActivity);
+    };
+  }, [user]);
+
   return (
-    <AuthContext.Provider value={{ 
+    <AuthContext.Provider value={{
       user,
       loading,
       authError,
       login,
-      logout,
+      logout: handleLogout,
       signup,
       checkAuthStatus,
       isAuthenticated: !!user

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { ThemeProvider, useTheme} from './context/ThemeContext'
+import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
@@ -21,18 +22,24 @@ import { AuthProvider } from './context/AuthContext';
 
 function AppContent() {
   const { isDarkMode, toggleTheme } = useTheme();
-  // const { isAuthenticated, user, loading } = useAuth();
+  const { user, loading, login, logout, signup, isAuthenticated } = useAuth();
   const [showAstronomy, setShowAstronomy] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [isCheckout, setIsCheckout] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
-  const [username, setUsername] = useState(null);
+  // const [username, setUsername] = useState(null);
   const [showDashboardPopup, setShowDashboardPopup] = useState(false);
-  const [email, setEmail] = useState(null);
+  // const [email, setEmail] = useState(null);
   const [showCart, setShowCart] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setShowDashboardPopup(true);
+    }
+  }, [user]);
 
   const handleAddToCart = (crystal) => {
     const existingItem = cartItems.find(item => item.id === crystal.id);
@@ -47,7 +54,7 @@ function AppContent() {
   };
 
   const handleCheckout = () => {
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       setShowAuthModal(true);
       return;
     }
@@ -74,28 +81,27 @@ function AppContent() {
     setIsPopup(true);
   };
 
-  const handleLoginSuccess = (user) => {
-    setIsLoggedIn(true);
-    setEmail(user.email);
-    setUsername(user.name || user.email.split('@')[0]);
-    setShowDashboardPopup(true);
-    setShowAuthModal(false);
-    if (cartItems.length > 0) {
-      setIsCheckout(true); // Proceed to checkout if cart has items
+  const handleLoginSuccess = async (credentials) => {
+    const result = await login(credentials.email, credentials.password);
+    if (result.success) {
+      setShowAuthModal(false);
+      if (cartItems.length > 0) {
+        setIsCheckout(true);
+      }
     }
   };
   
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername(null);
-    setEmail(null);
-  };
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  //   setUsername(null);
+  //   setEmail(null);
+  // };
 
-  const handleSignupSuccess = (user) => {
-    setIsLoggedIn(true);
-    setUsername(user.name || user.email);
-    setShowDashboardPopup(true);
-    setShowAuthModal(false);
+  const handleSignupSuccess = async (userData) => {
+    const result = await signup(userData.name, userData.email, userData.password);
+    if (result.success) {
+      setShowAuthModal(false);
+    }
   };
 
   const handleSwitchForm = () => {
@@ -108,21 +114,25 @@ function AppContent() {
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={`relative min-h-screen ${isDarkMode ? 'dark' : ''}`}>
       <div className="relative z-10 bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark transition-colors duration-200">
         <Navbar 
-          isLoggedIn={isLoggedIn} 
-          username={username} 
-          email={email}
-          onLogout={handleLogout}
-          onShowAuth={() => setShowAuthModal(true)}
-          onToggleTheme={toggleTheme}
-          isDarkMode={isDarkMode}
-          cartItems={cartItems}
-  onCheckout={handleCheckout}
-  showCart={showCart}
-  isCheckout={isCheckout}
+           isLoggedIn={isAuthenticated}
+           username={user?.name}
+           email={user?.email}
+           onLogout={logout}
+           onShowAuth={() => setShowAuthModal(true)}
+           onToggleTheme={toggleTheme}
+           isDarkMode={isDarkMode}
+           cartItems={cartItems}
+           onCheckout={handleCheckout}
+           showCart={showCart}
+           isCheckout={isCheckout}
           
         />
        
@@ -155,8 +165,8 @@ function AppContent() {
 
         {showDashboardPopup && (
           <DashboardPopup 
-            username={username} 
-            email={email}
+          username={user?.name}
+          email={user?.email}
             onClose={handleCloseDashboardPopup} 
           />
         )}
@@ -168,10 +178,7 @@ function AppContent() {
           ) : (
             <Checkout 
               totalAmount={cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}
-              onPaymentSuccess={() => {
-                setCartItems([]);
-                handleCloseCheckout();
-              }}
+              onPaymentSuccess={handlePaymentSuccess}
               onClose={handleCloseCheckout}
             />
           )}
