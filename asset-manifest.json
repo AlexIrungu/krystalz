@@ -1,11 +1,10 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.7b51d333.css",
-    "main.js": "/krystalz/static/js/main.1207cb8b.js",
+    "main.css": "/krystalz/static/css/main.3d41cb57.css",
+    "main.js": "/krystalz/static/js/main.1f8f652a.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
-    "static/media/moonpha.mp4": "/krystalz/static/media/moonpha.a253e13cbb0f775d7df4.mp4",
-    "static/media/d6069b77-b862-43ef-b6f6-04183622008e.jpg": "/krystalz/static/media/d6069b77-b862-43ef-b6f6-04183622008e.386c019d11d3211e390a.jpg",
+    "static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.jpeg": "/krystalz/static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.c9ccc3ad8d24de8ae2c4.jpeg",
     "static/media/imheart.jpg": "/krystalz/static/media/imheart.77cb2034e4e32f2b2dd0.jpg",
     "static/media/bheartt.jpg": "/krystalz/static/media/bheartt.35cd4b1c4a41192816a2.jpg",
     "static/media/bsacral.jpg": "/krystalz/static/media/bsacral.5e6a08613792786eeca2.jpg",
@@ -60,12 +59,12 @@
     "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.7b51d333.css.map": "/krystalz/static/css/main.7b51d333.css.map",
-    "main.1207cb8b.js.map": "/krystalz/static/js/main.1207cb8b.js.map",
+    "main.3d41cb57.css.map": "/krystalz/static/css/main.3d41cb57.css.map",
+    "main.1f8f652a.js.map": "/krystalz/static/js/main.1f8f652a.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b51d333.css",
-    "static/js/main.1207cb8b.js"
+    "static/css/main.3d41cb57.css",
+    "static/js/main.1f8f652a.js"
   ]
 }
