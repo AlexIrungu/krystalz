@@ -4,59 +4,61 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun, ShoppingCart } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import log from './Luna/logoo.jpeg';
-import Cart from './Cart';
+import AnimatedCartButton from './Cart';
 
 // CartButton Component - Moved outside of main component
-const CartButton = ({ totalItems, showCartDropdown, setShowCartDropdown, isCheckout, cartItems, onCheckout }) => (
-  <motion.div className="relative">
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={() => setShowCartDropdown(!showCartDropdown)}
-      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative"
-      aria-label="Shopping cart"
-    >
-      <ShoppingCart className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-      {totalItems > 0 && (
-        <motion.span
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs"
-        >
-          {totalItems}
-        </motion.span>
-      )}
-    </motion.button>
+// const CartButton = ({ totalItems, showCartDropdown, setShowCartDropdown, isCheckout, cartItems, onCheckout }) => (
+//   <motion.div className="relative">
+//     <motion.button
+//       whileHover={{ scale: 1.05 }}
+//       whileTap={{ scale: 0.95 }}
+//       onClick={() => setShowCartDropdown(!showCartDropdown)}
+//       className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative"
+//       aria-label="Shopping cart"
+//     >
+//       <ShoppingCart className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+//       {totalItems > 0 && (
+//         <motion.span
+//           initial={{ scale: 0 }}
+//           animate={{ scale: 1 }}
+//           className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs"
+//         >
+//           {totalItems}
+//         </motion.span>
+//       )}
+//     </motion.button>
 
-    <AnimatePresence>
-      {showCartDropdown && !isCheckout && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50"
-        >
-          <Cart 
-            items={cartItems}
-            onCheckout={onCheckout}
-            isVisible={showCartDropdown}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </motion.div>
-);
+//     <AnimatePresence>
+//       {showCartDropdown && !isCheckout && (
+//         <motion.div
+//           initial={{ opacity: 0, y: -10 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           exit={{ opacity: 0, y: -10 }}
+//           className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50"
+//         >
+//           <Cart 
+//             items={cartItems}
+//             onCheckout={onCheckout}
+//             isVisible={showCartDropdown}
+//           />
+//         </motion.div>
+//       )}
+//     </AnimatePresence>
+//   </motion.div>
+// );
 
 const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth, cartItems = [],
-  onCheckout, isCheckout  }) => {
+  onCheckout, isCheckout, showCartDropdown, setShowCartDropdown, onUpdateQuantity, onRemoveItem, showCart   }) => {
   const { isDarkMode, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [showCartDropdown, setShowCartDropdown] = useState(false);
+  // const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   // const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+ 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,14 +181,16 @@ const Navbar = ({ isLoggedIn, username, onLogout, onShowAuth, cartItems = [],
 
                 {/* Cart Button */}
                {/* Cart Button */}
-               <CartButton 
-                totalItems={totalItems}
-                showCartDropdown={showCartDropdown}
-                setShowCartDropdown={setShowCartDropdown}
-                isCheckout={isCheckout}
-                cartItems={cartItems}
-                onCheckout={onCheckout}
-              />
+               <AnimatedCartButton 
+  cartItems={cartItems || []}
+  showCartDropdown={showCartDropdown}
+  setShowCartDropdown={setShowCartDropdown}
+  onCheckout={onCheckout}
+  onUpdateQuantity={onUpdateQuantity}
+  onRemoveItem={onRemoveItem}
+  isCheckout={isCheckout}
+  showCart={showCart}
+/>
 
                 {/* Auth section */}
               {isLoggedIn && username ? (

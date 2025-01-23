@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ShoppingCart, ChevronRight, X, Share } from 'lucide-react';
-import Cart from './Cart';
+import AnimatedCartButton from './Cart';
 import Checkout from './Checkout';
 import grounded from './Luna/Groundedonlineworkshop.jpeg'
 import reiki from './Luna/ReikiEnergyHealingSession.jpeg'
@@ -73,12 +73,16 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart }) => {
   );
 };
 
+
+
 const Shop = () => {
   const [cartItems, setCartItems] = useState([]);
   const [isCheckout, setIsCheckout] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('default');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
+  const [visibleProducts, setVisibleProducts] = useState(8);
 
   const categories = ['All', 'Chakras', 'Crystals', 'Essential Oils', 'Reiki', 'Smudging And Cleansing', 'Spirituality', 'Workbooks', 'Worksheets', 'Workshop'];
 
@@ -273,6 +277,13 @@ const Shop = () => {
     setSelectedProduct(null);
   };
 
+  const handleShowMoreProducts = () => {
+    setVisibleProducts(crystalProducts.length);
+  };
+
+
+  
+
   return (
     <div id="shop" className="py-12">
      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -310,37 +321,51 @@ const Shop = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {sortedProducts.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-              onClick={() => handleProductClick(product)}
-            >
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-48 object-cover"
-                />
-                {product.onSale && (
-                  <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                    On sale
-                  </div>
-                )}
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {product.name}
-                </h3>
-                <p className="text-xl font-bold text-gray-800">
-                  KSH {product.price.toFixed(2)}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        
+<div 
+  id="product-grid" 
+  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+>
+{sortedProducts.slice(0, visibleProducts).map((product) => (
+          <div
+            key={product.id}
+            className="bg-white rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+            onClick={() => handleProductClick(product)}
+          >
+      <div className="relative">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 object-cover"
+        />
+        {product.onSale && (
+          <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+            On sale
+          </div>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          {product.name}
+        </h3>
+        <p className="text-xl font-bold text-gray-800">
+          KSH {product.price.toFixed(2)}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
 
+{visibleProducts < sortedProducts.length && (
+        <div className="flex justify-center mb-8">
+          <button
+            onClick={handleShowMoreProducts}
+            className="text-blue-500 hover:underline"
+          >
+            Scroll to see more
+          </button>
+        </div>
+)}
         {/* Product Modal */}
         <ProductModal
           product={selectedProduct}
@@ -351,10 +376,27 @@ const Shop = () => {
 
         {/* Cart and Checkout */}
         {!isCheckout ? (
-          <Cart items={cartItems} onCheckout={handleCheckout} />
-        ) : (
-          <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
-        )}
+  <AnimatedCartButton 
+    cartItems={cartItems}
+    showCartDropdown={showCartDropdown}
+  setShowCartDropdown={setShowCartDropdown} // Add state management if needed
+    onCheckout={handleCheckout}
+    onUpdateQuantity={(itemId, newQuantity) => {
+      setCartItems(cartItems.map(item =>
+        item.id === itemId 
+          ? { ...item, quantity: newQuantity }
+          : item
+      ).filter(item => item.quantity > 0));
+    }}
+    onRemoveItem={(itemId) => {
+      setCartItems(cartItems.filter(item => item.id !== itemId));
+    }}
+    isCheckout={isCheckout}
+    showCart={true}
+  />
+) : (
+  <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
+)}
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const Home = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center 
               bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-purple-400
               animate-gradient-x">
-              Discover the Power of Krystals
+              DISCOVER THE POWER OF KRYSTALS
             </h1>
             
             {/* Description */}

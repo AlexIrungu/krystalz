@@ -27,13 +27,11 @@ function AppContent() {
   const [isPopup, setIsPopup] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [isCheckout, setIsCheckout] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
-  // const [username, setUsername] = useState(null);
   const [showDashboardPopup, setShowDashboardPopup] = useState(false);
-  // const [email, setEmail] = useState(null);
   const [showCart, setShowCart] = useState(true);
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -91,11 +89,6 @@ function AppContent() {
     }
   };
   
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false);
-  //   setUsername(null);
-  //   setEmail(null);
-  // };
 
   const handleSignupSuccess = async (userData) => {
     const result = await signup(userData.name, userData.email, userData.password);
@@ -113,6 +106,20 @@ function AppContent() {
   };
 
   const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleUpdateQuantity = (itemId, newQuantity) => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === itemId
+          ? { ...item, quantity: newQuantity }
+          : item
+      ).filter(item => item.quantity > 0)
+    );
+  };
+  
+  const handleRemoveItem = (itemId) => {
+    setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -133,8 +140,21 @@ function AppContent() {
            onCheckout={handleCheckout}
            showCart={showCart}
            isCheckout={isCheckout}
-          
+           showCartDropdown={showCartDropdown}
+           setShowCartDropdown={setShowCartDropdown}
+           onUpdateQuantity={(itemId, newQuantity) => {
+            setCartItems(cartItems.map(item =>
+              item.id === itemId 
+                ? { ...item, quantity: newQuantity }
+                : item
+            ).filter(item => item.quantity > 0));
+          }}
+          onRemoveItem={(itemId) => {
+            setCartItems(cartItems.filter(item => item.id !== itemId));
+          }}
         />
+          
+        
        
 
 
