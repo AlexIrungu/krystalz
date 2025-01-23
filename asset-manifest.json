@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.3d41cb57.css",
-    "main.js": "/krystalz/static/js/main.1f8f652a.js",
+    "main.css": "/krystalz/static/css/main.de88458a.css",
+    "main.js": "/krystalz/static/js/main.52935c3e.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
     "static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.jpeg": "/krystalz/static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.c9ccc3ad8d24de8ae2c4.jpeg",
@@ -55,16 +55,17 @@
     "static/media/ChakraBraceletClearQuartz.jpeg": "/krystalz/static/media/ChakraBraceletClearQuartz.bc37d780c2183a9f1902.jpeg",
     "static/media/ChakraBraceletObsidian.jpeg": "/krystalz/static/media/ChakraBraceletObsidian.46e65e942737609e1322.jpeg",
     "static/media/third.jpg": "/krystalz/static/media/third.124cc1ac4dd7cae80d8e.jpg",
+    "static/media/Durendal Regular.ttf": "/krystalz/static/media/Durendal Regular.f8b2d4e66104b4fdf3d8.ttf",
     "static/media/ReikiEnergyHealingSession.jpeg": "/krystalz/static/media/ReikiEnergyHealingSession.3c7437fd39dc1ebad53c.jpeg",
     "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.3d41cb57.css.map": "/krystalz/static/css/main.3d41cb57.css.map",
-    "main.1f8f652a.js.map": "/krystalz/static/js/main.1f8f652a.js.map",
+    "main.de88458a.css.map": "/krystalz/static/css/main.de88458a.css.map",
+    "main.52935c3e.js.map": "/krystalz/static/js/main.52935c3e.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3d41cb57.css",
-    "static/js/main.1f8f652a.js"
+    "static/css/main.de88458a.css",
+    "static/js/main.52935c3e.js"
   ]
 }
