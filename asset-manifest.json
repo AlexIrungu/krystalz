@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.de88458a.css",
-    "main.js": "/krystalz/static/js/main.52935c3e.js",
+    "main.css": "/krystalz/static/css/main.65417a11.css",
+    "main.js": "/krystalz/static/js/main.2b74e1a3.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
     "static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.jpeg": "/krystalz/static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.c9ccc3ad8d24de8ae2c4.jpeg",
@@ -60,12 +60,12 @@
     "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.de88458a.css.map": "/krystalz/static/css/main.de88458a.css.map",
-    "main.52935c3e.js.map": "/krystalz/static/js/main.52935c3e.js.map",
+    "main.65417a11.css.map": "/krystalz/static/css/main.65417a11.css.map",
+    "main.2b74e1a3.js.map": "/krystalz/static/js/main.2b74e1a3.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.de88458a.css",
-    "static/js/main.52935c3e.js"
+    "static/css/main.65417a11.css",
+    "static/js/main.2b74e1a3.js"
   ]
 }
