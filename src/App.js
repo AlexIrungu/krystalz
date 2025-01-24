@@ -20,6 +20,7 @@ import AstronomyButtons from './components/AstronomyButtons';
 import { X } from 'lucide-react';
 import { AuthProvider } from './context/AuthContext';
 import CookieConsent from './components/CookieConsent';
+import LoadingAnimation from './components/LoadingAnimation';
 
 function AppContent() {
   const { isDarkMode, isDarkModeLoaded } = useTheme();
@@ -123,7 +124,7 @@ function AppContent() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   if (!isDarkModeLoaded) {
