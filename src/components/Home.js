@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
 import moon from './Luna/5f6181f1-41a4-4afd-9852-3d10ae65fac3.jpeg'
+import crescent from './Luna/crecentm.avif'
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +16,7 @@ const Home = () => {
       <section className="h-screen w-full relative">
         {/* Using a placeholder image for the background */}
         <img 
-          src={moon}
+          src={crescent}
           alt="Moon background" 
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
