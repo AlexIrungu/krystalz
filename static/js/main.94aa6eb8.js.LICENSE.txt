@@ -1,4 +1,14 @@
 /*!
+ * GSAP 3.12.7
+ * https://gsap.com
+ *
+ * @license Copyright 2008-2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
  * react-paypal-js v8.5.0 (2024-06-12T17:52:54.583Z)
  * Copyright 2020-present, PayPal, Inc. All rights reserved.
  *
