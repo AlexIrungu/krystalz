@@ -19,6 +19,7 @@ import AstronomyComponent from './components/AstronomyComponent';
 import AstronomyButtons from './components/AstronomyButtons';
 import { X } from 'lucide-react';
 import { AuthProvider } from './context/AuthContext';
+import CookieConsent from './components/CookieConsent';
 
 function AppContent() {
   const { isDarkMode, isDarkModeLoaded } = useTheme();
@@ -228,6 +229,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
       <AppContent />
+      <CookieConsent />
       </AuthProvider>
     </ThemeProvider>
   );

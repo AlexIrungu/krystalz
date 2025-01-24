@@ -1,6 +1,7 @@
 // AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import config from '../config';
 
 const AuthContext = createContext(null);
@@ -11,6 +12,41 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
   const [tokenRefreshTimeout, setTokenRefreshTimeout] = useState(null);
+
+   // Cookie configuration
+   const cookieOptions = {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    expires: 7 // 7 days
+  };
+
+  // Initialize auth state from cookies
+  useEffect(() => {
+    const initializeAuth = async () => {
+      const token = Cookies.get('authToken');
+      const storedUser = Cookies.get('userData');
+      
+      if (storedUser && token) {
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          setUser(parsedUser);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          await checkAuthStatus();
+        } catch (error) {
+          handleLogout();
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
+    return () => {
+      if (tokenRefreshTimeout) {
+        clearTimeout(tokenRefreshTimeout);
+      }
+    };
+  }, []);
 
   // Initialize auth state from localStorage
   useEffect(() => {
@@ -57,9 +93,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateAuthState = (userData, token) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('lastActivity', Date.now().toString());
+    Cookies.set('userData', JSON.stringify(userData), cookieOptions);
+    Cookies.set('authToken', token, cookieOptions);
+    Cookies.set('lastActivity', Date.now().toString(), cookieOptions);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setUser(userData);
   };
@@ -113,9 +149,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('lastActivity');
+    Cookies.remove('userData');
+    Cookies.remove('authToken');
+    Cookies.remove('lastActivity');
     delete axios.defaults.headers.common['Authorization'];
     if (tokenRefreshTimeout) {
       clearTimeout(tokenRefreshTimeout);
@@ -124,12 +160,12 @@ export const AuthProvider = ({ children }) => {
     setAuthError(null);
   };
 
-  // Add activity monitoring
+  // Activity monitoring
   useEffect(() => {
     const activityTimeout = 1000 * 60 * 30; // 30 minutes
 
     const checkActivity = () => {
-      const lastActivity = localStorage.getItem('lastActivity');
+      const lastActivity = Cookies.get('lastActivity');
       if (lastActivity && Date.now() - parseInt(lastActivity) > activityTimeout) {
         handleLogout();
       }
@@ -138,7 +174,7 @@ export const AuthProvider = ({ children }) => {
     const activityInterval = setInterval(checkActivity, 1000 * 60); // Check every minute
     const updateActivity = () => {
       if (user) {
-        localStorage.setItem('lastActivity', Date.now().toString());
+        Cookies.set('lastActivity', Date.now().toString(), cookieOptions);
       }
     };
 
