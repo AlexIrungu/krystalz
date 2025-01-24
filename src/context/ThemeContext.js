@@ -4,6 +4,7 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkModeLoaded, setIsDarkModeLoaded] = useState(false);
 
   useEffect(() => {
     // Check if user has a saved preference
@@ -19,6 +20,9 @@ export function ThemeProvider({ children }) {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    // Set isDarkModeLoaded to true after the initial theme is applied
+    setIsDarkModeLoaded(true);
   }, []);
 
   const toggleTheme = () => {
@@ -35,7 +39,7 @@ export function ThemeProvider({ children }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDarkMode, isDarkModeLoaded, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -4,6 +4,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        'durendal': ['Durendal', 'sans-serif'], // Add this line
+      },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
       },

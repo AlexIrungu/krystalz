@@ -179,7 +179,7 @@ const AboutMore = () => {
   ];
 
   return (
-    <div id="about-more" className="space-y-8 ">
+    <div id="about-more" className="space-y-8">
        <CrystalSection crystals={rootChakraCrystals} title="Root Chakra Crystals" />
       <CrystalSection crystals={sacralChakraCrystals} title="Sacral Chakra Crystals" />
       <CrystalSection crystals={solarPlexusChakraCrystals} title="Solar Plexus Chakra Crystals" />

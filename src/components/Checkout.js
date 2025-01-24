@@ -13,7 +13,6 @@ const MpesaPayment = ({ amount, onSuccess }) => {
     setError('');
 
     try {
-      // Format the phone number
       const formattedPhone = phoneNumber.replace(/^0/, '254').replace(/\+/, '');
   
       const response = await fetch('http://localhost:10000/api/mpesa/stkpush', {
@@ -35,7 +34,6 @@ const MpesaPayment = ({ amount, onSuccess }) => {
       const data = await response.json();
   
       if (data.success) {
-        // Show success message to user
         alert('Please check your phone for the STK push notification');
         onSuccess();
       } else {
@@ -68,29 +66,29 @@ const MpesaPayment = ({ amount, onSuccess }) => {
     <div className="p-4">
       <form onSubmit={handleMpesaPayment} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             M-Pesa Phone Number
           </label>
           <div className="relative">
-            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
             <input
               type="tel"
               value={phoneNumber}
               onChange={handlePhoneChange}
               placeholder="254XXXXXXXXX"
-              className="pl-10 w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 w-full p-2 border border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-dim-darker dark:text-gray-200"
               required
               pattern="254[0-9]{9}"
               title="Please enter a valid Safaricom number starting with 254"
             />
           </div>
-          <p className="mt-1 text-sm text-gray-500">Format: 254XXXXXXXXX</p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Format: 254XXXXXXXXX</p>
         </div>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 disabled:opacity-50"
+          className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 disabled:opacity-50"
         >
           {isLoading ? 'Processing...' : 'Pay with M-Pesa'}
         </button>
@@ -116,7 +114,6 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
 
   const handleCloseClick = () => {
     setIsClosing(true);
-    // Add a small delay to allow the closing animation if needed
     setTimeout(() => {
       if (typeof onClose === 'function') {
         onClose();
@@ -137,21 +134,21 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
       onClick={handleBackdropClick}
     >
       <div 
-        className="max-w-lg w-full bg-white rounded-lg shadow-xl relative"
+        className="max-w-lg w-full bg-white dark:bg-dim-dark rounded-lg shadow-xl relative"
         onClick={e => e.stopPropagation()}
       >
         <button
           onClick={handleCloseClick}
-          className="absolute top-3 right-3 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 z-10"
+          className="absolute top-3 right-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors duration-200 z-10"
           aria-label="Close checkout"
         >
-          <X size={24} className="text-gray-500 hover:text-gray-700" />
+          <X size={24} className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100" />
         </button>
         
         <div className="p-6">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">Complete your purchase</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Complete your purchase</h2>
           <div className="mb-6">
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
               Total Amount: KSH {totalAmount.toFixed(2)}
             </p>
           </div>
@@ -162,8 +159,8 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
                 onClick={() => setPaymentMethod('mpesa')}
                 className={`flex-1 py-2 px-4 rounded-lg border ${
                   paymentMethod === 'mpesa'
-                    ? 'border-green-500 bg-green-50'
-                    : 'border-gray-300'
+                    ? 'border-green-500 bg-green-50 dark:border-green-600 dark:bg-green-900/20'
+                    : 'border-gray-300 dark:border-gray-600'
                 }`}
               >
                 M-Pesa
@@ -172,8 +169,8 @@ const Checkout = ({ totalAmount, onPaymentSuccess, onClose }) => {
                 onClick={() => setPaymentMethod('paypal')}
                 className={`flex-1 py-2 px-4 rounded-lg border ${
                   paymentMethod === 'paypal'
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-300'
+                    ? 'border-blue-500 bg-blue-50 dark:border-blue-600 dark:bg-blue-900/20'
+                    : 'border-gray-300 dark:border-gray-600'
                 }`}
               >
                 PayPal

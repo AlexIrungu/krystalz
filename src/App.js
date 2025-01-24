@@ -21,7 +21,7 @@ import { X } from 'lucide-react';
 import { AuthProvider } from './context/AuthContext';
 
 function AppContent() {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode, isDarkModeLoaded } = useTheme();
   const { user, loading, login, logout, signup, isAuthenticated } = useAuth();
   const [showAstronomy, setShowAstronomy] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
@@ -125,6 +125,11 @@ function AppContent() {
     return <div>Loading...</div>;
   }
 
+  if (!isDarkModeLoaded) {
+    return <div className="loading">Loading...</div>;
+  }
+
+
   return (
     <div className={`relative min-h-screen ${isDarkMode ? 'dark' : ''}`}>
       <div className="relative z-10 bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark transition-colors duration-200">
@@ -134,7 +139,7 @@ function AppContent() {
            email={user?.email}
            onLogout={logout}
            onShowAuth={() => setShowAuthModal(true)}
-           onToggleTheme={toggleTheme}
+          //  onToggleTheme={toggleTheme}
            isDarkMode={isDarkMode}
            cartItems={cartItems}
            onCheckout={handleCheckout}

@@ -7,6 +7,12 @@ h1, h2, h3 {
   font-family: 'Durendal', serif;
 }
 
+@font-face {
+  font-family: 'Durendal';
+  src: url('./fonts/durendal-regular_gUjRs/Durendal Regular/Durendal Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 @keyframes spin {
