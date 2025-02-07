@@ -4,9 +4,9 @@ import { Moon, Stars } from 'lucide-react';
 const StyledButton = ({ onClick, children, isPrimary }) => {
   const baseClasses = "relative px-6 py-3 rounded-full font-medium text-sm shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 hover:scale-105 active:scale-95 flex items-center gap-2";
   
-  const primaryClasses = "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white focus:ring-indigo-500 hover:shadow-indigo-500/25";
+  const primaryClasses = "bg-black hover:bg-gray-800 text-white focus:ring-gray-500 hover:shadow-gray-500/25";
   
-  const secondaryClasses = "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white focus:ring-purple-400 hover:shadow-purple-500/25";
+  const secondaryClasses = "bg-gray-800 hover:bg-gray-700 text-white focus:ring-gray-400 hover:shadow-gray-500/25";
 
   return (
     <button

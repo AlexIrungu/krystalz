@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaPinterest, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaPinterest, FaEnvelope, FaPhone, FaTiktok } from 'react-icons/fa';
 import { Link } from 'react-scroll';
 import { useTheme } from '../context/ThemeContext';
 import NewsLetter from './NewsLetter';
@@ -11,7 +11,8 @@ const Footer = () => {
     { icon: FaFacebook, url: 'https://facebook.com/', label: 'Facebook' },
     { icon: FaTwitter, url: 'https://twitter.com/', label: 'Twitter' },
     { icon: FaInstagram, url: 'https://www.instagram.com/_luna.kenya/', label: 'Instagram' },
-    { icon: FaPinterest, url: 'https://pinterest.com/', label: 'Pinterest' }
+    { icon: FaPinterest, url: 'https://pinterest.com/', label: 'Pinterest' },
+    { icon: FaTiktok, url: 'https://tiktok.com/', label: 'TikTok' }
   ];
 
   const quickLinks = [
@@ -35,7 +36,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className={`
               text-xl font-bold mb-4 
-              ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}
+              ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}
             `}>
               Stay Connected
             </h3>
@@ -46,7 +47,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className={`
               text-xl font-bold mb-4 
-              ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}
+              ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}
             `}>
               Quick Links
             </h3>
@@ -75,17 +76,17 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className={`
               text-xl font-bold mb-4 
-              ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}
+              ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}
             `}>
               Contact Us
             </h3>
             <div className={`space-y-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <div className="flex items-center space-x-3">
-                <FaPhone className={isDarkMode ? 'text-purple-400' : 'text-purple-600'} />
+                <FaPhone className={isDarkMode ? 'text-gray-400' : 'text-gray-600'} />
                 <span>+254 702064459</span>
               </div>
               <div className="flex items-center space-x-3">
-                <FaEnvelope className={isDarkMode ? 'text-purple-400' : 'text-purple-600'} />
+                <FaEnvelope className={isDarkMode ? 'text-gray-400' : 'text-gray-600'} />
                 <a 
                   href="mailto:Lunakenya88@gmail.com" 
                   className={`
@@ -106,7 +107,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className={`
               text-xl font-bold mb-4 
-              ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}
+              ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}
             `}>
               Follow Us
             </h3>
@@ -148,8 +149,8 @@ const Footer = () => {
         <div className={`
           absolute top-0 left-0 w-full h-full 
           ${isDarkMode 
-            ? 'bg-gradient-to-br from-purple-900 to-pink-900' 
-            : 'bg-gradient-to-br from-purple-200 to-pink-200'}
+            ? 'bg-gradient-to-br from-gray-900 to-black' 
+            : 'bg-gradient-to-br from-gray-200 to-gray-300'}
           mix-blend-overlay
         `}></div>
       </div>

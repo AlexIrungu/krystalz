@@ -133,23 +133,23 @@ function AppContent() {
 
 
   return (
-    <div className={`relative min-h-screen ${isDarkMode ? 'dark' : ''}`}>
-      <div className="relative z-10 bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark transition-colors duration-200">
+    <div className={`relative ${isDarkMode ? 'dark' : ''}`}>
+      {/* Remove min-h-screen and ensure no padding or margins */}
+      <div className="relative z-10 bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark transition-colors duration-200 p-0 m-0">
         <Navbar 
-           isLoggedIn={isAuthenticated}
-           username={user?.name}
-           email={user?.email}
-           onLogout={logout}
-           onShowAuth={() => setShowAuthModal(true)}
-          //  onToggleTheme={toggleTheme}
-           isDarkMode={isDarkMode}
-           cartItems={cartItems}
-           onCheckout={handleCheckout}
-           showCart={showCart}
-           isCheckout={isCheckout}
-           showCartDropdown={showCartDropdown}
-           setShowCartDropdown={setShowCartDropdown}
-           onUpdateQuantity={(itemId, newQuantity) => {
+          isLoggedIn={isAuthenticated}
+          username={user?.name}
+          email={user?.email}
+          onLogout={logout}
+          onShowAuth={() => setShowAuthModal(true)}
+          isDarkMode={isDarkMode}
+          cartItems={cartItems}
+          onCheckout={handleCheckout}
+          showCart={showCart}
+          isCheckout={isCheckout}
+          showCartDropdown={showCartDropdown}
+          setShowCartDropdown={setShowCartDropdown}
+          onUpdateQuantity={(itemId, newQuantity) => {
             setCartItems(cartItems.map(item =>
               item.id === itemId 
                 ? { ...item, quantity: newQuantity }
@@ -160,12 +160,7 @@ function AppContent() {
             setCartItems(cartItems.filter(item => item.id !== itemId));
           }}
         />
-          
-        
-       
 
-
-        
         {showAuthModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
             <div className="bg-primary-light dark:bg-secondary-dark rounded-lg p-8 w-full max-w-md">
@@ -173,7 +168,7 @@ function AppContent() {
                 onClick={() => setShowAuthModal(false)}
                 className="float-right text-gray-500 hover:text-gray-700"
               >
-                 <X size={24} />
+                <X size={24} />
               </button>
               {showLogin ? (
                 <Login 
@@ -192,13 +187,14 @@ function AppContent() {
 
         {showDashboardPopup && (
           <DashboardPopup 
-          username={user?.name}
-          email={user?.email}
+            username={user?.name}
+            email={user?.email}
             onClose={handleCloseDashboardPopup} 
           />
         )}
 
-        <main className="container mx-auto px-4 pb-16">
+        {/* Ensure the main container has no padding or margins */}
+        <main className="p-0 m-0">
           <Home />
           {!isCheckout ? (
             <Shop onAddToCart={handleAddToCart} />
