@@ -1,10 +1,14 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.647cd8a2.css",
-    "main.js": "/krystalz/static/js/main.94aa6eb8.js",
+    "main.css": "/krystalz/static/css/main.43459e96.css",
+    "main.js": "/krystalz/static/js/main.4b061c06.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
-    "static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.jpeg": "/krystalz/static/media/5f6181f1-41a4-4afd-9852-3d10ae65fac3.c9ccc3ad8d24de8ae2c4.jpeg",
+    "static/media/Reiki.png": "/krystalz/static/media/Reiki.b7912f4b36b0cd07e393.png",
+    "static/media/Aromatherapy.png": "/krystalz/static/media/Aromatherapy.55cfb4e55d2f1597834f.png",
+    "static/media/Crystals.png": "/krystalz/static/media/Crystals.9c9a01c10e040e383f57.png",
+    "static/media/Other products.png": "/krystalz/static/media/Other products.fa9229cb79e2cd97d3a1.png",
+    "static/media/Poppins-Regular.ttf": "/krystalz/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
     "static/media/imheart.jpg": "/krystalz/static/media/imheart.77cb2034e4e32f2b2dd0.jpg",
     "static/media/bheartt.jpg": "/krystalz/static/media/bheartt.35cd4b1c4a41192816a2.jpg",
     "static/media/bsacral.jpg": "/krystalz/static/media/bsacral.5e6a08613792786eeca2.jpg",
@@ -55,18 +59,17 @@
     "static/media/ChakraBraceletClearQuartz.jpeg": "/krystalz/static/media/ChakraBraceletClearQuartz.bc37d780c2183a9f1902.jpeg",
     "static/media/ChakraBraceletObsidian.jpeg": "/krystalz/static/media/ChakraBraceletObsidian.46e65e942737609e1322.jpeg",
     "static/media/third.jpg": "/krystalz/static/media/third.124cc1ac4dd7cae80d8e.jpg",
-    "static/media/crecentm.avif": "/krystalz/static/media/crecentm.a0a0dbc5fe375d15c799.avif",
     "static/media/Durendal Regular.ttf": "/krystalz/static/media/Durendal Regular.f8b2d4e66104b4fdf3d8.ttf",
     "static/media/ReikiEnergyHealingSession.jpeg": "/krystalz/static/media/ReikiEnergyHealingSession.3c7437fd39dc1ebad53c.jpeg",
     "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.647cd8a2.css.map": "/krystalz/static/css/main.647cd8a2.css.map",
-    "main.94aa6eb8.js.map": "/krystalz/static/js/main.94aa6eb8.js.map",
+    "main.43459e96.css.map": "/krystalz/static/css/main.43459e96.css.map",
+    "main.4b061c06.js.map": "/krystalz/static/js/main.4b061c06.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.647cd8a2.css",
-    "static/js/main.94aa6eb8.js"
+    "static/css/main.43459e96.css",
+    "static/js/main.4b061c06.js"
   ]
 }
