@@ -64,7 +64,7 @@ const Navbar = ({
       initial={{ y: 0 }}
       animate={{ y: visible ? 0 : -100 }}
       transition={{ duration: 0.3 }}
-      className="fixed w-full top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-gray-900/90 shadow-lg transition-colors duration-200"
+      className="fixed w-full top-0 z-50 backdrop-blur-md bg-black/70 dark:bg-black/70 shadow-lg transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -86,7 +86,7 @@ const Navbar = ({
                       repeat: Infinity,
                       repeatType: "reverse",
                     }}
-                    className="text-xl md:text-3xl font-bold text-black dark:text-white tracking-wider"
+                    className="text-xl md:text-3xl font-bold text-white dark:text-white tracking-wider"
                   >
                     LUNA
                   </motion.p>

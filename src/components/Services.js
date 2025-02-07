@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { FaGem, FaHandHoldingHeart, FaBook, FaMagic, FaHome, FaShoppingBag } from 'react-icons/fa';
+import { FaGem, FaSmile, FaHands, FaHeart, FaCalendarAlt, FaShoppingBag } from 'react-icons/fa';
 
-const ServiceCard = ({ icon, title, description }) => {
+const ServiceCard = ({ icon, title, description, cta, onClick }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
@@ -29,13 +29,30 @@ const ServiceCard = ({ icon, title, description }) => {
   }, []);
 
   return (
-    <div id='services'
+    <div 
       ref={cardRef} 
-      className="bg-gray p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4"
+      className="bg-white p-6 rounded-lg shadow-lg group hover:shadow-xl transition-all duration-300 ease-in-out opacity-0 translate-y-4 flex flex-col relative overflow-hidden"
     >
-      <div className="text-4xl text-black-600 mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      {/* Hover effect overlay */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-all duration-300 z-0"></div>
+      
+      {/* Icon with hover scale effect */}
+      <div className="text-4xl text-black-600 mb-4 self-start transform transition-transform duration-300 group-hover:scale-110 z-10 relative">
+        {React.cloneElement(icon, {
+          className: 'transition-colors duration-300 group-hover:text-black/70'
+        })}
+      </div>
+      
+      <h3 className="text-xl font-semibold mb-2 z-10 relative">{title}</h3>
+      <p className="text-gray-600 mb-4 flex-grow z-10 relative">{description}</p>
+      
+      <button 
+        onClick={onClick}
+        className="mt-auto px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300 self-start z-10 relative 
+        transform hover:translate-x-1 hover:-translate-y-1 transition-transform"
+      >
+        {cta}
+      </button>
     </div>
   );
 };
@@ -67,36 +84,47 @@ const Services = () => {
     };
   }, []);
 
+  const handleNavigation = (path) => {
+    // You can replace this with your preferred navigation method
+    console.log(`Navigating to ${path}`);
+    // Example: window.location.href = path;
+  };
+
   const services = [
     {
       icon: <FaGem />,
-      title: "Crystal Identification",
-      description: "Expert identification and authentication of rare and valuable crystals."
+      title: "Crystals and Gemstones",
+      description: "Explore the world of Crystals and their healing power through our products. Each product is authentic, and made with love. We hope that they bring a positive impact to your life.",
+      cta: "Find Crystals",
+      path: "/crystals"
     },
     {
-      icon: <FaHandHoldingHeart />,
-      title: "Healing Sessions",
-      description: "Personalized crystal healing sessions to balance your energy and promote wellbeing."
+      icon: <FaSmile />,
+      title: "Aromatherapy",
+      description: "Our senses play a big role in our wellbeing. Through aromatherapy, we explore the power of plant scents in bringing healing, relaxation, energy, and even groundedness in our lives through the sense of smell.",
+      cta: "Explore Aromatherapy",
+      path: "/aromatherapy"
     },
     {
-      icon: <FaBook />,
-      title: "Educational Workshops",
-      description: "Learn about crystal properties, care, and uses in our informative workshops."
+      icon: <FaHands />,
+      title: "Reiki",
+      description: "Reiki is a Japanese energy healing modality that helps people enhance wellbeing and relaxation.",
+      cta: "Book a Session",
+      path: "/reiki"
     },
     {
-      icon: <FaMagic />,
-      title: "Custom Crystal Grids",
-      description: "Design and creation of custom crystal grids for specific intentions and goals."
+      icon: <FaHeart />,
+      title: "Selfcare Products",
+      description: "We create and stock the best products that can bring you closer to your self-care goals and self-love goals.",
+      cta: "Browse Products",
+      path: "/products"
     },
     {
-      icon: <FaHome />,
-      title: "Home & Office Consultations",
-      description: "Expert advice on incorporating crystals into your living and working spaces."
-    },
-    {
-      icon: <FaShoppingBag />,
-      title: "Curated Collections",
-      description: "Handpicked crystal collections tailored to your specific needs and preferences."
+      icon: <FaCalendarAlt />,
+      title: "Events and Workshops",
+      description: "We organize and collaborate with like-minded individuals, companies, and organizations to hold events and workshops that enhance wellbeing.",
+      cta: "View Events",
+      path: "/events"
     }
   ];
 
@@ -104,7 +132,7 @@ const Services = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="py-20  opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
+      className="py-20 bg-gray-50 opacity-0 translate-y-4 transition-all duration-300 ease-in-out"
     >
       <div className="container mx-auto px-4">
         <h2
@@ -126,6 +154,8 @@ const Services = () => {
               icon={service.icon}
               title={service.title}
               description={service.description}
+              cta={service.cta}
+              onClick={() => handleNavigation(service.path)}
             />
           ))}
         </div>
