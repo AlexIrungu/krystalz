@@ -5,22 +5,22 @@ const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700 py-4">
+    <div className="border-b border-gray-200 py-4">
       <button
         className="flex justify-between items-center w-full text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        <span className="text-lg font-semibold">
           {question}
         </span>
         {isOpen ? (
-          <ChevronUp className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+          <ChevronUp className="w-6 h-6 text-gray-800" />
         ) : (
-          <ChevronDown className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+          <ChevronDown className="w-6 h-6 text-gray-800" />
         )}
       </button>
       {isOpen && (
-        <p className="mt-2 text-gray-600 dark:text-gray-300">{answer}</p>
+        <p className="mt-2 text-gray-600">{answer}</p>
       )}
     </div>
   );
@@ -47,12 +47,12 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-white dark:bg-[#1a1a1a] transition-colors duration-200">
+    <section className="py-12 bg-white">
     <div className="container mx-auto px-4">
-      <h2 className="text-3xl font-bold text-center text-indigo-800 dark:text-indigo-300 mb-8">
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Frequently Asked Questions
       </h2>
-      <div className="font-durendal bg-white dark:bg-[#2d2d2d] rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-lg shadow-lg p-6">
         {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}

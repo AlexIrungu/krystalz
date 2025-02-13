@@ -20,49 +20,135 @@ import obsidian from './Luna/ObsidianBracelet.jpeg'
 import aventurine from './Luna/AventurineBracelet.jpeg'
 import amethyst from './Luna/Amethyst.jpeg'
 
-const ProductModal = ({ product, isOpen, onClose, onAddToCart }) => {
-  if (!isOpen) return null;
+// ProductCard Component
+const ProductCard = ({ product, onClick }) => {
+  if (!product) return null;
+
+  const price = typeof product.price === 'number' ? product.price : 0;
+  const originalPrice = typeof product.originalPrice === 'number' ? product.originalPrice : 0;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 text-black hover:text-black">
-      <div className="bg-white rounded-lg w-full max-w-2xl overflow-hidden relative">
+    <div 
+      onClick={onClick}
+      className="group relative cursor-pointer overflow-hidden bg-white"
+    >
+      {product.onSale && originalPrice > price && (
+        <div className="absolute top-2 left-2 z-10 bg-cyan-400 text-white px-3 py-1 text-xs">
+          SAVE {Math.round((originalPrice - price) / 100)}KES
+        </div>
+      )}
+      
+      <div className="aspect-[4/5] overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+      
+      <div className="p-4 text-center">
+        <h3 className="text-lg font-normal mb-2">{product.name}</h3>
+        <div className="flex justify-center items-center gap-2">
+          <span className="text-lg font-semibold">KSH {price.toFixed(2)}</span>
+          {product.onSale && originalPrice > 0 && (
+            <span className="text-gray-500 line-through">
+              KSH {originalPrice.toFixed(2)}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ProductGrid Component
+const ProductGrid = ({ products = [], onProductClick }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          onClick={() => onProductClick(product)}
+        />
+      ))}
+    </div>
+  );
+};
+
+// CategoryTabs Component
+const CategoryTabs = ({ categories = [], activeCategory, onCategoryChange }) => {
+  return (
+    <div className="flex justify-center mb-12 overflow-x-auto">
+      {categories.map((category) => (
+        <button
+          key={category}
+          onClick={() => onCategoryChange(category)}
+          className={`px-6 py-2 text-sm transition-colors whitespace-nowrap ${
+            activeCategory === category
+              ? 'text-black border-b-2 border-black'
+              : 'text-gray-500 hover:text-black'
+          }`}
+        >
+          {category === 'All' ? 'New Arrivals' : category}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// ProductModal Component
+const ProductModal = ({ product, isOpen, onClose, onAddToCart }) => {
+  if (!isOpen || !product) return null;
+
+  const price = typeof product.price === 'number' ? product.price : 0;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg w-full max-w-4xl overflow-hidden relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray rounded-full"
+          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
         >
           <X size={24} />
         </button>
+
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="aspect-square ">
+          <div className="aspect-square">
             <img
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="p-6 flex flex-col">
-            <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+
+          <div className="p-8 flex flex-col">
+            <h2 className="text-2xl font-normal mb-2">{product.name}</h2>
             <p className="text-xl font-semibold mb-4">
-              KSH {product.price.toFixed(2)}
+              KSH {price.toFixed(2)}
             </p>
             <p className="text-gray-600 mb-6">{product.description}</p>
+            
             <div className="flex gap-4 mt-auto">
               <button
                 onClick={() => {
                   onAddToCart(product);
                   onClose();
                 }}
-                className="flex-1 bg-black text-white py-3 rounded hover:bg-gray-800"
+                className="flex-1 bg-black text-white py-3 rounded-none hover:bg-gray-800 transition-colors"
               >
                 Add To Bag
               </button>
-              <button className="flex items-center justify-center p-3 border border-gray-300 rounded hover:bg-gray-50">
+              <button 
+                className="p-3 border border-gray-200 hover:bg-gray-50 transition-colors"
+              >
                 <Share size={20} />
               </button>
             </div>
+
             <button
               onClick={onClose}
-              className="mt-4 text-center text-gray-600 hover:text-gray-800"
+              className="mt-4 text-center text-gray-600 hover:text-gray-800 transition-colors"
             >
               Continue shopping
             </button>
@@ -72,7 +158,6 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart }) => {
     </div>
   );
 };
-
 
 
 const Shop = () => {
@@ -228,17 +313,24 @@ const Shop = () => {
   ];
 
   const handleAddToCart = (crystal) => {
-    const existingItem = cartItems.find(item => item.id === crystal.id);
-    if (existingItem) {
-      setCartItems(cartItems.map(item =>
-        item.id === crystal.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
-    } else {
-      setCartItems([...cartItems, { ...crystal, quantity: 1 }]);
-    }
+    if (!crystal) return;
+    
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(item => item.id === crystal.id);
+      if (existingItem) {
+        return prevItems.map(item =>
+          item.id === crystal.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevItems, { ...crystal, quantity: 1 }];
+    });
   };
 
   const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
     setIsCheckout(true);
   };
 
@@ -250,10 +342,7 @@ const Shop = () => {
 
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
-  };
-
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
+    setVisibleProducts(8); // Reset visible products when changing category
   };
 
   const filteredProducts = activeCategory === 'All' 
@@ -261,145 +350,82 @@ const Shop = () => {
     : crystalProducts.filter(product => product.category === activeCategory);
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortBy === 'price-low-high') return a.price - b.price;
-    if (sortBy === 'price-high-low') return b.price - a.price;
+    if (sortBy === 'price-low-high') return (a.price || 0) - (b.price || 0);
+    if (sortBy === 'price-high-low') return (b.price || 0) - (a.price || 0);
     return 0;
   });
 
-  const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const closeProductModal = () => {
-    setSelectedProduct(null);
-  };
+  const totalAmount = cartItems.reduce((sum, item) => {
+    const price = typeof item.price === 'number' ? item.price : 0;
+    const quantity = typeof item.quantity === 'number' ? item.quantity : 0;
+    return sum + (price * quantity);
+  }, 0);
 
   const handleShowMoreProducts = () => {
-    setVisibleProducts(crystalProducts.length);
+    setVisibleProducts(prev => Math.min(prev + 8, sortedProducts.length));
   };
 
-
-  
-
   return (
-    <div id="shop" className="py-12">
-     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header section with Shop title and sort */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold tracking-wide">SHOP</h1>
-          <div className="flex items-center">
-            <select
-              onChange={handleSortChange}
-              className="border rounded-md px-4 py-2 bg-white text-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200"
-            >
-              <option value="default">SORT BY</option>
-              <option value="price-low-high">Price: Low to High</option>
-              <option value="price-high-low">Price: High to Low</option>
-            </select>
-            <ChevronRight className="ml-1" />
-          </div>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 py-16">
+      <CategoryTabs 
+        categories={categories}
+        activeCategory={activeCategory}
+        onCategoryChange={handleCategoryChange}
+      />
 
-        {/* Categories */}
-        <div className="flex overflow-x-auto space-x-4 pb-6">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full ${
-                activeCategory === category
-                  ? 'bg-gray-200 text-gray-800'
-                  : 'bg-white text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+      <ProductGrid 
+        products={sortedProducts.slice(0, visibleProducts)}
+        onProductClick={setSelectedProduct}
+      />
 
-        {/* Product Grid */}
-        
-<div 
-  id="product-grid" 
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
->
-{sortedProducts.slice(0, visibleProducts).map((product) => (
-          <div
-            key={product.id}
-            className="bg-white rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-            onClick={() => handleProductClick(product)}
-          >
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover"
-        />
-        {product.onSale && (
-          <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-            On sale
-          </div>
-        )}
-      </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {product.name}
-        </h3>
-        <p className="text-xl font-bold text-gray-800">
-          KSH {product.price.toFixed(2)}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
-
-{visibleProducts < sortedProducts.length && (
-        <div className="flex justify-center mb-8">
+      {visibleProducts < sortedProducts.length && (
+        <div className="text-center mt-12">
           <button
             onClick={handleShowMoreProducts}
-            className="text-blue-500 hover:underline"
+            className="inline-block border border-black px-8 py-3 text-sm hover:bg-black hover:text-white transition-colors"
           >
-            Scroll to see more
+            VIEW MORE
           </button>
         </div>
-)}
-        {/* Product Modal */}
-        <ProductModal
-          product={selectedProduct}
-          isOpen={!!selectedProduct}
-          onClose={closeProductModal}
-          onAddToCart={handleAddToCart}
-        />
+      )}
 
-        {/* Cart and Checkout */}
-        {!isCheckout ? (
-  <AnimatedCartButton 
-    cartItems={cartItems}
-    showCartDropdown={showCartDropdown}
-  setShowCartDropdown={setShowCartDropdown} // Add state management if needed
-    onCheckout={handleCheckout}
-    onUpdateQuantity={(itemId, newQuantity) => {
-      setCartItems(cartItems.map(item =>
-        item.id === itemId 
-          ? { ...item, quantity: newQuantity }
-          : item
-      ).filter(item => item.quantity > 0));
-    }}
-    onRemoveItem={(itemId) => {
-      setCartItems(cartItems.filter(item => item.id !== itemId));
-    }}
-    isCheckout={isCheckout}
-    showCart={true}
-  />
-) : (
-  <Checkout totalAmount={totalAmount} onPaymentSuccess={handlePaymentSuccess} />
-)}
-      </div>
+      <ProductModal
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={handleAddToCart}
+      />
+
+      {!isCheckout ? (
+        <AnimatedCartButton 
+          cartItems={cartItems}
+          showCartDropdown={showCartDropdown}
+          setShowCartDropdown={setShowCartDropdown}
+          onCheckout={handleCheckout}
+          onUpdateQuantity={(itemId, newQuantity) => {
+            setCartItems(prevItems => 
+              prevItems.map(item =>
+                item.id === itemId 
+                  ? { ...item, quantity: Math.max(0, newQuantity) }
+                  : item
+              ).filter(item => item.quantity > 0)
+            );
+          }}
+          onRemoveItem={(itemId) => {
+            setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
+          }}
+          isCheckout={isCheckout}
+          showCart={true}
+        />
+      ) : (
+        <Checkout 
+          totalAmount={totalAmount} 
+          onPaymentSuccess={handlePaymentSuccess} 
+        />
+      )}
     </div>
   );
 };
+
 
 export default Shop;

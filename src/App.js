@@ -21,6 +21,11 @@ import { X } from 'lucide-react';
 import { AuthProvider } from './context/AuthContext';
 import CookieConsent from './components/CookieConsent';
 import LoadingAnimation from './components/LoadingAnimation';
+import Crystals from './components/Crystals';
+import Events from './components/Events';
+import Aromatherapy from './components/Aromatherapy';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Blog from './components/Blog';
 
 function AppContent() {
   const { isDarkMode, isDarkModeLoaded } = useTheme();
@@ -210,8 +215,10 @@ function AppContent() {
           {showAstronomy && (
             <AstronomyComponent isPopup={isPopup} onClose={() => setShowAstronomy(false)} />
           )}
+           <Services />
           <About />
-          <Services />
+          <Blog />
+         
           <Contact />
           <FAQSection />
         </main>
@@ -225,7 +232,14 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-      <AppContent />
+      <Router>
+          <Routes>
+            <Route path="/" element={<AppContent />} />
+            <Route path="/crystals" element={<Crystals />} />
+            <Route path="/aromatherapy" element={<Aromatherapy />} />
+            <Route path="/events" element={<Events />} />
+          </Routes>
+        </Router>
       <CookieConsent />
       </AuthProvider>
     </ThemeProvider>
