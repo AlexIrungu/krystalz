@@ -1,13 +1,18 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.43459e96.css",
-    "main.js": "/krystalz/static/js/main.4b061c06.js",
+    "main.css": "/krystalz/static/css/main.d2bb39ae.css",
+    "main.js": "/krystalz/static/js/main.74349577.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
+    "static/media/kry.jpg": "/krystalz/static/media/kry.a167525e2937798afd44.jpg",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
     "static/media/Reiki.png": "/krystalz/static/media/Reiki.b7912f4b36b0cd07e393.png",
     "static/media/Aromatherapy.png": "/krystalz/static/media/Aromatherapy.55cfb4e55d2f1597834f.png",
     "static/media/Crystals.png": "/krystalz/static/media/Crystals.9c9a01c10e040e383f57.png",
     "static/media/Other products.png": "/krystalz/static/media/Other products.fa9229cb79e2cd97d3a1.png",
+    "static/media/healing.jpg": "/krystalz/static/media/healing.66ed82f5bf5b7af5f515.jpg",
+    "static/media/store2.jpg": "/krystalz/static/media/store2.16d028e526754f6b9488.jpg",
+    "static/media/anime.jpg": "/krystalz/static/media/anime.4f801f9ddda0a9197baa.jpg",
+    "static/media/store1.jpg": "/krystalz/static/media/store1.5cfa020b83ed39c48530.jpg",
     "static/media/Poppins-Regular.ttf": "/krystalz/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
     "static/media/imheart.jpg": "/krystalz/static/media/imheart.77cb2034e4e32f2b2dd0.jpg",
     "static/media/bheartt.jpg": "/krystalz/static/media/bheartt.35cd4b1c4a41192816a2.jpg",
@@ -64,12 +69,12 @@
     "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.43459e96.css.map": "/krystalz/static/css/main.43459e96.css.map",
-    "main.4b061c06.js.map": "/krystalz/static/js/main.4b061c06.js.map",
+    "main.d2bb39ae.css.map": "/krystalz/static/css/main.d2bb39ae.css.map",
+    "main.74349577.js.map": "/krystalz/static/js/main.74349577.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.43459e96.css",
-    "static/js/main.4b061c06.js"
+    "static/css/main.d2bb39ae.css",
+    "static/js/main.74349577.js"
   ]
 }
