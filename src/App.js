@@ -229,6 +229,9 @@ function AppContent() {
 }
 
 function App() {
+   // Get the basename from the package.json homepage
+   const basename = process.env.PUBLIC_URL;
+   
   return (
     <ThemeProvider>
       <AuthProvider>
