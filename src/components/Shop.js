@@ -20,7 +20,7 @@ import obsidian from './Luna/ObsidianBracelet.jpeg'
 import aventurine from './Luna/AventurineBracelet.jpeg'
 import amethyst from './Luna/Amethyst.jpeg'
 
-// ProductCard Component
+// ProductCard Component with always visible name and price
 const ProductCard = ({ product, onClick }) => {
   if (!product) return null;
 
@@ -30,33 +30,37 @@ const ProductCard = ({ product, onClick }) => {
   return (
     <div 
       onClick={onClick}
-      className="group relative cursor-pointer overflow-hidden bg-white"
+      className="group relative cursor-pointer overflow-hidden bg-white h-full"
     >
-      {product.onSale && originalPrice > price && (
-        <div className="absolute top-2 left-2 z-10 bg-cyan-400 text-white px-3 py-1 text-xs">
-          SAVE {Math.round((originalPrice - price) / 100)}KES
-        </div>
-      )}
-      
-      <div className="aspect-[4/5] overflow-hidden">
+      <div className="aspect-[4/5] w-full h-full relative">
         <img
           src={product.image}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-      </div>
-      
-      <div className="p-4 text-center">
-        <h3 className="text-lg font-normal mb-2">{product.name}</h3>
-        <div className="flex justify-center items-center gap-2">
-          <span className="text-lg font-semibold">KSH {price.toFixed(2)}</span>
-          {product.onSale && originalPrice > 0 && (
-            <span className="text-gray-500 line-through">
-              KSH {originalPrice.toFixed(2)}
-            </span>
-          )}
+        
+        {/* Permanent gradient overlay for text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        
+        {/* Always visible product name and price */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+          <h3 className="text-lg font-normal mb-2 text-white line-clamp-2">{product.name}</h3>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-semibold">KSH {price.toFixed(2)}</span>
+            {product.onSale && originalPrice > 0 && (
+              <span className="text-gray-300 line-through text-sm">
+                KSH {originalPrice.toFixed(2)}
+              </span>
+            )}
+          </div>
         </div>
       </div>
+      
+      {product.onSale && originalPrice > price && (
+        <div className="absolute top-2 left-2 z-10 bg-cyan-400 text-white px-3 py-1 text-xs">
+          SAVE {Math.round((originalPrice - price) / 100)}KES
+        </div>
+      )}
     </div>
   );
 };

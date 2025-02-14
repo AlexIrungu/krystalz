@@ -3,8 +3,8 @@ import { Link as ScrollLink } from "react-scroll";
 import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun, ShoppingCart } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import log from "./Luna/logoo.jpeg";
 import AnimatedCartButton from "./Cart";
+import log from './Luna/Luna-Logo-White.png'
 
 const Navbar = ({
   isLoggedIn,
@@ -95,16 +95,20 @@ const Navbar = ({
                   </p>
                 </div>
               </div>
-              <motion.img
-                className="h-10 w-10 md:h-12 md:w-12 rounded-full shadow-lg"
-                src={log}
-                alt="Logo"
+              <motion.div
+                className="relative w-12 h-12 md:w-12 md:h-12"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 1 }}
-                style={{ filter: "grayscale(100%)" }}
-              />
+              >
+                <img 
+                  src={log} // Replace with your image path
+                  alt="Luna Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </motion.div>
             </div>
           </motion.div>
+
           {/* desktop navigation */}
           <div className="hidden md:block flex-grow">
             <div className="flex items-center justify-center space-x-6">
@@ -114,13 +118,13 @@ const Navbar = ({
                   to={item.to}
                   smooth={true}
                   duration={500}
-                  className="relative text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white px-3 py-2 text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out group"
-                  activeClass="text-black dark:text-white"
+                  className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out group"
+                  activeClass="text-white"
                   spy={true}
                   offset={-80}
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black dark:bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                 </ScrollLink>
               ))}
             </div>
@@ -134,13 +138,13 @@ const Navbar = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full hover:bg-gray-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {isDarkMode ? (
-                  <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Sun className="w-5 h-5 text-gray-300" />
                 ) : (
-                  <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Moon className="w-5 h-5 text-gray-300" />
                 )}
               </motion.button>
 
@@ -163,7 +167,7 @@ const Navbar = ({
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                 >
-                  <span className="text-gray-700 dark:text-gray-300 px-3 py-2 rounded-md text-sm font-medium bg-gray-100 dark:bg-gray-800">
+                  <span className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium bg-gray-800">
                     Welcome, {username}
                   </span>
                   <motion.button
@@ -186,7 +190,7 @@ const Navbar = ({
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 ease-in-out"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 ease-in-out"
             >
               <span className="sr-only">Open main menu</span>
               {!isOpen ? (
@@ -231,7 +235,7 @@ const Navbar = ({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md"
+            className="md:hidden bg-black/95 backdrop-blur-md"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
@@ -240,8 +244,8 @@ const Navbar = ({
                   to={item.to}
                   smooth={true}
                   duration={500}
-                  className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-all duration-300 ease-in-out"
-                  activeClass="text-black dark:text-white bg-gray-100 dark:bg-gray-800"
+                  className="text-gray-300 hover:text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium cursor-pointer transition-all duration-300 ease-in-out"
+                  activeClass="text-white bg-gray-800"
                   spy={true}
                   offset={-64}
                   onClick={() => setIsOpen(false)}
@@ -256,7 +260,7 @@ const Navbar = ({
                   setShowCartDropdown(!showCartDropdown);
                   setIsOpen(false);
                 }}
-                className="w-full flex items-center justify-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
+                className="w-full flex items-center justify-center space-x-2 text-gray-300 hover:text-white hover:bg-gray-800 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
               >
                 <ShoppingCart className="w-5 h-5" />
                 <span>Cart ({totalItems})</span>
@@ -265,7 +269,7 @@ const Navbar = ({
               {/* mobile theme toggle */}
               <button
                 onClick={toggleTheme}
-                className="w-full flex items-center justify-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
+                className="w-full flex items-center justify-center space-x-2 text-gray-300 hover:text-white hover:bg-gray-800 px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ease-in-out"
               >
                 {isDarkMode ? (
                   <>
@@ -279,10 +283,11 @@ const Navbar = ({
                   </>
                 )}
               </button>
+
               {/* mobile auth section */}
               {isLoggedIn && username ? (
                 <>
-                  <span className="text-gray-700 dark:text-gray-300 block px-3 py-2 rounded-md text-base font-medium bg-gray-100 dark:bg-gray-800">
+                  <span className="text-gray-300 block px-3 py-2 rounded-md text-base font-medium bg-gray-800">
                     Welcome, {username}
                   </span>
                   <motion.button

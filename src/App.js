@@ -24,8 +24,9 @@ import LoadingAnimation from './components/LoadingAnimation';
 import Crystals from './components/Crystals';
 import Events from './components/Events';
 import Aromatherapy from './components/Aromatherapy';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Blog from './components/Blog';
+import ReikiCalendar from './components/ReikiCalendar';
 
 function AppContent() {
   const { isDarkMode, isDarkModeLoaded } = useTheme();
@@ -229,21 +230,19 @@ function AppContent() {
 }
 
 function App() {
-   // Get the basename from the package.json homepage
-   const basename = process.env.PUBLIC_URL;
-   
   return (
     <ThemeProvider>
       <AuthProvider>
-      <Router>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<AppContent />} />
             <Route path="/crystals" element={<Crystals />} />
             <Route path="/aromatherapy" element={<Aromatherapy />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/reiki" element={<ReikiCalendar />} />
           </Routes>
-        </Router>
-      <CookieConsent />
+        </HashRouter>
+        <CookieConsent />
       </AuthProvider>
     </ThemeProvider>
   );
