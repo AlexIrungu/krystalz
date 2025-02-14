@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/krystalz/static/css/main.d2bb39ae.css",
-    "main.js": "/krystalz/static/js/main.889c935f.js",
+    "main.css": "/krystalz/static/css/main.476169c6.css",
+    "main.js": "/krystalz/static/js/main.2fed8d4e.js",
     "static/js/453.d705188a.chunk.js": "/krystalz/static/js/453.d705188a.chunk.js",
     "static/media/kry.jpg": "/krystalz/static/media/kry.a167525e2937798afd44.jpg",
     "static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.jpg": "/krystalz/static/media/joanna-kosinska-K_OzFXOcQX8-unsplash.6734885793bb032c0ab6.jpg",
@@ -44,6 +44,7 @@
     "static/media/bsollar.jpg": "/krystalz/static/media/bsollar.f9f8f812765ffdd1295b.jpg",
     "static/media/ReikiHelp.jpg": "/krystalz/static/media/ReikiHelp.7754a00ceb96a307b4cb.jpg",
     "static/media/Groundedonlineworkshop.jpeg": "/krystalz/static/media/Groundedonlineworkshop.988b6ad1bf78142d381e.jpeg",
+    "static/media/Luna-Logo-White.png": "/krystalz/static/media/Luna-Logo-White.08566832347591215a69.png",
     "static/media/sacral.jpg": "/krystalz/static/media/sacral.8fe1a27cb6aa9db2dbb4.jpg",
     "static/media/Amethyst.jpeg": "/krystalz/static/media/Amethyst.686301a04470b8392e5a.jpeg",
     "static/media/ObsidianBracelet.jpeg": "/krystalz/static/media/ObsidianBracelet.e264e7c0e4618d41774f.jpeg",
@@ -66,15 +67,14 @@
     "static/media/third.jpg": "/krystalz/static/media/third.124cc1ac4dd7cae80d8e.jpg",
     "static/media/Durendal Regular.ttf": "/krystalz/static/media/Durendal Regular.f8b2d4e66104b4fdf3d8.ttf",
     "static/media/ReikiEnergyHealingSession.jpeg": "/krystalz/static/media/ReikiEnergyHealingSession.3c7437fd39dc1ebad53c.jpeg",
-    "static/media/logoo.jpeg": "/krystalz/static/media/logoo.90e01d5689e02c0ec45e.jpeg",
     "static/media/TurqoiseBracelet.jpeg": "/krystalz/static/media/TurqoiseBracelet.02b4144b4f2e991158d0.jpeg",
     "index.html": "/krystalz/index.html",
-    "main.d2bb39ae.css.map": "/krystalz/static/css/main.d2bb39ae.css.map",
-    "main.889c935f.js.map": "/krystalz/static/js/main.889c935f.js.map",
+    "main.476169c6.css.map": "/krystalz/static/css/main.476169c6.css.map",
+    "main.2fed8d4e.js.map": "/krystalz/static/js/main.2fed8d4e.js.map",
     "453.d705188a.chunk.js.map": "/krystalz/static/js/453.d705188a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d2bb39ae.css",
-    "static/js/main.889c935f.js"
+    "static/css/main.476169c6.css",
+    "static/js/main.2fed8d4e.js"
   ]
 }
